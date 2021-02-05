@@ -31,10 +31,12 @@
 		/>
 		</view>
 	</view> -->
-
-		<view class="text-center margin-top">
-			<button class="bg-grey" bindtap="accountLogin">账号密码登录</button>
+		<view class="text-center" style="margin-top: 40px;">
+			<button class="bg-blue" bindtap="accountLogin"><text decode>登&emsp;&emsp;录</text></button>
 		</view>
+		<!-- <view class="text-center margin-top">
+			<button class="bg-grey" bindtap="accountLogin">账号密码登录</button>
+		</view> -->
 	</form>
-	<button class="bg-blue margin-top" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">微信一键登录</button>
+	<!-- <button class="bg-blue margin-top" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">微信一键登录</button> -->
 </view>
