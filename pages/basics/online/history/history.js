@@ -30,6 +30,7 @@ Page({
     } else {
       wx.showModal({
         title: '提示',
+        confirmColor: '#0081ff',
         content: '当前微信版本过低，请升级到最新微信版本后重试。'
       })
     }

@@ -1,11 +1,11 @@
 <!--pages/basics/online/search/search.wxml-->
-<cu-custom bgColor="bg-green" isBack="{{true}}">
+<cu-custom bgColor="bg-blue" isBack="{{true}}">
   <view slot="backText">返回</view>
   <view slot="content">历史数据</view>
 </cu-custom>
 <view class=" margin-bottom bg-white custom-bar shadow" style="top:{{custom}}">
   <view class="flex justify-around">
-    <view class=" padding-sm margin-xs radius text-green">{{name||'--'}} ({{unit||'--'}})</view>
+    <view class=" padding-sm margin-xs radius text-blue">{{name||'--'}} ({{unit||'--'}})</view>
     <button bindtap="showModal" data-target="DrawerModalL"
       class="cu-btn margin-sm round bg-blue light shadow">更换因子</button>
   </view>

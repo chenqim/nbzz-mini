@@ -60,6 +60,7 @@ Page({
             // title: '提示',
             content: "密码修改成功",
             showCancel: false,
+            confirmColor: '#0081ff',
             success(res) {
               if (res.confirm) {
                 // return wx.navigateBack({delta:1})
@@ -74,6 +75,7 @@ Page({
             // title: '提示',
             content: "原密码错误,请重新填写",
             showCancel: false,
+            confirmColor: '#0081ff',
             success(res) {
               if (res.confirm) {
                 that.setData({
@@ -89,6 +91,7 @@ Page({
             // title: '提示',
             content: "出现其他错误，请重新登录",
             showCancel: false,
+            confirmColor: '#0081ff',
             success(res) {
               if (res.confirm) {
                 wx.redirectTo({

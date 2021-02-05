@@ -19,6 +19,7 @@ Page({
       title: '提示',
       content: '需重新编辑本页数据',
       showCancel: true,
+      confirmColor: '#0081ff',
       success(res) {
         if (res.confirm) {
           that.setData({
@@ -163,6 +164,7 @@ Page({
       content: '确定要删除这张照片吗？',
       cancelText: '点错了',
       confirmText: '确定',
+      confirmColor: '#0081ff',
       success: res => {
         if (res.confirm) {
           this.data.imgList.splice(e.currentTarget.dataset.index, 1);
@@ -182,6 +184,7 @@ Page({
       content: '确定要删除这张照片吗？',
       cancelText: '点错了',
       confirmText: '确定',
+      confirmColor: '#0081ff',
       success: res => {
         if (res.confirm) {
           this.data.fileList.splice(e.currentTarget.dataset.index, 1);
@@ -257,6 +260,7 @@ Page({
         title: '提示',
         content: '请将信息填写完整',
         showCancel: false,
+        confirmColor: '#0081ff',
         success(res) {
           if (res.confirm) {}
         }
@@ -267,6 +271,7 @@ Page({
         title: '提示',
         content: '是否确定提交',
         showCancel: true,
+        confirmColor: '#0081ff',
         success(res) {
           if (res.confirm) {
             app.request({
@@ -284,6 +289,7 @@ Page({
                 title: '提示',
                 content: '提交成功',
                 showCancel: false,
+                confirmColor: '#0081ff',
                 success(res) {
                   if (res.confirm) {
                     let pages = getCurrentPages(); // 当前页的数据，

@@ -191,6 +191,7 @@ Page({
       content: '确定要删除这张照片吗？',
       cancelText: '点错了',
       confirmText: '确定',
+      confirmColor: '#0081ff',
       success: res => {
         if (res.confirm) {
           this.data.signinForm.signInImgIdList.splice(e.currentTarget.dataset.index, 1);
@@ -428,6 +429,7 @@ Page({
         title: '提示',
         content: '请上传现场照片',
         showCancel: false,
+        confirmColor: '#0081ff',
       });
       return;
     }
@@ -441,6 +443,7 @@ Page({
           wx.showModal({
             title: '提示',
             content: '提交失败，当前位置附近没有可签到站点',
+            confirmColor: '#0081ff',
             showCancel: false
           });
 
@@ -454,6 +457,7 @@ Page({
           wx.showModal({
             title: '提示',
             content: '提交失败，无法获取当前位置信息',
+            confirmColor: '#0081ff',
             showCancel: false,
             success: function () {
               that.setData({
@@ -468,6 +472,7 @@ Page({
             wx.showModal({
               title: '提示',
               content: '当前位置发生改变请重新确认',
+              confirmColor: '#0081ff',
               showCancel: false,
               success: function(){
                 that.setData({
@@ -492,6 +497,7 @@ Page({
               wx.showModal({
                 title: '提示',
                 content: '签到成功',
+                confirmColor: '#0081ff',
                 showCancel: false,
                 success: function(){
                   that.refreshCurrentLocation();
@@ -513,6 +519,7 @@ Page({
         wx.showModal({
           title: '提示',
           content: '今日已签到，确定要再次签到吗？',
+          confirmColor: '#0081ff',
           cancelText: '取消',
           confirmText: '确定',
           success: res => {
@@ -524,6 +531,7 @@ Page({
                     wx.showModal({
                       title: '提示',
                       content: '当前位置附近没有可签到站点',
+                      confirmColor: '#0081ff',
                       showCancel: false
                     });
                     return;
@@ -550,6 +558,7 @@ Page({
               wx.showModal({
                 title: '提示',
                 content: '当前位置附近没有可签到站点',
+                confirmColor: '#0081ff',
                 showCancel: false
               });
               return;

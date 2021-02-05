@@ -1,5 +1,5 @@
 <!--pages/basics/online/search/search.wxml-->
-<cu-custom bgColor="bg-green" isBack="{{true}}">
+<cu-custom bgColor="bg-blue" isBack="{{true}}">
   <view slot="backText">返回</view>
   <view slot="content">历史数据</view>
 </cu-custom>
@@ -48,6 +48,6 @@
 <view class="text-grey text-sm margin-lr-lg"> 注意：实时数据仅能选择一个月的区间</view>
 <view class="margin-sm cu-list card-menu shadow-lg radius">
   <view class=" bg-white margin-lr flex flex-direction">
-    <button class="cu-btn bg-green lg" bindtap="search">查 询</button>
+    <button class="cu-btn bg-blue lg" bindtap="search">查 询</button>
   </view>
 </view>

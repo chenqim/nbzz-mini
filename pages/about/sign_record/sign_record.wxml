@@ -1,5 +1,5 @@
 <!--pages/about/sign_record/sign_record.wxml-->
-<cu-custom bgColor="bg-green" isBack="{{true}}">
+<cu-custom bgColor="bg-blue" isBack="{{true}}">
 	<view slot="backText">返回</view>
 	<view slot="content">签到记录</view>
 </cu-custom>
@@ -7,10 +7,10 @@
 <view wx:for="{{signRecordList}}" wx:key="index" wx:for-index="idx" wx:for-item="listitem">
 	<view wx:for="{{listitem}}" wx:key="index" wx:for-index="id" class="cu-timeline">
 		<!-- <view class="cu-time">今天</view> -->
-		<view class="cu-item text-green cur cuIcon-locationfill">
-			<view class="content bg-gradual-green shadow-blur">
+		<view class="cu-item text-blue cur cuIcon-locationfill">
+			<view class="content bg-gradual-blue shadow-blur">
 				<view class="cu-capsule radius">
-					<view class="cu-tag bg-white text-green">{{item.week}}</view>
+					<view class="cu-tag bg-white text-blue">{{item.week}}</view>
 					<view class="cu-tag line-white">{{item.time}}</view>
 				</view>
 				<view class="margin-top-sm text-lg">
@@ -23,10 +23,10 @@
 
 <view class="cu-timeline listloading" wx:if="{{doneList}}">
 	<!-- <view class="cu-time">今天</view> -->
-	<view class="cu-item text-green cur cuIcon-locationfill">
-		<view class="content bg-gradual-green shadow-blur">
+	<view class="cu-item text-blue cur cuIcon-locationfill">
+		<view class="content bg-gradual-blue shadow-blur">
 			<view class="cu-capsule radius">
-				<view class="cu-tag bg-white text-green">周三</view>
+				<view class="cu-tag bg-white text-blue">周三</view>
 				<view class="cu-tag line-white">11-11 11:11</view>
 			</view>
 			<view class="margin-top-sm text-lg">

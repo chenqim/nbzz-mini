@@ -142,6 +142,7 @@ Page({
         title: '提示',
         content: '请将信息填写完整',
         showCancel: false,
+        confirmColor: '#0081ff',
         success(res) {}
       })
     } else {
@@ -149,6 +150,7 @@ Page({
         title: '提示',
         content: '是否确定提交',
         showCancel: true,
+        confirmColor: '#0081ff',
         success(res) {
           if (res.confirm) {
             app.request({
@@ -164,6 +166,7 @@ Page({
                 title: '提示',
                 content: '提交成功',
                 showCancel: false,
+                confirmColor: '#0081ff',
                 success(res) {
                   if (res.confirm) {
                     let pages = getCurrentPages(); // 当前页的数据，
@@ -189,6 +192,7 @@ Page({
       title: '提示',
       content: '需重新编辑本页数据',
       showCancel: true,
+      confirmColor: '#0081ff',
       success(res) {
         if (res.confirm) {
           that.setData({

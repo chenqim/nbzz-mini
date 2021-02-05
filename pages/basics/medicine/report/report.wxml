@@ -1,5 +1,5 @@
 <!--pages/basics/site/report/report.wxml-->
-<cu-custom bgColor="bg-green" isBack="{{true}}">
+<cu-custom bgColor="bg-blue" isBack="{{true}}">
 	<view slot="backText">返回</view>
 	<view slot="content">{{!detail?'药剂申报':'详情'}}</view>
 </cu-custom>
@@ -22,8 +22,8 @@
 			<text class="cuIcon-title text-blue"></text>药剂列表
 		</view>
 		<view class="action" wx:if="{{!detail}}">
-			<button class="cu-btn {{editStatus?'bg':'line'}}-blue" wx:if="{{medicineList.length!=0}}" bindtap="showEdit">{{editStatus?'完成':'编辑'}}</button>
-			<button class="cu-btn line-green margin-left-sm" bindtap="showModal" wx:if="{{!editStatus||medicineList.length==0}}" data-target="Modal">添加</button>
+			<button class="cu-btn {{editStatus?'bg':'line'}}-grey" wx:if="{{medicineList.length!=0}}" bindtap="showEdit">{{editStatus?'完成':'编辑'}}</button>
+			<button class="cu-btn line-blue margin-left-sm" bindtap="showModal" wx:if="{{!editStatus||medicineList.length==0}}" data-target="Modal">添加</button>
 		</view>
 	</view>
 	<view class="padding-sm bg-white">
@@ -71,13 +71,13 @@
 				<view class="cu-form-group text-{{showindex==2?'left':'right'}}" wx:if="{{showindex>=2&&other}}">
 					<view class="title">药品名称</view>
 					<input placeholder="请输入药剂名称" bindinput="otherName" disabled="{{showindex!=2}}" ></input>
-					<button class="cu-btn line-green" wx:if="{{otherName && showindex==2}}" bindtap="otherNameAC">确定</button>
+					<button class="cu-btn line-blue" wx:if="{{otherName && showindex==2}}" bindtap="otherNameAC">确定</button>
 				</view>
 
 				<view class="cu-form-group text-{{showindex==3?'left':'right'}}" wx:if="{{showindex>=3&&other}}">
 					<view class="title">药品规格</view>
 					<input placeholder="请输入药剂名称" bindinput="otherSpec" disabled="{{showindex!=3}}" ></input>
-					<button class="cu-btn line-green" wx:if="{{otherSpec && showindex==3}}" bindtap="otherSpecAC">确定</button>
+					<button class="cu-btn line-blue" wx:if="{{otherSpec && showindex==3}}" bindtap="otherSpecAC">确定</button>
 				</view>
 
 				<view class="cu-form-group" wx:if="{{showindex>=2&&!other}}">
@@ -95,7 +95,7 @@
 			</view>
 			<view class="cu-bar bg-white">
 				<view class="action margin-0 flex-sub" bindtap="hideModal">取消</view>
-				<view class="action text-green margin-0 flex-sub" bindtap="additem" wx:if="{{showindex>=4}}">确定</view>
+				<view class="action text-blue margin-0 flex-sub" bindtap="additem" wx:if="{{showindex>=4}}">确定</view>
 			</view>
 		</view>
 	</view>
@@ -106,6 +106,6 @@
 </view>
 
 <view class="flex flex-direction">
-	<button wx:if="{{!detail&&!editStatus}}" class="cu-btn bg-green margin-lr-lg margin-tb-sm lg" bindtap="submit">提交申报</button>
-	<button wx:if="{{site_details.flowStatus=='reject'&&detail}}" class="cu-btn bg-blue margin-lr-lg margin-tb-sm lg" bindtap="resubmit">重新申报</button>
+	<button wx:if="{{!detail&&!editStatus}}" class="cu-btn bg-blue margin-lr-lg margin-tb-sm lg" bindtap="submit">提交申报</button>
+	<button wx:if="{{site_details.flowStatus=='reject'&&detail}}" class="cu-btn bg-grey margin-lr-lg margin-tb-sm lg" bindtap="resubmit">重新申报</button>
 </view>

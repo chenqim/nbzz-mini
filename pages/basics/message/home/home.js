@@ -121,6 +121,7 @@ Page({
       title: '提示',
       content: '将所有的消息全部标记为已读？',
       showCancel: true,
+      confirmColor: '#0081ff',
       success(res) {
         if (res.confirm) {
           app.request({
@@ -140,6 +141,7 @@ Page({
       content: '将所有的消息全部清空？',
       confirmColor: '#e54d42',
       showCancel: true,
+      confirmColor: '#0081ff',
       success(res) {
         if (res.confirm) {
           app.request({

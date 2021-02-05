@@ -1,4 +1,4 @@
-<cu-custom bgColor="bg-green">
+<cu-custom bgColor="bg-blue"> 
 	<view slot="content">签 到</view>
 </cu-custom>
 <map id="map" longitude="{{mapData.currentLng}}" latitude="{{mapData.currentLat}}" scale="{{mapData.scale}}" markers="{{mapData.showData?mapData.markers:''}}" circles="{{mapData.showData?mapData.circles:''}}" include-points="{{mapData.includePoints}}" show-location="true" bindmarkertap="onMapMarkerTap" bindregionchange="onMapRegionChange" style="width: 100%; height: 30vh;"></map>
@@ -48,8 +48,8 @@
 		</view>
 		<view class="cu-bar bg-white justify-end">
 			<view class="action">
-				<button class="cu-btn line-green text-green" bindtap="onHideSetting">取消</button>
-				<button class="cu-btn bg-green margin-left" bindtap="onOpenSetting">确定</button>
+				<button class="cu-btn line-grey text-grey" bindtap="onHideSetting">取消</button>
+				<button class="cu-btn bg-blue margin-left" bindtap="onOpenSetting">确定</button>
 
 			</view>
 		</view>
@@ -68,7 +68,7 @@
 		</view>
 		<view class="cu-bar bg-white justify-end">
 			<view class="action">
-				<button class="cu-btn bg-green margin-left" bindtap="onHidelocationError">确定</button>
+				<button class="cu-btn bg-blue margin-left" bindtap="onHidelocationError">确定</button>
 
 			</view>
 		</view>
@@ -118,8 +118,8 @@
 		</view>
 		<view class="cu-bar bg-white justify-end">
 			<view class="action">
-				<button class="cu-btn line-green text-green" bindtap="onHideSigninPage">取消</button>
-				<button class="cu-btn bg-green margin-left" bindtap="onSignin">提交</button>
+				<button class="cu-btn line-grey text-blue" bindtap="onHideSigninPage">取消</button>
+				<button class="cu-btn bg-blue margin-left" bindtap="onSignin">提交</button>
 
 			</view>
 		</view>

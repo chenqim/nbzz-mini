@@ -83,6 +83,7 @@ Page({
             title: '提示',
             content: res.data.msg + '',
             showCancel: false,
+            confirmColor: '#0081ff',
             success(res) {
               if (res.confirm) {
                 return wx.redirectTo({
@@ -129,6 +130,7 @@ Page({
     wx.showModal({
       title: '提示',
       content: '正在开发中，敬请期待',
+      confirmColor: '#0081ff',
       showCancel: false
     });
   }

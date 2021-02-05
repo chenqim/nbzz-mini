@@ -1,5 +1,5 @@
 <!--pages/basics/site/report/report.wxml-->
-<cu-custom bgColor="bg-green" isBack="{{true}}">
+<cu-custom bgColor="bg-blue" isBack="{{true}}">
 	<view slot="backText">返回</view>
 	<view slot="content">{{!detail?'运维申报':'详情'}}</view>
 </cu-custom>
@@ -47,7 +47,7 @@
 			</view>
 			<view class="grid col-1 padding-sm margin-tb">
 				<view wx:for="{{checkbox}}" class="padding-xs" wx:key="index">
-					<button class="cu-btn margin-lr-lg green lg block {{item.checked?'bg-green':'line-green'}}"
+					<button class="cu-btn margin-lr-lg blue lg block {{item.checked?'bg-blue':'line-blue'}}"
 						bindtap="ChooseCheckbox" data-value="{{item.value}}"> {{item.name}}
 					</button>
 				</view>
@@ -109,7 +109,7 @@
 </view>
 
 <view class="flex flex-direction">
-	<button wx:if="{{!detail}}" class="cu-btn bg-green margin-lr-lg margin-tb-sm lg" bindtap="submit">提交申报</button>
-	<button wx:if="{{site_details.flowStatus=='reject'&&detail}}" class="cu-btn bg-blue margin-lr-lg margin-tb-sm lg"
+	<button wx:if="{{!detail}}" class="cu-btn bg-blue margin-lr-lg margin-tb-sm lg" bindtap="submit">提交申报</button>
+	<button wx:if="{{site_details.flowStatus=='reject'&&detail}}" class="cu-btn bg-grey margin-lr-lg margin-tb-sm lg"
 		bindtap="resubmit">重新申报</button>
 </view>

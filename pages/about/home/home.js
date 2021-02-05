@@ -16,6 +16,7 @@ Page({
             title: '提示',
             content: res.data.msg+'',
             showCancel: false,
+            confirmColor: '#0081ff',
             success(res) {
               if (res.confirm) {
                 return wx.redirectTo({

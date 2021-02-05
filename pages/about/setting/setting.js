@@ -7,6 +7,7 @@ Page({
     return wx.showModal({
       title: '提示',
       content: "是否确认退出登录？",
+      confirmColor: '#0081ff',
       success(res) {
         if (res.confirm) {
           app.request({

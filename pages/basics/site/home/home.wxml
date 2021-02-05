@@ -1,5 +1,5 @@
 <!--pages/basics/site/home/home.wxml-->
-<cu-custom bgColor="bg-green" isBack="{{true}}">
+<cu-custom bgColor="bg-blue" isBack="{{true}}">
 	<view slot="backText">返回</view>
 	<view slot="content">站点管理</view>
 </cu-custom>
@@ -11,7 +11,7 @@
 			<van-icon wx:if="{{name != ''}}" class="text-gray text-xl margin-right-sm" name="clear" bindtap="clear" />
 		</view>
 		<view class="action">
-			<button class="cu-btn bg-green shadow-blur round" bindtap="search">搜索</button>
+			<button class="cu-btn bg-blue shadow-blur round" bindtap="search">搜索</button>
 		</view>
 	</view>
 </view>

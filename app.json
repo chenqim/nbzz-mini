@@ -35,6 +35,7 @@
     "onReachBottomDistance":70
   },
   "tabBar": {
+    "selectedColor": "#0081ff",
     "list": [
       {
         "pagePath": "pages/basics/home/home",

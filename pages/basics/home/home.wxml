@@ -1,9 +1,9 @@
-<cu-custom bgColor="bg-green">
+<cu-custom bgColor="bg-blue"> 
 	<view slot="content">首 页</view>
 </cu-custom>
 <view class="grid col-1 padding-sm">
 	<view class="padding-lr-sm padding-top-sm">
-		<view class="bg-gradual-green padding-lr padding-top-sm radius text-left shadow-blur">
+		<view class="bg-gradual-blue padding-lr padding-top-sm radius text-left shadow-blur">
 			<view class="flex align-center">
 				<view class="flex-sub text-left">
 					<text class="text-white text-xxl">{{user_info.userName||"获取中"}}</text>
