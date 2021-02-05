@@ -1,0 +1,97 @@
+{
+  "permission": {
+    "scope.userLocation": {
+      "desc": "您的位置信息将用于“污染源在线工作平台”签到功能和位置采集"
+    }
+  },
+  "pages": [
+    "pages/index/index",
+    "pages/basics/online/search/search",
+    "pages/basics/online/history/history",
+    "pages/basics/online/home/home",
+    "pages/login/home",
+    "pages/basics/home/home",
+    "pages/signin/home",
+    "pages/about/home/home",
+    "pages/basics/message/home/home",
+    "pages/basics/site/operation/operation",
+    "pages/basics/medicine/home/home",
+    "pages/basics/medicine/report/report",
+    "pages/basics/kits/home/home",
+    "pages/basics/kits/report/report",
+    "pages/basics/site/report/report",
+    "pages/basics/site/home/home",
+    "pages/basics/site/details/details",
+    "pages/basics/police/home/home",
+    "pages/about/setting/setting",
+    "pages/about/password/password",
+    "pages/about/sign_record/sign_record"
+  ],
+  "window": {
+    "navigationStyle": "custom",
+    "backgroundColor": "#1E9FFF",
+    "backgroundColorBottom":"#F1F1F1",
+    "backgroundColorTop":"#F1F1F1",
+    "onReachBottomDistance":70
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/basics/home/home",
+        "text": "首页",
+        "iconPath": "/images/tabbar/home.png",
+        "selectedIconPath": "/images/tabbar/home_cur.png"
+      },
+      {
+        "pagePath": "pages/signin/home",
+        "text": "签到",
+        "iconPath": "/images/tabbar/signin.png",
+        "selectedIconPath": "/images/tabbar/signin_cur.png"
+      },
+      {
+        "pagePath": "pages/about/home/home",
+        "text": "我的",
+        "iconPath": "/images/tabbar/my.png",
+        "selectedIconPath": "/images/tabbar/my_cur.png"
+      }
+    ]
+  },
+  "usingComponents": {
+    "van-count-down": "@vant/weapp/count-down/index",
+    "van-button": "@vant/weapp/button/index",
+    "van-tag": "@vant/weapp/tag/index",
+    "cu-custom": "/colorui/components/cu-custom",
+    "van-divider": "@vant/weapp/divider/index",
+    "van-icon": "@vant/weapp/icon/index",
+    "van-grid": "@vant/weapp/grid/index",
+    "van-grid-item": "@vant/weapp/grid-item/index",
+    "van-image": "@vant/weapp/image/index",
+    "van-loading": "@vant/weapp/loading/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-picker": "@vant/weapp/picker/index",
+    "van-dialog": "@vant/weapp/dialog/index",
+    "van-field": "@vant/weapp/field/index",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-skeleton": "@vant/weapp/skeleton/index",
+    "van-collapse": "@vant/weapp/collapse/index",
+    "van-collapse-item": "@vant/weapp/collapse-item/index",
+    "van-uploader": "@vant/weapp/uploader/index",
+    "van-action-sheet": "@vant/weapp/action-sheet/index",
+    "van-checkbox": "@vant/weapp/checkbox/index",
+    "van-checkbox-group": "@vant/weapp/checkbox-group/index",
+    "van-search": "@vant/weapp/search/index",
+    "van-stepper": "@vant/weapp/stepper/index",
+    "van-sidebar": "@vant/weapp/sidebar/index",
+    "van-sidebar-item": "@vant/weapp/sidebar-item/index",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index",
+    "van-calendar": "@vant/weapp/calendar/index",
+    "van-toast": "@vant/weapp/toast/index"
+  },
+  "sitemapLocation": "sitemap.json",
+  "networkTimeout": {
+    "request": 60000,
+    "downloadFile": 60000
+  }
+}

@@ -1,0 +1,111 @@
+<!--pages/basics/site/report/report.wxml-->
+<cu-custom bgColor="bg-green" isBack="{{true}}">
+	<view slot="backText">返回</view>
+	<view slot="content">{{!detail?'配件申报':'详情'}}</view>
+</cu-custom>
+<view class="margin-sm cu-list card-menu shadow-lg radius">
+	<van-cell-group wx:if="{{!detail}}">
+		<van-field value="{{ userInfo.userName||'获取中'}}" label="运维人员" disabled placeholder="请输入用户名" />
+		<van-field value="{{ userInfo.deptName ||'获取中'}}" label="运维组" disabled placeholder="请输入用户名" />
+		<view class="cu-form-group">
+			<view class="title">站点名称</view>
+			<picker bindchange="sitePickerChange" value="{{sitepickindex}}" range="{{siteList}}">
+				<view class="picker">
+					{{sitepickindex==0?siteList[sitepickindex]:sitepickindex?siteList[sitepickindex]:'请选择一个站点'}}
+				</view>
+			</picker>
+		</view>
+	</van-cell-group>
+
+	<van-cell-group>
+		<view wx:if="{{detail}}">
+			<van-field value="{{ site_details.userInfo.userName||'获取中'}}" label="运维人员" disabled />
+			<van-field value="{{ site_details.userInfo.deptName ||'获取中'}}" label="运维组" disabled />
+			<van-field value="{{ site_details.siteInfo.name ||'获取中'}}" label="站点名称" disabled />
+			<van-field value="{{ site_details.updateTime ||'获取中'}}" label="更新时间" disabled />
+		</view>
+	</van-cell-group>
+
+	<view class="cu-bar bg-white solid-bottom">
+		<view class="action">
+			<text class="cuIcon-title text-blue"></text>配件列表
+		</view>
+		<view class="action" wx:if="{{!detail}}">
+			<button class="cu-btn {{editStatus?'bg':'line'}}-blue" wx:if="{{medicineList.length!=0}}"
+				bindtap="showEdit">{{editStatus?'完成':'编辑'}}</button>
+			<button class="cu-btn line-green margin-left-sm" bindtap="showModal"
+				wx:if="{{!editStatus||medicineList.length==0}}" data-target="Modal">添加</button>
+		</view>
+	</view>
+	<view class="padding-sm bg-white">
+		<view class="flex p-xs margin-bottom-sm mb-sm solid-bottom text-bold" wx:if="{{medicineList.length!=0}}">
+			<view class="flex-treble text-center padding-sm margin-xs radius">公司</view>
+			<view class="flex-twice text-center padding-sm margin-xs radius">名称</view>
+			<view class="flex-sub text-center padding-sm margin-xs radius">数量</view>
+		</view>
+		<view class="flex p-xs padding-bottom-xs margin-bottom-xs mb-sm solid-bottom" wx:for="{{medicineList}}"
+			wx:key="index">
+			<view class="flex-treble text-center padding-xs margin-xs radius"><text bindtap="deldrug" data-index="{{index}}"
+					class="cuIcon-roundclosefill lg text-red" wx:if="{{editStatus}}"></text> {{item.accessoryGroupName}}</view>
+			<view class="flex-twice text-center padding-xs margin-xs radius"><text decode> {{item.accessoryName}}</text>
+			</view>
+			<view class="flex-sub text-center padding-xs margin-xs radius">{{item.amount}}</view>
+		</view>
+	</view>
+
+	<view class="cu-modal {{modalName=='Modal'?'show':''}}">
+		<view class="cu-dialog">
+			<view class="cu-bar bg-white justify-end">
+				<view class="content">添加配件</view>
+				<!-- <view class="action" bindtap="hideModal">
+					<text class="cuIcon-close text-red"></text>
+				</view> -->
+			</view>
+			<view>
+
+				<view class="cu-form-group" wx:if="{{showindex>=0}}">
+					<view class="title">公司选择</view>
+					<picker bindchange="PickerChange" value="{{pickindex}}" range="{{drug}}">
+						<view class="picker">
+							{{pickindex?drug[pickindex]:'请选择一个公司'}}
+						</view>
+					</picker>
+				</view>
+				<view class="cu-form-group" wx:if="{{showindex>=1&&!other}}">
+					<view class="title">配件选择</view>
+					<picker bindchange="childPickerChange" value="{{pickidx}}" range="{{type}}">
+						<view class="picker">
+							{{pickidx?type[pickidx]:'请选择配件'}}
+						</view>
+					</picker>
+				</view>
+				<view class="cu-form-group text-{{showindex==1?'left':'right'}}" wx:if="{{showindex>=1&&other}}">
+					<view class="title">配件名称</view>
+					<input placeholder="请输入配件名称" bindinput="otherName" disabled="{{showindex==2}}" ></input>
+					<button class="cu-btn line-green" wx:if="{{otherName && showindex==1}}" bindtap="otherAC">确定</button>
+				</view>
+				<view class="cu-form-group" wx:if="{{showindex>=2}}">
+					<view class="title">数量</view>
+					<van-stepper value="{{ 1 }}" bind:change="onChange" integer />
+				</view>
+			</view>
+			<view class="cu-bar bg-white">
+				<view class="action margin-0 flex-sub" bindtap="hideModal">取消</view>
+				<view class="action text-green margin-0 flex-sub" bindtap="additem" wx:if="{{showindex>=2}}">确定</view>
+			</view>
+		</view>
+	</view>
+	<view hidden="{{modalName}}">
+		<van-field wx:if="{{message&&detail||!detail}}" value="{{modalName?'':message}}" label="备注" disabled="{{detail}}"
+			type="textarea" bind:input="description" autosize border="{{ false }}" />
+		<van-field wx:if="{{site_details.flowStatus=='reject'&&detail}}" value="{{ modalName?'':site_details.flowComment }}"
+			label="审阅意见" disabled type="textarea" autosize border="{{ false }}" />
+	</view>
+</view>
+
+<view class="flex flex-direction">
+	<button wx:if="{{!detail&&!editStatus}}" class="cu-btn bg-green margin-lr-lg margin-tb-sm lg"
+		bindtap="submit">提交申报</button>
+	<button wx:if="{{site_details.flowStatus=='reject'&&detail}}" class="cu-btn bg-blue margin-lr-lg margin-tb-sm lg"
+		bindtap="resubmit">重新申报</button>
+</view>

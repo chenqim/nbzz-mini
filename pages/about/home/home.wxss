@@ -1,0 +1,13 @@
+/* pages/about/home/home.wxss */
+page{
+  /* background-color: white; */
+  background-color: rgb(249, 249, 249);
+}
+.item{
+  height: 100rpx;
+}
+.item-text{
+  font-size: 32rpx;
+  margin-left:5rpx;
+}
+

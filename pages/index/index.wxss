@@ -1,0 +1,30 @@
+/**index.wxss**/
+page{
+  background-color: white;
+  height: 100%;
+}
+.main-box{
+  height: 100%;
+  position: relative;
+}
+.main-box .footer{
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  bottom: 200rpx;
+}
+.main-box .footer .logo{
+  width: 90rpx;
+  height: 90rpx;
+  display: inline-block;
+  margin: 15rpx;
+}
+.main-box .footer .title{
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 50rpx;
+  font-weight: bold;
+  display: inline-block;
+  vertical-align: top;
+  margin: 10rpx;
+}

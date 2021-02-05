@@ -1,0 +1,7 @@
+/* pages/basics/site/details/details.wxss */
+page{
+  background-color: rgb(247, 247, 247);
+}
+.van-tag{
+  min-width: 32px;
+}

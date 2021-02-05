@@ -1,0 +1,53 @@
+<!--pages/basics/online/search/search.wxml-->
+<cu-custom bgColor="bg-green" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">历史数据</view>
+</cu-custom>
+<van-toast id="onlineSearch" />
+<view class="margin-sm cu-list card-menu shadow-lg radius">
+  <view class="cu-bar bg-white justify-end">
+    <view class="content">查询历史数据</view>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">数据类型</view>
+    <picker bindchange="timePickerChange" value="{{timeindex}}" range="{{timetype}}">
+      <view class="picker">
+        {{timeindex==0?timetype[timeindex]:timeindex?timetype[timeindex]:'请选择数据类型'}}
+      </view>
+    </picker>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">站点选择</view>
+    <picker bindchange="sitePickerChange" value="{{siteindex}}" range="{{siteList}}">
+      <view class="picker">
+        {{siteindex==0?siteList[siteindex]:siteindex?siteList[siteindex]:'请选择一个站点'}}
+      </view>
+    </picker>
+  </view>
+
+  <view class="cu-form-group">
+		<view class="title">开始日期</view>
+		<picker mode="date" value="{{startDate}}" start="{{minDate}}" end="{{tempStart}}" bindchange="DateChange">
+			<view class="picker">
+				{{startDate}}
+			</view>
+		</picker>
+  </view>
+  
+  <view class="cu-form-group">
+		<view class="title">结束日期</view>
+		<picker mode="date" value="{{endDate}}" start="{{tempEnd}}" end="{{maxDate}}" bindchange="endDateChange">
+			<view class="picker">
+				{{endDate}}
+			</view>
+		</picker>
+	</view>
+
+</view>
+
+<view class="text-grey text-sm margin-lr-lg"> 注意：实时数据仅能选择一个月的区间</view>
+<view class="margin-sm cu-list card-menu shadow-lg radius">
+  <view class=" bg-white margin-lr flex flex-direction">
+    <button class="cu-btn bg-green lg" bindtap="search">查 询</button>
+  </view>
+</view>

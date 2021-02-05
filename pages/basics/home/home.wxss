@@ -1,0 +1,24 @@
+/* pages/basics/home/home.wxss */
+page {
+  background-color: rgb(249, 249, 249);
+}
+
+.disabled {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: #f2f3f5aa;
+  pointer-events: auto;
+}
+
+.menu-s {
+  filter: grayscale(100%);
+  background-color: #f2f3f5 !important;
+}
+
+.menu-s .van-grid-item__content--clickable:active {
+  background-color: #fff !important;
+}
+.van-divider{
+  margin:16rpx 0 0 0 !important;
+}

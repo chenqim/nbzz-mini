@@ -1,0 +1,97 @@
+<!--pages/basics/online/home/home.wxml-->
+<!-- <text>pages/basics/online/home/home.wxml</text> -->
+<cu-custom bgColor="bg-green" isBack="{{true}}">
+	<view slot="backText">返回</view>
+	<view slot="content">在线数据</view>
+</cu-custom>
+<van-toast id="van-toast" />
+<view class="margin-sm cu-list card-menu shadow-lg radius">
+	<van-cell center>
+		<view slot="title">
+			<view class="van-cell-text flex">
+				<view class="flex-treble padding-tb flex justify-start align-center">
+					<text decode class="margin-right-xs text-blue text-lg text-shadow">距离下次刷新还剩</text>
+					<van-count-down class="control-count-down" use-slot auto-start="{{true}}" time="{{ time }}"
+						bind:change="onCha" bind:finish="refresh">
+						<text class="item text-df">{{ timeData.seconds }}</text>
+					</van-count-down>
+					<text decode class="margin-left-xs text-blue text-lg text-shadow">秒</text>
+				</view>
+				<button bindtap="toSearch" class="cu-btn flex-sub margin-sm round bg-blue shadow">历史数据</button>
+			</view>
+		</view>
+	</van-cell>
+
+	<view wx:for="{{onlineList}}" wx:key="index" wx:for-index="idx" wx:for-item="listitem">
+			<view wx:for="{{listitem}}" wx:key="index" wx:for-index="id">
+		<van-cell value="" label="" center is-link bindtap="showModal" data-item="{{idx}}" data-id="{{id}}" data-active="{{item.siteId}}">
+			<view slot="title">
+				<view class="van-cell-text flex">
+					<text decode class="flex-treble margin-right padding-tb-sm text-lg text-shadow">{{item.siteName}}</text>
+					<van-tag type="{{item.status == 0?'success':'danger'}}" plain
+						custom-class="flex-sub margin-right-sm margin-top"> {{item.status == 0?'正常':'异常'}}</van-tag>
+				</view>
+				<view>
+					<text decode class="text-gray text-df">
+						<text class="text-grey text-shadow" decode>{{item.monitorTime}}</text>
+					</text>
+				</view>
+			</view>
+		</van-cell>
+	</view>
+	</view>
+<view class="listloading" hidden="{{!doneList}}">
+	<van-cell value="" label="" center is-link>
+		<view slot="title">
+			<view class="van-cell-text flex">
+				<text decode class="flex-treble margin-right padding-tb-sm text-lg text-shadow">加载中</text>
+				<van-tag type="{{item.status == 0?'success':'danger'}}" plain
+				custom-class="flex-sub margin-right-sm margin-top"> {{item.status == 0?'正常':'异常'}}</van-tag>
+			</view>
+			<view>
+				<text decode class="text-gray text-df">
+					<text class="text-grey text-shadow" decode>2020-11-12 21:22:33</text>
+				</text>
+			</view>
+		</view>
+	</van-cell>
+</view>
+	
+</view>
+<view class="margin-lr-lg">
+	<van-divider wx:if="{{!doneList}}" contentPosition="center"
+	customStyle="color: #1989fa; border-color: #1989fa; font-size: 14px;">
+	{{onlineList.length!=0?'到底啦~':'还没有在线数据'}}
+	</van-divider>
+</view>
+<view class="padding-top-xs"></view>
+
+<!-- 弹出框 -->
+	<view class="cu-modal {{modalName}}" bindtap="hideModal" catchtouchmove='filterViewMove'>
+		<view class="cu-dialog" catchtap>
+			<view class="wrap"><span
+					class="ribbon6 bg-{{item.status == 0?'green':'red'}} light">{{item.status == 0?'正  常':'异  常'}}</span></view>
+			<view class="padding-top-xl padding-lr-xl bg-white">
+				<view class="text-black text-shadow text-center text-xl margin-lr margin-bottom">
+					<text decode>{{item.siteName}}</text>
+				</view>
+				<view class="text-grey text-center margin-lr padding-bottom-sm">
+					<text decode>{{item.monitorTime}}</text>
+				</view>
+			</view>
+			<scroll-view class="padding-lr-xl bg-white padding-tb-xs scroll" scroll-y id="item">
+				<view wx:for="{{item.factors}}" wx:for-index="idx"  wx:for-item="itemName" wx:key="idx"
+					class=" sm-border">
+					<view class="flex solid-bottom justify-between">
+						<view class="bg-white margin-sm radius text-{{itemName.dataFlag!='O'?'grey':'red text-bold'}}">
+							{{itemName.factor.polluteName}}\t({{itemName.factor.unit?itemName.factor.unit:'--'}})
+						</view>
+						<view class="bg-white text-df text-{{itemName.dataFlag!='O'?'grey':'red text-bold'}}  margin-sm radius">{{item.siteStatus=='offline'?'--':itemName.averageValue}}</view>
+					</view>
+				</view>
+			</scroll-view>
+			<view class="cu-bar bg-white solid-top">
+				<view class="action margin-0 flex-sub text-blue" bindtap="hideModal">我知道了</view>
+			</view>
+		</view>
+	</view>

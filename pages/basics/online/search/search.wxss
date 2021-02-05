@@ -1,0 +1,11 @@
+.custom-bar {
+  z-index: 100;
+  position: fixed;
+  background-color: white;
+  opacity: 0.9;
+  /* filter: blur(1px); */
+  width: 100%;
+}
+/* .van-cell{
+  padding:0 16px !important ;
+} */

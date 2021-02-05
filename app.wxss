@@ -1,0 +1,13 @@
+/**app.wxss**/
+@import "colorui/main.wxss";
+@import "colorui/icon.wxss";
+.custom-item{
+  height: 100rpx;
+}
+.custom-item-text{
+  font-size: 32rpx;
+  margin-left:5rpx;
+}
+.listloading{
+  filter: blur(2px);
+}

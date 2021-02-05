@@ -1,0 +1,30 @@
+/* pages/signin/home.wxss */
+page{
+  height: 100%;
+}
+
+.signin-button {
+  /* position: absolute; */
+  /* left: 50%; */
+  /* top:120px; */
+  width: 100%;
+  /* margin: 0 auto; */
+  /* transform: translate(-50%, -50%); */
+}
+.sign-background{
+  height: 100%;
+  position: fixed;
+  width: 100%;
+}
+
+.signin-radius{
+  border-radius: 50%;
+  height: 20vh;
+  width: 20vh;
+  margin: 0 auto;
+}
+
+.signin-text{
+  line-height: 20vh;
+  display: block;
+}

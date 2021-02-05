@@ -1,0 +1,4 @@
+/* pages/about/sign_record/sign_record.wxss */
+page{
+  background-color: rgb(255, 255, 255);
+}

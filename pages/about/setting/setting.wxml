@@ -1,0 +1,36 @@
+<!--pages/about/setting/setting.wxml-->
+<cu-custom bgColor="bg-green" isBack="{{true}}">
+  <view slot="backText">返回</view>
+	<view slot="content">系统设置</view>
+</cu-custom>
+<view class="cu-list menu card-menu margin-top  shadow-lg radius">
+<van-cell
+  is-link
+	title-class="text-grey custom-item-text"
+	custom-class="custom-item"
+  title="修改密码"
+	center
+	icon="completed"
+  link-type="navigateTo"
+  url="/pages/about/password/password"
+/>
+	<!-- <view class="cu-item">
+		<navigator class="content" url="/pages/about/password/password" hover-class="none">
+			<text class="cuIcon-formfill text-green"></text>
+			<text class="text-grey">修改密码</text>
+		</navigator>
+	</view> -->
+	<!-- <view class="cu-item arrow">
+		<navigator class="content" url="/pages/about/setting/setting" hover-class="none">
+			<text class="cuIcon-settingsfill text-blue"></text>
+			<text class="text-grey">退出登录</text>
+		</navigator>
+	</view> -->
+</view>
+<view class="padding flex flex-direction">
+  <button class="cu-btn bg-white text-grey lg" bindtap="logout">退出登录</button>
+</view>
+<view class="padding text-center viewback">
+	<button class="cu-btn bg-gray text-blue feedback" open-type="feedback">意见反馈</button>
+</view>
+<view class="cu-tabbar-height"></view>

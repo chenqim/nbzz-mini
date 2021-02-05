@@ -1,0 +1,89 @@
+<!--pages/basics/police/home/home.wxml-->
+<!-- <text>pages/basics/police/home/home.wxml</text> -->
+<cu-custom bgColor="bg-green" isBack="{{true}}">
+	<view slot="backText">返回</view>
+	<view slot="content">监控报警</view>
+</cu-custom>
+<image src='/images/icon/refresh.svg' class='goTop' hidden="{{!floorstatus||modalName}}" bindtap="gotop"></image>
+
+<view class="margin-sm cu-list card-menu shadow-lg radius">
+	<view wx:for="{{policeList}}" wx:key="index" wx:for-index="idx" wx:for-item="listitem">
+		<view wx:for="{{listitem}}" wx:key="index" wx:for-index="id">
+			<van-cell value="" label="" center is-link bindtap="showModal" data-item="{{item.id}}" data-index="{{index}}"
+				data-item="{{idx}}" data-id="{{id}}">
+				<view slot="title">
+					<view class="van-cell-text flex">
+						<text decode
+							class="flex-treble margin-right padding-tb-sm text-lg text-shadow">{{item.siteInfo.name}}</text>
+						<van-tag type="{{item.state == 1?'danger':'success'}}" plain
+							custom-class="flex-sub margin-right-sm margin-top"> {{item.state==1?'报警中':'报警结束'}}</van-tag>
+					</view>
+					<view>
+						<text decode class="text-gray text-df">
+							<text class="text-grey text-shadow"
+								decode>{{item.callPoliceType == 'always_equal_factor'?'恒值报警':item.callPoliceType == 'beyond_threshold'?'阈值报警':'脱机报警'}}\t{{item.polluteFactor.polluteName}}</text>
+						</text>
+					</view>
+				</view>
+			</van-cell>
+		</view>
+	</view>
+
+	<view class="listloading" hidden="{{!doneList}}">
+		<van-cell value="" label="" center is-link>
+			<view slot="title">
+				<view class="van-cell-text flex">
+					<text decode class="flex-treble margin-right padding-tb-sm text-lg text-shadow">加载中</text>
+					<van-tag color="#aaaaaa" plain
+						custom-class="flex-sub margin-right-sm margin-top">状态暂定</van-tag>
+				</view>
+				<view>
+					<text decode class="text-gray text-df">
+						<text class="text-grey text-shadow" decode>恒值报警\t加载中</text>
+					</text>
+				</view>
+			</view>
+		</van-cell>
+	</view>
+</view>
+
+
+<!-- 弹窗 -->
+		<view class="cu-modal {{modalName}}" bindtap="hideModal">
+			<view class="cu-dialog" catchtap>
+				<view class="wrap"><span
+						class="ribbon6 bg-{{item.state == 1?'red':'green'}} light">{{item.state == 1?'报警中':'报警结束'}}</span></view>
+				<scroll-view class="padding-top-xl padding-lr-xl message-context bg-white" scroll-y>
+					<view class="text-black text-shadow text-center text-xl margin-lr margin-bottom">
+						<text decode>{{item.siteInfo.name}}</text>
+					</view>
+					<view class="text-grey text-center margin-lr margin-bottom">
+						<text decode>
+							{{item.callPoliceType == 'always_equal_factor'?'恒值报警':item.callPoliceType == 'beyond_threshold'?'阈值报警':'脱机报警'}}\t{{item.polluteFactor.polluteName}}</text>
+					</view>
+					<view class="flex solid-bottom  justify-between">
+						<view class="  margin-sm radius">开始时间</view>
+						<view class="  margin-sm radius">{{item.startTime}}</view>
+					</view>
+					<view class="flex solid-bottom  justify-between">
+						<view class="  margin-sm radius">结束时间</view>
+						<view class="  margin-sm radius">{{item.endTime==null?'/':item.endTime}}</view>
+					</view>
+					<view class="flex solid-bottom  justify-between">
+						<view class="  margin-sm radius">报警值</view>
+						<view class="  margin-sm radius">{{item.currentValue==null?'/':item.currentValue}}<text decode class="text-grey">\t{{item.polluteFactor.unit}}</text> </view>
+					</view>
+				</scroll-view>
+				<view class="cu-bar bg-white">
+					<view class="action margin-0 flex-sub text-blue" bindtap="hideModal">我知道了</view>
+				</view>
+			</view>
+		</view>
+
+<view class="margin-lr-lg">
+	<van-divider wx:if="{{!doneList}}" contentPosition="center"
+		customStyle="color: #1989fa; border-color: #1989fa; font-size: 14px;">
+		{{siteList.length!=0?'到底啦~':'还没有内容'}}
+	</van-divider>
+</view>
+<view class="padding-top-xs"></view>

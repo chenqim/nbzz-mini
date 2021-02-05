@@ -1,0 +1,95 @@
+<cu-custom bgColor="bg-green" isBack="{{true}}">
+	<view slot="backText">返回</view>
+	<view slot="content">站内消息</view>
+</cu-custom>
+
+<view class=" margin-bottom bg-white custom-bar shadow" style="top:{{custom}}" hidden="{{messageList.length==0}}">
+	<view class="flex justify-around">
+		<view class=" padding-sm margin-xs radius text-blue" bindtap="readall">
+			<van-icon name="passed" /> 全部已读</view>
+		<view class=" padding-sm margin-xs radius text-red" bindtap="cleanall">
+			<van-icon name="delete" /> 一键清空</view>
+	</view>
+</view>
+<view class="margin-tb padding-tb" hidden="{{messageList.length==0}}"></view>
+
+
+<view class="margin-sm cu-list card-menu shadow-lg radius">
+	<!-- 消息列表 -->
+	<!-- <view wx:for="{{messageList}}" wx:key="index"> -->
+	<view wx:for="{{messageList}}" wx:key="index" wx:for-index="idx" wx:for-item="listitem">
+		<view wx:for="{{listitem}}" wx:key="index" wx:for-index="id">
+			<van-cell value="" label="" center is-link bindtap="showModal" data-item="{{item.id}}" data-idx="{{idx}}" data-index="{{id}}">
+				<view slot="title">
+					<view class="van-cell-text flex">
+						<text decode class="flex-treble margin-right padding-tb-sm text-lg text-shadow">{{item.title}}</text>
+						<van-tag type="{{item.readStatus == 1?'success':'danger'}}" plain
+							custom-class="flex-sub margin-right-sm margin-top">{{item.readStatus == 1?'已读':'未读'}}</van-tag>
+					</view>
+					<view>
+						<text decode class="text-gray text-df">
+							<text class="text-grey text-shadow">{{item.sendDate}}</text>
+						</text>
+					</view>
+				</view>
+			</van-cell>
+		</view>
+	</view>
+	<view class="listloading" wx:if="{{doneList}}">
+		<van-cell value="" label="" center is-link>
+			<view slot="title">
+				<view class="van-cell-text flex">
+					<text decode class="flex-treble margin-right padding-tb-sm text-lg text-shadow">正在努力地加载中</text>
+					<van-tag color="#aaaaaa" plain custom-class="flex-sub margin-right-sm margin-top">暂定</van-tag>
+				</view>
+				<view>
+					<text decode class="text-gray text-df">
+						<text class="text-grey text-shadow">2020-11-11 11:11:11</text>
+					</text>
+				</view>
+			</view>
+		</van-cell>
+	</view>
+</view>
+
+
+<!-- 弹出框 -->
+<view class="cu-modal {{modalName}}" bindtap="hideModal">
+	<view class="cu-dialog" catchtap>
+		<scroll-view class="padding-xl message-context bg-white" scroll-y style="height:40vh">
+			<view class="text-black text-shadow text-center text-xl margin-lr margin-bottom">
+				<text decode>{{message.title}}</text>
+			</view>
+			<view class="text-grey text-center margin-lr margin-bottom">
+				<text decode>{{message.sendDate}}</text>
+			</view>
+			<view class=" text-lg">
+				<view wx:if="{{left >= 0 && right >= 0}}">
+					<text decode>{{contextOne}}</text><text class="text-blue" data-type="{{message.type}}"
+						bindtap="toPage">{{contextTwo}}</text><text decode>{{contextThree}}</text>
+				</view>
+				<text decode wx:else>{{message.context}}</text>
+			</view>
+		</scroll-view>
+		<view class="flex bg-white solid-bottom padding text-gray justify-between">
+			<view wx:if="{{message.sendUser}}" class="padding-xs">
+				发送人：{{message.sendUser.userName}}
+			</view>
+			<view wx:elif="{{message.sendUserId == 0}}" class="padding-xs">
+				发送人：系统发送
+			</view>
+		</view>
+		<view class="cu-bar bg-white">
+			<view class="action margin-0 flex-sub text-blue" bindtap="hideModal">我知道了</view>
+		</view>
+	</view>
+</view>
+
+<!-- 触底提示 -->
+<view class="margin-lr-lg">
+	<van-divider wx:if="{{!doneList}}" contentPosition="center"
+		customStyle="color: #1989fa; border-color: #1989fa; font-size: 14px;">
+		{{messageList.length!=0?'到底啦~':'还没有消息'}}
+	</van-divider>
+</view>
+<view class="padding-top-xs"></view>

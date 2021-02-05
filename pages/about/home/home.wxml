@@ -1,0 +1,73 @@
+<cu-custom bgColor="bg-green">
+	<view slot="content">个人中心</view>
+</cu-custom>
+<view class="flex solid-bottom margin align-center bg-white shadow-blur ">
+	<view class="padding">
+	</view>
+
+	<view class="cu-avatar xl round" style="background-color:white;">
+		<image src="/images/my-info/default_user_icon.svg"></image>
+		<!-- <view class="cu-avatar xl round margin-left"></view> -->
+	</view>
+	<view class="radius padding-sm">
+		<view class="solid-bottom text-lg padding-sm text-shadow text-grey">
+			<text class="text-bold"> {{user_info.userName||"韩子昂"}}</text>
+		</view>
+		<view class="padding-sm text-sm">{{user_info.deptName||"流浪地球能源运输组"}}</view>
+	</view>
+</view>
+
+
+
+
+<view class="cu-list menu card-menu margin-top margin-bottom-xl shadow-lg radius">
+
+	<van-cell is-link title-class="text-grey item-text" custom-class="item" title="签到记录" center icon="map-marked" link-type="navigateTo" url="/pages/about/sign_record/sign_record" />
+	<!-- <van-cell is-link title-class="text-grey item-text" custom-class="item" title="消息管理" center icon="comment" link-type="navigateTo" url="/pages/basics/message/home/home" /> -->
+	<van-cell icon="comment" is-link custom-class="item" link-type="navigateTo" center url="/pages/basics/message/home/home">
+		<view slot="title" class="text-grey item-text">
+			<view class="van-cell-text"><text decode>消息管理 </text>
+			<van-tag round type="danger">{{message==0?'':message>99?"99+":message}}</van-tag>
+			</view>
+		</view>
+	</van-cell>
+	<!-- <van-cell
+  is-link
+	title-class="text-grey item-text"
+	custom-class="item"
+  title="意见反馈"
+	center
+	icon="column"
+  link-type="navigateTo"
+  url="/pages/dashboard/index"
+/> -->
+	<van-cell is-link title-class="text-grey item-text" custom-class="item" title="系统设置" center icon="setting" link-type="navigateTo" url="/pages/about/setting/setting" />
+
+
+	<!-- <view class="cu-item arrow">
+		<navigator class="content" url="/pages/about/log/log" hover-class="none">
+			<text class="cuIcon-formfill text-green"></text>
+			<text class="text-grey">签到记录</text>
+		</navigator>
+	</view> -->
+	<!-- <view class="cu-item arrow">
+		<view class="content" bindtap="showQrcode">
+			<text class="cuIcon-messagefill text-red"></text>
+			<text class="text-grey">消息中心</text>
+		</view>
+	</view>
+	<view class="cu-item arrow">
+		<button class="cu-btn content" open-type="feedback">
+			<text class="cuIcon-writefill text-cyan"></text>
+			<text class="text-grey">意见反馈</text>
+		</button>
+	</view>
+	<view class="cu-item arrow" bindtap="">
+		<view class="content">
+			<text class="cuIcon-settingsfill text-blue"></text>
+			<text class="text-grey">系统设置</text>
+		</view>
+	</view> -->
+
+</view>
+<view class="cu-tabbar-height"></view>

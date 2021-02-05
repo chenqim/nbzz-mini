@@ -1,0 +1,61 @@
+<!--pages/basics/site/home/home.wxml-->
+<cu-custom bgColor="bg-green" isBack="{{true}}">
+	<view slot="backText">返回</view>
+	<view slot="content">站点管理</view>
+</cu-custom>
+<view class=" margin-bottom bg-white custom-bar shadow" style="top:{{custom}}">
+	<view class="cu-bar search bg-white">
+		<view class="search-form round">
+			<text class="cuIcon-search"></text>
+			<input type="text" placeholder="搜索站点" confirm-type="search" bindinput="name" value="{{name}}" ></input>
+			<van-icon wx:if="{{name != ''}}" class="text-gray text-xl margin-right-sm" name="clear" bindtap="clear" />
+		</view>
+		<view class="action">
+			<button class="cu-btn bg-green shadow-blur round" bindtap="search">搜索</button>
+		</view>
+	</view>
+</view>
+<!-- <image src='/images/icon/refresh.svg' class='goTop' hidden="{{topStatus}}" bindtap="gotop"></image> -->
+<view class="margin-tb padding-tb"></view>
+
+<view class="margin-sm cu-list card-menu shadow-lg radius">
+	<view wx:for="{{siteList}}" wx:key="index">
+		<van-cell value="" label="" center is-link bindtap="toDetails" data-item="{{item.id}}">
+			<view slot="title">
+				<view class="van-cell-text flex">
+					<text decode class="flex-treble margin-right padding-tb-sm text-lg text-shadow">{{item.name}}</text>
+					<van-tag type="{{item.biEnterpriseInfo.status=='运行'?'success':'danger'}}" plain
+						custom-class="flex-sub margin-right-sm margin-top">{{item.biEnterpriseInfo.status}}</van-tag>
+				</view>
+				<view>
+					<text decode class="text-gray text-df"><text class="text-grey text-shadow">{{item.area.areaShort}}</text>\t{{item.dept.deptName}}</text>
+				</view>
+			</view>
+		</van-cell>
+	</view>
+	<view class="listloading" wx:if="{{doneList}}">
+		<van-cell value="" label="" center is-link>
+			<view slot="title">
+				<view class="van-cell-text flex">
+					<text decode class="flex-treble margin-right padding-tb-sm text-lg text-shadow">正在非常努力的加载中……</text>
+					<van-tag color="#aaaaaa" plain custom-class="flex-sub margin-right-sm margin-top">暂定</van-tag>
+				</view>
+				<view>
+					<text decode class="text-gray text-df"><text class="text-grey text-shadow">加载中</text> \t 在加载</text>
+				</view>
+			</view>
+		</van-cell>
+	</view>
+</view>
+<view class="margin-lr-lg">
+	<van-divider wx:if="{{!doneList}}" contentPosition="center"
+		customStyle="color: #1989fa; border-color: #1989fa; font-size: 14px;">
+		{{siteList.length!=0?'到底啦~':'还没有内容'}}
+	</van-divider>
+
+	<!-- <van-cell>
+		<van-skeleton row="2" />
+	</van-cell> -->
+
+</view>
+<view class="padding-top-xs"></view>

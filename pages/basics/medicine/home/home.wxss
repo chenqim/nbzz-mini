@@ -1,0 +1,4 @@
+/* pages/basics/site/operation/operation.wxss */
+.site_name{
+  max-width: 70vw;
+}

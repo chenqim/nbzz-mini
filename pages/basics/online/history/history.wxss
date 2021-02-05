@@ -1,0 +1,28 @@
+.custom-bar {
+  z-index: 100;
+  position: fixed;
+  background-color: white;
+  opacity: 0.9;
+  /* filter: blur(1px); */
+  backdrop-filter:blur(2px);
+  width: 100%;
+}
+.van-cell{
+  padding:0 16px !important ;
+}
+.goTop{
+  height: 100rpx;
+  width: 100rpx;
+  position: fixed;
+  bottom: 100rpx;
+  padding: 10rpx;
+  background: rgba(255, 255, 255, 0.618);
+  backdrop-filter: blur(1px);
+  box-shadow: rgba(167, 167, 167, 0.575) 2rpx 2rpx 4rpx 3rpx;
+  right: 100rpx;
+  border-radius: 28%;
+  z-index: 9999;
+}
+/* .list{
+  backdrop-filter: blur(2px);
+} */

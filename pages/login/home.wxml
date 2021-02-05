@@ -1,0 +1,42 @@
+<cu-custom>
+	<!-- <view slot="content">科怡云</view> -->
+</cu-custom>
+<view class="padding-sm text-center margin-bottom-lg shadow-blur">
+	<!-- <view class="bg-blue padding radius text-center shadow-blur"> -->
+	<view class="cu-avatar logo-size round">
+		<image class="logo-size" src="/images/logo.svg"></image>
+		<!-- <view class="cu-avatar xl round margin-left"></view> -->
+	</view>
+	<!-- </view> -->
+	<view class="text-center text-xxl text-bold text-white"><text>污染源在线工作平台</text></view>
+</view>
+<view class="margin-left-xl margin-right-xl margin text-center text-white">
+	<form class="text-left">
+		<view class="cu-form-group">
+			<view class="title "><text decode>账&emsp;号</text></view>
+			<input placeholder-class="phcolor" placeholder="字母、数字和下划线组合" bindinput="account"></input>
+		</view>
+		<view class="cu-form-group">
+			<view class="title"><text decode>密&emsp;码</text></view>
+			<input placeholder-class="phcolor" type="password" placeholder="2-20位密码" bindinput="password"></input>
+		</view>
+
+		<!-- <view class="cu-form-group">
+		<view class="title">验证码</view>
+		<input placeholder="输入图形中的数字"></input>
+		<view class="cu-capsule radius">
+		<van-image
+  	width="100px"
+  	height="60rpx"
+  	fit="contain"
+  	src="http://192.168.0.7:8080/login/verifyCode/{{verification}}"
+		/>
+		</view>
+	</view> -->
+
+		<view class="text-center margin-top">
+			<button class="bg-blue" bindtap="accountLogin">账号密码登录</button>
+		</view>
+	</form>
+	<button class="bg-green margin-top" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">微信账号一键登录</button>
+</view>

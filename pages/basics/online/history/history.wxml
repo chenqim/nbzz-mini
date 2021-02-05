@@ -1,0 +1,64 @@
+<!--pages/basics/online/search/search.wxml-->
+<cu-custom bgColor="bg-green" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">历史数据</view>
+</cu-custom>
+<view class=" margin-bottom bg-white custom-bar shadow" style="top:{{custom}}">
+  <view class="flex justify-around">
+    <view class=" padding-sm margin-xs radius text-green">{{name||'--'}} ({{unit||'--'}})</view>
+    <button bindtap="showModal" data-target="DrawerModalL"
+      class="cu-btn margin-sm round bg-blue light shadow">更换因子</button>
+  </view>
+</view>
+
+<image src='/images/icon/refresh.svg' class='goTop' hidden="{{!floorstatus||modalName}}" bindtap="gotop"></image>
+
+<view class="cu-modal drawer-modal justify-start {{modalName=='DrawerModalL'?'show':''}}" bindtap="hideModal"
+  catchtouchmove='filterViewMove'>
+  <view class="cu-dialog basis-lg" style="top:{{CustomBar}}px;height:calc(100vh - {{CustomBar}}px)">
+    <scroll-view scroll-y="{{true}}" style="height:calc(100vh - {{CustomBar}}px)">
+      <view class="cu-list menu text-left">
+        <view class="cu-item" wx:for="{{menu}}" wx:key="index" bindtap="factor" data-key="{{item.fieldKey}}"
+          data-name="{{item.fieldName}}" data-unit="{{item.fieldUnit}}" data-max="{{item.max}}" data-min="{{item.min}}">
+          <view class="content">
+            <view>{{item.fieldName||''}}</view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>
+
+<view class="margin-tb padding-tb"></view>
+
+
+<view class="margin-sm cu-list card-menu shadow-lg radius">
+
+  <!-- <view wx:for="{{list}}" wx:key="index" class="cu-bar bg-white list" style="background: linear-gradient(to right, #39b54a12 0%,#39b54a12 {{(item[factorData]-minProgress)/(maxProgress-minProgress)*75}}%,white 0%,white 100%)"> -->
+  <!-- <view wx:for="{{list}}" wx:key="index" class="cu-bar bg-white"> -->
+    <view wx:for="{{list}}" wx:key="index" wx:for-index="idx" wx:for-item="listitem" >
+      <view wx:for="{{listitem}}" wx:key="index" wx:for-index="id" class="cu-bar bg-white">
+        <view class="action">
+          {{item.monitorTime||''}}
+        </view>
+        <view class="action">
+          {{item[factorData]}}
+        </view>
+      </view>
+    </view>
+
+    <view class="cu-bar bg-white solid-bottom listloading" wx:if="{{doneList}}">
+      <view class="action">
+        2020-11-11 11:11:11
+      </view>
+      <view class="action">
+        666
+      </view>
+    </view>
+  </view>
+  <view class="margin-lr-lg">
+    <van-divider wx:if="{{!doneList}}" contentPosition="center"
+      customStyle="color: #1989fa; border-color: #1989fa; font-size: 14px;">
+      {{list.length!=0?'到底啦~':'还没有历史数据'}}
+    </van-divider>
+  </view>

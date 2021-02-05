@@ -1,0 +1,41 @@
+/* page{
+  background-color: rgb(250, 250, 250);
+} */
+
+.message-context{
+  text-align: left;
+}
+.custom-bar{
+  z-index: 100;
+  position: fixed;
+  background-color: white;
+  opacity: 0.9;
+  /* filter: blur(1px); */
+  width: 100%;
+  backdrop-filter: blur(2px);
+}
+
+
+/* ::-webkit-scrollbar {
+  width: 40px;
+  height: 40px;
+  color:#000000;
+}*/
+
+/*定义滚动条轨道 内阴影+圆角*/
+/*
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background-color:#000000;
+}*/
+
+/*定义滑块 内阴影+圆角*/
+/*
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color:#39b54a;
+} */

@@ -1,0 +1,55 @@
+<cu-custom bgColor="bg-green">
+	<view slot="content">首 页</view>
+</cu-custom>
+<view class="grid col-1 padding-sm">
+	<view class="padding-lr-sm padding-top-sm">
+		<view class="bg-gradual-green padding-lr padding-top-sm radius text-left shadow-blur">
+			<view class="flex align-center">
+				<view class="flex-sub text-left">
+					<text class="text-white text-xxl">{{user_info.userName||"获取中"}}</text>
+				</view>
+				<view class="margin-right-sm text-xxl margin-top-sm" bindtap="toMessage">
+					<van-icon name="comment" info="{{messageCount==0?'':messageCount>99?'99+':messageCount}}" />
+					
+				</view>
+			</view>
+			<view class="margin-top-sm text-Abc">{{enterpriseName?enterpriseName+" / ":""}}{{user_info.deptName||"获取中"}}</view>
+			<view class="margin-tb-sm text-Abc text-sm">{{user_info.roleName||"获取中"}}</view>
+			<van-divider customStyle="border-color: #ffffff;" />
+			<navigator url="/pages/basics/site/operation/operation" class="padding-tb-sm padding-bottom">
+				<view class="flex align-center">
+					<view class="flex-sub text-left">
+						<text class="text-white">运维报告单</text>
+					</view>
+					<view class="margin-right-sm">>></view>
+				</view>
+			</navigator>
+		</view>
+	</view>
+</view>
+
+<view class="bg-white margin-lr-lg cu-card case" wx:if="{{menuList.length > 0}}">
+	<view class="cu-item shadow">
+		<van-grid square column-num="3" border="{{true}}" clickable="true" gutter="10rpx">
+			<view wx:for="{{ menuList }}" wx:key="index">
+				<!-- dot  badge -->
+				<!-- <navigator url="{{item.href}}" > -->
+				<view class="{{item.statu=='s'?'menu-s':''}}">
+					<van-grid-item use-slot url="{{item.href}}" link-type="{{item.target}}">
+						<van-icon name="{{'/images/icon/'+item.icon}}" size="50px" />
+						<text class="margin-top-sm">{{item.title}}</text>
+						<view class="disabled" wx:if="{{item.statu=='s'}}" catchtap></view>
+					</van-grid-item>
+				</view>
+				<view>
+					<van-grid-item use-slot url="" wx:if="{{index == menuList.length-1}}" bindtap="onMoreTap">
+						<van-icon name="/images/icon/more.svg" size="50px" />
+						<text class="margin-top-sm">更多</text>
+					</van-grid-item>
+				</view>
+				<!-- </navigator> -->
+			</view>
+
+		</van-grid>
+	</view>
+</view>

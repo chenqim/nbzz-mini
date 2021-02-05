@@ -1,0 +1,7 @@
+
+<view class="main-box">
+  <view class="footer">
+    <image src='/images/logo.svg' class='logo' mode='aspectFit'></image>
+    <text class="title">污染源在线工作平台</text>
+  </view>
+</view>

@@ -1,0 +1,115 @@
+<!--pages/basics/site/report/report.wxml-->
+<cu-custom bgColor="bg-green" isBack="{{true}}">
+	<view slot="backText">返回</view>
+	<view slot="content">{{!detail?'运维申报':'详情'}}</view>
+</cu-custom>
+<view class="margin-sm cu-list card-menu shadow-lg radius">
+	<van-cell-group wx:if="{{!detail}}">
+		<van-field value="{{ userInfo.userName||'获取中'}}" label="运维人员" disabled placeholder="请输入用户名" />
+		<van-field value="{{ userInfo.deptName ||'获取中'}}" label="运维组" disabled placeholder="请输入用户名" />
+		<view class="cu-form-group">
+			<view class="title">站点名称</view>
+			<picker bindchange="PickerChange" value="{{pickindex}}" range="{{siteList}}">
+				<view class="picker">
+					{{pickindex==0?siteList[pickindex]:pickindex?siteList[pickindex]:'请选择一个站点'}}
+				</view>
+			</picker>
+		</view>
+		<view class="cu-list menu radius sm-border">
+			<view class="cu-item" bindtap="showModal" data-target="ChooseModal">
+				<view class="content">
+					<text class=" ">运维事项</text>
+				</view>
+				<view class="action">
+					<text class="text-grey">{{checked||'点击选择事项'}}</text>
+				</view>
+			</view>
+		</view>
+	</van-cell-group>
+
+	<van-cell-group>
+		<view wx:if="{{detail}}">
+			<van-field value="{{ site_details.userInfo.userName||'获取中'}}" label="运维人员" disabled />
+			<van-field value="{{ site_details.userInfo.deptName ||'获取中'}}" label="运维组" disabled />
+			<van-field value="{{ site_details.opsDate ||'获取中'}}" label="运维时间" disabled />
+			<van-field value="{{ site_details.siteInfo.name ||'获取中'}}" label="站点名称" disabled />
+			<van-field value="{{ opscheck ||'获取中'}}" label="运维事项" disabled />
+		</view>
+	</van-cell-group>
+
+	<view class="cu-modal {{modalName=='ChooseModal'?'show':''}}" bindtap="hideModal">
+		<view class="cu-dialog" catchtap>
+			<view class="cu-bar bg-white justify-end">
+				<view class="content">点击选择</view>
+				<view class="action" bindtap="hideModal">
+					<text class="cuIcon-close text-red"></text>
+				</view>
+			</view>
+			<view class="grid col-1 padding-sm margin-tb">
+				<view wx:for="{{checkbox}}" class="padding-xs" wx:key="index">
+					<button class="cu-btn margin-lr-lg green lg block {{item.checked?'bg-green':'line-green'}}"
+						bindtap="ChooseCheckbox" data-value="{{item.value}}"> {{item.name}}
+					</button>
+				</view>
+			</view>
+		</view>
+	</view>
+
+	<!-- 站房环境 -->
+	<view class="cu-bar bg-white">
+		<view class="action">
+			站房环境
+		</view>
+		<view class="action" wx:if="{{!detail}}">
+			{{imgList.length}}/8
+		</view>
+	</view>
+	<view class="cu-form-group">
+		<view class="grid col-4 grid-square flex-sub">
+			<view class="bg-img" wx:for="{{imgList}}" wx:key="index" bindtap="ViewImage" data-url="{{viewimage[index]}}">
+				<image src='{{imgList[index]}}' mode='aspectFill'></image>
+				<view wx:if="{{!detail}}" class="cu-tag bg-red" catchtap="{{!detail?'DelImg':''}}" data-index="{{index}}">
+					<text class="cuIcon-close"></text>
+				</view>
+			</view>
+			<view class="solids" bindtap="ChooseImage" wx:if="{{imgList.length<8&&!detail}}">
+				<text class="cuIcon-cameraadd"></text>
+			</view>
+		</view>
+	</view>
+	<!-- 运维单 -->
+	<view class="cu-bar bg-white">
+		<view class="action">
+			运维单
+		</view>
+		<view class="action" wx:if="{{!detail}}">
+			{{fileList.length}}/4
+		</view>
+	</view>
+	<view class="cu-form-group">
+		<view class="grid col-4 grid-square flex-sub">
+			<view class="bg-img" wx:for="{{fileList}}" wx:key="index" bindtap="ViewForm" data-url="{{viewfile[index]}}">
+				<image src='{{fileList[index]}}' mode='aspectFill'></image>
+				<view wx:if="{{!detail}}" class="cu-tag bg-red" catchtap="{{!detail?'Delfile':''}}" data-index="{{index}}">
+					<text class="cuIcon-close"></text>
+				</view>
+			</view>
+			<view class="solids" bindtap="ChoosePic" wx:if="{{fileList.length<4&&!detail}}">
+				<text class="cuIcon-cameraadd"></text>
+			</view>
+		</view>
+	</view>
+	<view hidden="{{modalName}}">
+		<van-field wx:if="{{message&&detail||!detail}}" value="{{message}}" label="备注" disabled="{{detail}}" type="textarea"
+			bind:input="description" autosize border="{{ false }}" />
+	</view>
+	<van-field wx:if="{{site_details.flowStatus=='reject'&&detail}}" value="{{ site_details.flowComment }}" label="审阅意见"
+		disabled type="textarea" autosize border="{{ false }}" />
+
+</view>
+
+<view class="flex flex-direction">
+	<button wx:if="{{!detail}}" class="cu-btn bg-green margin-lr-lg margin-tb-sm lg" bindtap="submit">提交申报</button>
+	<button wx:if="{{site_details.flowStatus=='reject'&&detail}}" class="cu-btn bg-blue margin-lr-lg margin-tb-sm lg"
+		bindtap="resubmit">重新申报</button>
+</view>

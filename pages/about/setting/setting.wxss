@@ -1,0 +1,10 @@
+/* pages/about/setting/setting.wxss */
+.feedback{
+  margin: 0 auto;
+}
+.viewback{
+  position: fixed;
+  bottom: 32rpx;
+  margin: 0 auto;
+  width: 100%;
+}

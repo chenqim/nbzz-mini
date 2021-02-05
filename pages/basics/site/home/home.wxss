@@ -1,0 +1,26 @@
+/* pages/basics/site/home/home.wxss */
+page{
+  background-color: rgb(250, 250, 250);
+}
+.custom-bar{
+  z-index: 100;
+  position: fixed;
+  background-color: white;
+  opacity: 0.9;
+  /* filter: blur(1px); */
+  width: 100%;
+  backdrop-filter: blur(2px);
+}
+/* .listloading{
+  filter: blur(2px);
+} */
+/* .goTop{
+  height: 90rpx;
+  width: 90rpx;
+  position: fixed;
+  bottom: 100rpx;
+  background: rgba(255, 255, 255, 0.3);
+  right: 100rpx;
+  border-radius: 28%;
+  z-index: 9999;
+} */

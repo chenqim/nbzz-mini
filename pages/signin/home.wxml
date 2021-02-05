@@ -1,0 +1,127 @@
+<cu-custom bgColor="bg-green">
+	<view slot="content">签 到</view>
+</cu-custom>
+<map id="map" longitude="{{mapData.currentLng}}" latitude="{{mapData.currentLat}}" scale="{{mapData.scale}}" markers="{{mapData.showData?mapData.markers:''}}" circles="{{mapData.showData?mapData.circles:''}}" include-points="{{mapData.includePoints}}" show-location="true" bindmarkertap="onMapMarkerTap" bindregionchange="onMapRegionChange" style="width: 100%; height: 30vh;"></map>
+
+<view class="cu-bar bg-white solid-bottom">
+	<view class="action" style="margin:0 auto;">
+		<view class="{{siteSelect.siteList.length <= 0?'':'cu-form-group'}}">
+			<picker bindchange="onSelectSiteConfirm" value="{{siteSelect.currentIndex}}" range="{{siteSelect.texts}}" disabled="{{siteSelect.siteList.length <= 0}}">
+				<view class="picker">
+					{{signinText.currentSiteName}}
+				</view>
+			</picker>
+		</view>
+	</view>
+</view>
+
+<view class="sign-background bg-white padding">
+	<view class="text-center text-lg text-shadow text-green margin-bottom">{{signinText.currentSiteDistance}}</view>
+
+	<view class="padding signin-button">
+		<view class="text-center signin-radius shadow-blur text-xxl shadow cu-btn signin-text {{signinText.signinStatus?(siteSelect.siteList[siteSelect.currentIndex].todaySigninStatus?'bg-green':'bg-blue'):'bg-grey'}}" bindtap="onOpenSigninPage">
+		{{signinText.signinStatus?(siteSelect.siteList[siteSelect.currentIndex].todaySigninStatus?'已签到':'签到'):'无法签到'}}
+		</view>
+		<view class="text-center margin-top text-df text-gary text-shadow" style="height: 60rpx; ">
+			<van-icon style="height: 60rpx;margin-right: 10rpx;vertical-align: middle;" wx:if="{{signinText.signinStatus}}" name="/images/signin/sign_yes.svg" size="36rpx" />
+			<view decode style="line-height: 60rpx; height: 60rpx;display: inline-block;vertical-align: middle;">{{siteSelect.siteList[siteSelect.currentIndex].todaySigninStatus?siteSelect.siteList[siteSelect.currentIndex].signInDate+"已签到":signinText.signinRangeText}}</view>
+			<!-- <view class="text-center">上次签到时间：17:16</view> -->
+		</view>
+		<view class="text-center margin-top-sm text-df text-blue text-shadow" bindtap="onfreshLocation">刷新定位<text class="cuIcon-refresh text-blue"></text></view>
+		<view class="text-center margin-top text-df text-gery text-shadow">{{signinText.currentDate}}</view>
+	</view>
+
+
+</view>
+
+
+<view class="cu-modal {{openSetting.show?'show':''}}">
+	<view class="cu-dialog">
+		<view class="cu-bar bg-white justify-end">
+			<view class="content">请开启定位</view>
+			<view class="action" bindtap="onHideSetting">
+				<text class="cuIcon-close text-red"></text>
+			</view>
+		</view>
+		<view class="padding-xl">
+			请允许“污染源在线工作平台”使用您的定位，方便为您提供站点签到功能
+		</view>
+		<view class="cu-bar bg-white justify-end">
+			<view class="action">
+				<button class="cu-btn line-green text-green" bindtap="onHideSetting">取消</button>
+				<button class="cu-btn bg-green margin-left" bindtap="onOpenSetting">确定</button>
+
+			</view>
+		</view>
+	</view>
+</view>
+<view class="cu-modal {{locationError.show?'show':''}}">
+	<view class="cu-dialog">
+		<view class="cu-bar bg-white justify-end">
+			<view class="content">{{locationError.title}}</view>
+			<view class="action" bindtap="onHidelocationError">
+				<text class="cuIcon-close text-red"></text>
+			</view>
+		</view>
+		<view class="padding-xl">
+			{{locationError.content}}
+		</view>
+		<view class="cu-bar bg-white justify-end">
+			<view class="action">
+				<button class="cu-btn bg-green margin-left" bindtap="onHidelocationError">确定</button>
+
+			</view>
+		</view>
+	</view>
+</view>
+
+
+<view class="cu-modal {{signinForm.show?'show':''}}">
+	<view class="cu-dialog">
+		<view class="cu-bar bg-white justify-end">
+			<view class="content">签到</view>
+			<view class="action" bindtap="onHideSigninPage">
+				<text class="cuIcon-close text-red"></text>
+			</view>
+		</view>
+		<view class="margin-sm cu-list card-menu shadow-lg radius text-left">
+			<van-cell-group>
+				<van-field value="{{ userInfo.userName||'获取失败'}}" label="运维人员" disabled placeholder="请输入用户名" />
+				<van-field value="{{ userInfo.deptName ||'获取失败'}}" label="运维组" disabled placeholder="请输入用户名" />
+				<van-field value="{{ signinForm.currentSiteName ||'获取失败'}}" label="签到站点" disabled placeholder="请输入签到站点" />
+				<van-field value="{{ signinForm.signinDate ||'获取失败'}}" label="签到时间" disabled placeholder="请输入签到时间" />
+			</van-cell-group>
+			<view class="cu-bar bg-white">
+				<view class="action">
+					现场照片
+				</view>
+				<view class="action">
+					{{signinForm.signInImgList.length}}/1
+				</view>
+			</view>
+			<view class="cu-form-group">
+				<view class="grid col-4 grid-square flex-sub">
+					<view class="bg-img" wx:for="{{signinForm.signInImgList}}" wx:key="index" bindtap="onViewImage" data-url="{{signinForm.signInImgList[index]}}">
+						<image src='{{signinForm.signInImgList[index]}}' mode='aspectFill'></image>
+						<view class="cu-tag bg-red" catchtap="onDelImg" data-index="{{index}}">
+							<text class="cuIcon-close"></text>
+						</view>
+					</view>
+					<view class="solids" bindtap="onChooseImage" wx:if="{{signinForm.signInImgList.length<1}}">
+						<text class="cuIcon-cameraadd"></text>
+					</view>
+				</view>
+			</view>
+			<van-cell-group>
+				<van-field  wx:if="{{ signinForm.show }}" value="{{ signinData.positionName ||'获取失败'}}" type="textarea" border="{{ false }}" autosize label="当前位置" disabled/>
+			</van-cell-group>
+		</view>
+		<view class="cu-bar bg-white justify-end">
+			<view class="action">
+				<button class="cu-btn line-green text-green" bindtap="onHideSigninPage">取消</button>
+				<button class="cu-btn bg-green margin-left" bindtap="onSignin">提交</button>
+
+			</view>
+		</view>
+	</view>
+</view>

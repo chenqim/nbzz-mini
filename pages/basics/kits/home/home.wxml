@@ -1,0 +1,64 @@
+<!--pages/basics/site/operation/operation.wxml-->
+<cu-custom bgColor="bg-green" isBack="{{true}}">
+	<view slot="backText">返回</view>
+	<view slot="content">配件申报</view>
+</cu-custom>
+
+<view class="margin-sm cu-list card-menu shadow-lg radius">
+	<van-cell center>
+		<view slot="title">
+			<view class="van-cell-text flex">
+      <text decode class=" flex-treble margin-right-lg padding-tb text-blue text-lg text-shadow">创建新的配件申报</text>
+      <button bindtap="toReport" class="cu-btn flex-sub margin-sm round bg-blue shadow">申报</button>
+      </view>
+		</view>
+	</van-cell>
+	<!-- <view wx:for="{{list}}" wx:key="index"> -->
+	  <view wx:for="{{list}}" wx:key="index" wx:for-index="idx" wx:for-item="listitem" >
+      <view wx:for="{{listitem}}" wx:key="index" wx:for-index="id">
+		<van-cell value="" label="" center is-link bindtap="toDetails" data-item="{{item}}">
+			<view slot="title">
+				<view class="van-cell-text">
+					<view class="flex">
+						<text decode class=" flex-treble margin-right padding-tb-sm text-lg text-shadow">{{item.title}}</text>
+						<van-tag color="{{item.flowStatus=='confirm'?'limegreen':item.flowStatus=='pending'?'tomato':'orange'}}" plain custom-class=" flex-sub margin-sm margin-top">{{item.flowStatus=='confirm'?'已确认':item.flowStatus=='pending'?'未确认':' 驳  回 '}}</van-tag>
+					</view>
+				</view>
+
+				<view>
+					<text class="text-grey text-shadow">{{item.appDate}}</text>
+					<text decode class="text-gray fr margin-right-sm text-df">  </text>
+				</view>
+			</view>
+		</van-cell>
+	</view>
+
+	<view class="listloading" wx:if="{{doneList}}">
+		<van-cell value="" label="" center is-link >
+			<view slot="title">
+				<view class="van-cell-text">
+					<view class="flex">
+						<text decode class=" flex-treble margin-right padding-tb-sm text-lg text-shadow">某某配件等申报</text>
+						<van-tag color="#aaaaaa" plain custom-class=" flex-sub margin-sm margin-top">暂定</van-tag>
+					</view>
+				</view>
+				<view>
+					<text class="text-grey text-shadow">2020-11-11 11:11:11</text>
+					<text decode class="text-gray fr margin-right-sm text-df">  </text>
+				</view>
+			</view>
+		</van-cell>
+	</view>
+	</view>
+</view>
+<view class="margin-lr-lg">
+	<van-divider wx:if="{{!doneList}}" contentPosition="center" customStyle="color: #1989fa; border-color: #1989fa; font-size: 14px;">
+		{{list.length!=0?'到底啦~':'还没有申报记录'}}
+	</van-divider>
+
+	<!-- <van-cell>
+		<van-skeleton row="2" />
+	</van-cell> -->
+
+</view>
+<view class="padding-top-xs"></view>

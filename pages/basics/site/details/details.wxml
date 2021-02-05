@@ -1,0 +1,96 @@
+<!--pages/basics/site/details/details.wxml-->
+<cu-custom bgColor="bg-green" isBack="{{true}}">
+	<view slot="backText">返回</view>
+	<view slot="content">详情</view>
+</cu-custom>
+<view class="cu-bar bg-white">
+	<view class="action">
+		<text class="cuIcon-title text-blue"></text>
+		<text decode class="text-lg padding-tb-sm text-bold">{{details.name}}</text>
+		<van-tag type="{{details.biEnterpriseInfo.status=='运行'?'success':'danger'}}" custom-class="margin-left-lg van-tag">{{details.biEnterpriseInfo.status}}</van-tag>
+		<!-- <view class="cu-tag round bg-blue light margin-left-lg">审核中</view> -->
+	</view>
+</view>
+<view class="cu-list menu margin-top-sm margin-lr-sm radius sm-border">
+	<view class="cu-item">
+		<view class="content">
+			<!-- <text class="cuIcon-warn text-green"></text> -->
+			<text class="">企业名称</text>
+		</view>
+		<view class="action">
+			<text class="text-grey">{{details.biEnterpriseInfo.name}}</text>
+		</view>
+	</view>
+	<view class="cu-item">
+		<view class="content">
+			<text class="">企业联系人</text>
+		</view>
+		<view class="action">
+			<text class="text-grey">{{details.biEnterpriseInfo.contacts || "未填写"}}</text>
+		</view>
+	</view>
+	<view class="cu-item">
+		<view class="content">
+			<text class="">联系电话</text>
+		</view>
+		<view class="action">
+			<!-- <text class="text-grey">{{details.biEnterpriseInfo.mobile || "未填写"}}</text> -->
+			<text decode class="text-{{details.biEnterpriseInfo.mobile?'blue':'grey'}} padding-tb-sm" bindtap="{{details.biEnterpriseInfo.mobile&&'goPhone'}}">{{details.biEnterpriseInfo.mobile||'未填写'}}</text>
+		</view>
+	</view>
+	<view class="cu-item">
+		<view class="content">
+			<!-- <text class="cuIcon-warn text-green"></text> -->
+			<text class=" ">运维组</text>
+		</view>
+		<view class="action">
+			<text class="text-grey">{{details.dept.deptName||'未填写'}}</text>
+		</view>
+	</view>
+	<view class="cu-item">
+		<view class="content">
+			<!-- <text class="cuIcon-warn text-green"></text> -->
+			<text class="">运维人员</text>
+		</view>
+		<view class="action">
+			<text class="text-grey">{{details.opsName||'无'}}</text>
+		</view>
+	</view>
+	<view class="cu-item">
+		<view class="content">
+			<!-- <text class="cuIcon-warn text-green"></text> -->
+			<text class="">区域</text>
+		</view>
+		<view class="action">
+			<text class="text-grey">{{details.area.name||'未填写'}}</text>
+		</view>
+	</view>
+	<view class="cu-item">
+		<view class="content">
+			<!-- <text class="cuIcon-warn text-green"></text> -->
+			<text class="">站点地址</text>
+			<!-- <van-tag type="primary" bindtap="goSite" plain wx:if="{{details.address}}">查看地图</van-tag> -->
+		</view>
+		<view class="action">
+			<text decode class="text-{{details.address?'blue':'grey'}} padding-tb-sm" bindtap="{{details.address&&'goSite'}}"><text wx:if="{{details.address}}" class="cu-item text-blue cuIcon-locationfill"></text> {{details.address||'未填写'}}</text>
+		</view>
+	</view>
+	<view class="cu-item">
+		<view class="content">
+			<!-- <text class="cuIcon-warn text-green"></text> -->
+			<text class=" ">设备型号</text>
+		</view>
+		<view class="action">
+			<text class="text-grey">{{details.equipmentNames||'未填写'}}</text>
+		</view>
+	</view>
+	<view class="cu-item">
+		<view class="content">
+			<!-- <text class="cuIcon-warn text-green"></text> -->
+			<text class=" ">备注</text>
+		</view>
+		<view class="action">
+			<text class="text-grey">{{details.description||'未填写'}}</text>
+		</view>
+	</view>
+</view>
