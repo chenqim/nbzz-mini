@@ -29,7 +29,7 @@
   ],
   "window": {
     "navigationStyle": "custom",
-    "backgroundColor": "#1E9FFF",
+    "backgroundColor": "#F9F9F9",
     "backgroundColorBottom":"#F1F1F1",
     "backgroundColorTop":"#F1F1F1",
     "onReachBottomDistance":70
