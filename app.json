@@ -1,7 +1,7 @@
 {
   "permission": {
     "scope.userLocation": {
-      "desc": "您的位置信息将用于“污染源在线工作平台”签到功能和位置采集"
+      "desc": "您的位置信息将用于小程序的签到功能和位置采集"
     }
   },
   "pages": [
@@ -29,7 +29,7 @@
   ],
   "window": {
     "navigationStyle": "custom",
-    "backgroundColor": "#F9F9F9",
+    "backgroundColor": "#0081ff",
     "backgroundColorBottom":"#F1F1F1",
     "backgroundColorTop":"#F1F1F1",
     "onReachBottomDistance":70

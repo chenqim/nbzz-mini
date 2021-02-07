@@ -44,7 +44,7 @@
 			</view>
 		</view>
 		<view class="padding-xl">
-			请允许“污染源在线工作平台”使用您的定位，方便为您提供站点签到功能
+			请允许小程序使用您的定位，方便为您提供站点签到功能
 		</view>
 		<view class="cu-bar bg-white justify-end">
 			<view class="action">
