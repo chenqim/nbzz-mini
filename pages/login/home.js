@@ -14,14 +14,16 @@ Page({
           wx.request({
             method: "POST",
             header: {
-              "AUTH-TOKEN": token
+              "Auth-Token": token
             },
             url: app.baseurl+app.api.SEND_CODE,
             data: {
               code: res.code
             },
             success(res) {
-              wx.setStorageSync('token', res.data.token)
+              if (res.header["Auth-Token"]) {
+                wx.setStorageSync('token', res.header["Auth-Token"])
+              }
               
             },
             fail(err) {
@@ -114,24 +116,16 @@ Page({
       toShow: true,
       data
     }).then(res => {
-      // console.log(res)
-      // console.log(res)
-      if (res.data.code == '1') {
+      if (res.data.code == '00000') {
         wx.switchTab({
           url: '../basics/home/home',
           fail: function (res) {
             console.log(res)
           }
         })
-      } else if (res.data.code == '0') {
-        wx.showToast({
-          title: res.data.msg + '',
-          icon: 'none',
-          duration: 2500
-        })
       } else {
         wx.showToast({
-          title: "登录失败，请重试",
+          title: res.data.message + '',
           icon: 'none',
           duration: 2500
         })
@@ -177,15 +171,14 @@ Page({
           wx.request({
             method: "POST",
             header:{
-              "AUTH-TOKEN":token
+              "Auth-Token":token
             },
             url: config.apiPrefix + app.api.SEND_CODE,
             data: {
               code: res.code
             },
             success(res) {
-              console.log(res.data.token)
-              wx.setStorageSync('token', res.data.token)
+              wx.setStorageSync('token', res.header["Auth-Token"])
             },
             fail(err){
               wx.showToast({

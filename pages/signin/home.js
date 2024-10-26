@@ -256,7 +256,7 @@ Page({
         positionLat: lat
       }
     }).then(res => {
-      if (res.data.code == 1) {
+      if (res.data.code == '00000') {
         that.setData({
           "signinData.positionName": res.data.data.currentPosition.positionName,
           "mapData.range": res.data.data.range
@@ -487,7 +487,7 @@ Page({
             url: app.api.SIGNIN,
             data: that.data.signinData
           }).then(res => {
-            if (res.data.code == 1) {
+            if (res.data.code == '00000') {
               that.setData({
                 "signinForm.show": false,
                 "signinForm.signInImgIdList": [],

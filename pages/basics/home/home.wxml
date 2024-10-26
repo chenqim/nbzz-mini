@@ -1,7 +1,7 @@
 <cu-custom bgColor="bg-blue"> 
-	<view slot="content">首 页</view>
+	<view slot="content">工作台</view>
 </cu-custom>
-<view class="grid col-1 padding-sm">
+<!-- <view class="grid col-1 padding-sm">
 	<view class="padding-lr-sm padding-top-sm">
 		<view class="bg-gradual-blue padding-lr padding-top-sm radius text-left shadow-blur">
 			<view class="flex align-center">
@@ -26,9 +26,9 @@
 			</navigator>
 		</view>
 	</view>
-</view>
+</view> -->
 
-<view class="bg-white margin-lr-lg cu-card case" wx:if="{{menuList.length > 0}}">
+<view class="bg-white margin-lr-lg margin-tb-lg cu-card case" wx:if="{{menuList.length > 0}}">
 	<view class="cu-item shadow">
 		<van-grid square column-num="3" border="{{true}}" clickable="true" gutter="10rpx">
 			<view wx:for="{{ menuList }}" wx:key="index">
@@ -36,17 +36,17 @@
 				<!-- <navigator url="{{item.href}}" > -->
 				<view class="{{item.statu=='s'?'menu-s':''}}">
 					<van-grid-item use-slot url="{{item.href}}" link-type="{{item.target}}">
-						<van-icon name="{{'/images/icon/'+item.icon}}" size="50px" />
+						<van-icon name="{{'/images/icon/' + item.icon}}" size="50px" />
 						<text class="margin-top-sm">{{item.title}}</text>
 						<view class="disabled" wx:if="{{item.statu=='s'}}" catchtap></view>
 					</van-grid-item>
 				</view>
-				<view>
+				<!-- <view>
 					<van-grid-item use-slot url="" wx:if="{{index == menuList.length-1}}" bindtap="onMoreTap">
 						<van-icon name="/images/icon/more.svg" size="50px" />
 						<text class="margin-top-sm">更多</text>
 					</van-grid-item>
-				</view>
+				</view> -->
 				<!-- </navigator> -->
 			</view>
 

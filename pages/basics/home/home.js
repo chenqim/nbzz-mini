@@ -81,7 +81,7 @@ Page({
           clearInterval(app.globalData.queryMessage)
           return wx.showModal({
             title: '提示',
-            content: res.data.msg + '',
+            content: res.data.message + '',
             showCancel: false,
             confirmColor: '#0081ff',
             success(res) {
@@ -116,11 +116,11 @@ Page({
     if (app.globalData.internal) {
       app.globalData.internal = false
       app.globalData.queryMessage = setInterval(() => {
-        this.queryMessage()
+        // this.queryMessage()
       }, 15000)
     }
     if(!app.globalData.internal){
-      this.queryMessage()
+      // this.queryMessage()
     }
   },
   onShareAppMessage: function () {

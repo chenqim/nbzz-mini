@@ -14,7 +14,7 @@ Page({
         if(res.data.code == '-2'||res.data.code == '-4'){
           return wx.showModal({
             title: '提示',
-            content: res.data.msg+'',
+            content: res.data.message+'',
             showCancel: false,
             confirmColor: '#0081ff',
             success(res) {
@@ -91,7 +91,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.queryMessage()
+    // this.queryMessage()
   },
 
   /**

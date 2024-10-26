@@ -1,0 +1,22 @@
+<!--pages/basics/work/detail/detail.wxml-->
+<!--pages/basics/work/home/home.wxml-->
+<cu-custom bgColor="bg-blue" isBack="{{true}}"> 
+	<view slot="content">工单详情</view>
+</cu-custom>
+<view>
+    <van-cell-group inset>
+        <van-cell title="ID" value="{{ instance.id }}" />
+        <van-cell title="工单名称" value="{{ instance.name }}" />
+        <van-cell title="工单级别">
+            <van-tag type="danger">{{ instance.level }}</van-tag>
+        </van-cell>
+        <van-cell title="工单类型" value="{{ instance.type }}" />
+        <van-cell title="产品名称" value="{{ instance.productName }}" />
+        <van-cell title="生产数量" value="{{ instance.number }}" />
+        <van-cell title="生产状态">
+            <van-tag plain type="primary">{{ instance.status }}</van-tag>
+        </van-cell>
+        <van-cell title="截止时间" value="{{ instance.time }}" />
+        <van-cell title="备注" label="{{ instance.remark }}" />
+    </van-cell-group>
+</view>

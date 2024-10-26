@@ -15,6 +15,7 @@ Page({
           }).then(res =>{
             // console.log(res)
             // wx.clearStorage()
+            wx.clearStorageSync()
             app.globalData.user_info = null
             app.globalData.internal = true
             clearInterval(app.globalData.queryMessage)

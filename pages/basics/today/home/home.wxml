@@ -1,0 +1,5 @@
+<!--pages/basics/today/home/home.wxml-->
+<cu-custom bgColor="bg-blue" isBack="{{true}}"> 
+	<view slot="content">今日工单</view>
+</cu-custom>
+<text>pages/basics/today/home/home.wxml</text>

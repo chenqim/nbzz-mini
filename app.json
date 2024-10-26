@@ -23,6 +23,9 @@
     "pages/basics/site/home/home",
     "pages/basics/site/details/details",
     "pages/basics/police/home/home",
+    "pages/basics/work/home/home",
+    "pages/basics/work/detail/detail",
+    "pages/basics/today/home/home",
     "pages/about/setting/setting",
     "pages/about/password/password",
     "pages/about/sign_record/sign_record"
@@ -39,15 +42,9 @@
     "list": [
       {
         "pagePath": "pages/basics/home/home",
-        "text": "首页",
+        "text": "工作台",
         "iconPath": "/images/tabbar/home.png",
         "selectedIconPath": "/images/tabbar/home_cur.png"
-      },
-      {
-        "pagePath": "pages/signin/home",
-        "text": "签到",
-        "iconPath": "/images/tabbar/signin.png",
-        "selectedIconPath": "/images/tabbar/signin_cur.png"
       },
       {
         "pagePath": "pages/about/home/home",

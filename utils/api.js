@@ -3,6 +3,7 @@ module.exports = {
     APP_CONFIG:"/wxapp/misc/readAppConfig",                     //app配置读取
     //权限认证模块
     SEND_CODE : "/wxapp/auth/code2Session",                     // 发送code获取session
+    AUTO_LOGIN: "/wxapp/auth/code2Login",                       // 已绑定过的自动登录
     GET_TOKEN : "/wxapp/auth/login",                            // 获取token 认证
     LOGOUT: "/wxapp/auth/logout",                               //登出
     CURRENT_MENT_INFO:"/wxapp/auth/queryCurrentMenuInfo",       //查询当前菜单信息

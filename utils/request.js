@@ -38,7 +38,7 @@ function request(opts = {}) {
       data,
       method,
       header: {
-        "AUTH-TOKEN": `${token}`,
+        "Auth-Token": `${token}`,
       },
       success: res => {
         // console.log(`请求【${method} ${url}】成功，响应数据：%o`, res)
@@ -53,10 +53,11 @@ function request(opts = {}) {
           initialization(toShow,loading)
           return resolve(res)
         }
-        if(res.data.token!=token){
-          wx.setStorageSync('token', res.data.token)
+        console.log(res);
+        if(res.header["Auth-Token"] && res.header["Auth-Token"]!=token){
+          wx.setStorageSync('token', res.header["Auth-Token"])
         }
-        if (res.data.code == 1) {
+        if (res.data.code == '00000') {
           initialization(toShow,loading)
           return resolve(res)
         } else {
@@ -67,7 +68,7 @@ function request(opts = {}) {
             }else{
               initialization(toShow,loading)
               return wx.showToast({
-                title: res.data.msg + '',
+                title: res.data.message + '',
                 icon: 'none',
                 duration: 2000
               })
@@ -80,7 +81,7 @@ function request(opts = {}) {
               initialization(toShow,loading)
             return wx.showModal({
               title: '提示',
-              content: res.data.msg+'',
+              content: res.data.message+'',
               showCancel: false,
               success(res) {
                 if (res.confirm) {
@@ -95,7 +96,7 @@ function request(opts = {}) {
             initialization(toShow,loading)
             return wx.showModal({
               title: '提示',
-              content: res.data.msg+'',
+              content: res.data.message+'',
               showCancel: false,
               success(res) {
                 if (res.confirm) {
@@ -106,7 +107,7 @@ function request(opts = {}) {
           }else{
             initialization(toShow,loading)
              return wx.showToast({
-              title: res.data.msg + '',
+              title: res.data.message + '',
               icon: 'none',
               duration: 2000
             })
@@ -157,7 +158,7 @@ function uploadFile(filePath, url) {
       name: 'file',
       url: url,
       header: {
-        "AUTH-TOKEN": wx.getStorageSync('token'),
+        "Auth-Token": wx.getStorageSync('token'),
         'content-type': 'multipart/form-data'
       },
       success(res) {

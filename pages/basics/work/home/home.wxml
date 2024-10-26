@@ -1,0 +1,40 @@
+<!--pages/basics/work/home/home.wxml-->
+<cu-custom bgColor="bg-blue" isBack="{{true}}"> 
+	<view slot="content">我的工单</view>
+</cu-custom>
+<view class="work-box" wx:for="{{ list }}" wx:key="*this">
+	<!-- 工单名称、工单级别、工单类型、产品名称、生产数量、生产状态、备注 -->
+	<view class="flex justify-between">
+		<view class="text-cut">
+			<!-- <text>工单名称：</text> -->
+			<text class="title">{{ item.name }}</text>
+		</view>
+		<view class="status">
+			<!-- <text>工单级别：</text> -->
+			<van-tag type="{{ item.level === '普通' ? 'success' : 'danger' }}">{{ item.level }}</van-tag>
+		</view>
+	</view>
+	<view class="text-cut margin-top-sm">
+		<text>名称：</text>
+		<text class="sub-text">{{ item.productName }}</text>
+	</view>
+	<view class="flex justify-between margin-top-sm">
+		<view class="text-cut">
+			<text>数量：</text>
+			<text class="sub-text">{{ item.number }}</text>
+		</view>
+		<view>
+			<text>截止时间：</text>
+			<text class="sub-text">{{ item.time }}</text>
+		</view>
+	</view>
+	<view class="flex justify-between margin-top-sm">
+		<view>
+			<van-tag plain type="{{ item.status === '已认领' ? 'primary' : 'success' }}">{{ item.status }}</van-tag>
+		</view>
+		<view>
+			<van-button type="default" bind:tap="goToDetail" size="small">查看详情</van-button>
+			<van-button type="info" class="margin-left-xs" size="small" wx:if="{{ item.status === '未认领' }}">认领工单</van-button>
+		</view>
+	</view>
+</view>
