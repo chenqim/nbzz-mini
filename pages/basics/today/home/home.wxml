@@ -48,6 +48,7 @@
   show="{{ show }}"
   show-cancel-button
   before-close="{{ verify }}"
+  catchtouchmove="stop"
 >
 	<view class="process-dialog-content">
 		<van-radio-group value="{{ choosedProcess }}" bind:change="onChange">
