@@ -51,6 +51,8 @@ Page({
     },
   },
 
+  stop() {},
+
   goToDetail (e) {
     wx.navigateTo({
       url: '/pages/basics/work/detail/detail?id=' + e.currentTarget.dataset.id
