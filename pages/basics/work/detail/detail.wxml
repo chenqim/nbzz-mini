@@ -4,19 +4,30 @@
 	<view slot="content">工单详情</view>
 </cu-custom>
 <view>
-    <van-cell-group inset>
+    <van-cell-group title="基本信息">
         <van-cell title="ID" value="{{ instance.id }}" />
         <van-cell title="工单名称" value="{{ instance.name }}" />
         <van-cell title="工单级别">
-            <van-tag type="danger">{{ instance.level }}</van-tag>
+            <van-tag type="{{ gradeTypeMap[instance.grade] }}">{{ gradeMap[instance.grade] }}</van-tag>
         </van-cell>
-        <van-cell title="工单类型" value="{{ instance.type }}" />
-        <van-cell title="产品名称" value="{{ instance.productName }}" />
-        <van-cell title="生产数量" value="{{ instance.number }}" />
+        <van-cell title="工单类型" value="{{ typeMap[instance.type] }}" />
+        <van-cell title="产品名称" value="{{ instance.productInfo.name }}" />
+        <van-cell title="生产数量" value="{{ instance.count }}" />
         <van-cell title="生产状态">
-            <van-tag plain type="primary">{{ instance.status }}</van-tag>
+            <van-tag plain type="{{ statusTypeMap[instance.status] }}">{{ statusMap[instance.status] }}</van-tag>
         </van-cell>
-        <van-cell title="截止时间" value="{{ instance.time }}" />
+        <van-cell title="截止时间" value="{{ instance.needDate }}" />
         <van-cell title="备注" label="{{ instance.remark }}" />
+    </van-cell-group>
+    <van-cell-group wx:for="{{ instance.procedureList }}" wx:key="id" title="{{ item.workingProcedure.name + '(' + item.workingProcedure.code + ')' }}">
+        <van-cell title="当前认领人" value="{{ item.userName || '-' }}" />
+        <van-cell title="认领时间" value="{{ item.userName || '-' }}" />
+        <van-cell title="完成情况" value="{{ item.completeCount + '/' + item.count }}" />
+        <!-- <van-cell>
+            <view slot="title">
+                <van-progress percentage="50" style="margin-top: 50rpx;" />
+            </view>
+        </van-cell> -->
+        <!-- <van-progress percentage="0" /> -->
     </van-cell-group>
 </view>

@@ -26,6 +26,7 @@
     "pages/basics/work/home/home",
     "pages/basics/work/detail/detail",
     "pages/basics/today/home/home",
+    "pages/basics/today/detail/detail",
     "pages/about/setting/setting",
     "pages/about/password/password",
     "pages/about/sign_record/sign_record"
@@ -78,6 +79,8 @@
     "van-action-sheet": "@vant/weapp/action-sheet/index",
     "van-checkbox": "@vant/weapp/checkbox/index",
     "van-checkbox-group": "@vant/weapp/checkbox-group/index",
+    "van-radio": "@vant/weapp/radio/index",
+    "van-radio-group": "@vant/weapp/radio-group/index",
     "van-search": "@vant/weapp/search/index",
     "van-stepper": "@vant/weapp/stepper/index",
     "van-sidebar": "@vant/weapp/sidebar/index",
@@ -85,7 +88,8 @@
     "van-tab": "@vant/weapp/tab/index",
     "van-tabs": "@vant/weapp/tabs/index",
     "van-calendar": "@vant/weapp/calendar/index",
-    "van-toast": "@vant/weapp/toast/index"
+    "van-toast": "@vant/weapp/toast/index",
+    "van-progress": "@vant/weapp/progress/index"
   },
   "sitemapLocation": "sitemap.json",
   "networkTimeout": {

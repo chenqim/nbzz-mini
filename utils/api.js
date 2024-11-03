@@ -9,6 +9,11 @@ module.exports = {
     CURRENT_MENT_INFO:"/wxapp/auth/queryCurrentMenuInfo",       //查询当前菜单信息
     CURRENT_USER_INFO : "/wxapp/auth/queryCurrentUserInfo",     //查询当前用户信息
     CHANGE_PASSWORD:"/wxapp/auth/updatePassword",               //修改密码
+    WORK_ORDER_PAGE: "/wxapp/workOrder/queryByPage",
+    MY_WORK_ORDER_PAGE: "/wxapp/workOrder/queryMyByPage",
+    WORK_ORDER_DETAIL: "/wxapp/workOrder/queryDetail",
+    RECEIVE_PROCEDURE: "/wxapp/workOrder/queryReceiveProcedure",
+    RECEIVE_PROCESS: "/wxapp/workOrder/receive",
     //站内信模块
     MESSAGE_ID:"/wxapp/message/queryMyMessageById?id=",         //读取站内信
     MESSAGE_PAGE:"/wxapp/message/queryMyMessageByPage",         //查询当前用户站内信列表

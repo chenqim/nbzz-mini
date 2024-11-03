@@ -1,30 +1,69 @@
-// pages/basics/work/detail/detail.js
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    instance: {}
+    gradeMap: {
+      middle: '普通',
+      high: '紧急'
+    },
+    gradeTypeMap: {
+      middle: 'success',
+      high: 'danger'
+    },
+    typeMap: {
+      produce: '制造',
+      maintenance: '维修'
+    },
+    statusMap: {
+      create: '已创建',
+      receive: '已认领',
+      producing: '生产中',
+      completed: '已完成'
+    },
+    statusTypeMap: {
+      create: 'primary',
+      receive: 'danger',
+      producing: 'warning',
+      completed: 'success'
+    },
+    instance: {},
+    loading: false
+  },
+
+  queryDetail(id) {
+    let loading = this.data.loading
+    return new Promise((resolve, reject) => {
+      app.request({
+        url: app.api.WORK_ORDER_DETAIL,
+        loading: loading,
+        data: {
+          id
+        }
+      }).then(res => {
+        return resolve(res)
+      }).catch(err => {
+        return reject(err)
+      })
+    })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    this.setData({
-      instance: {
-        id: 202410230110,
-        name: '测试工单henchang工单工单工单工单工单工单工单工单工单工单1',
-        level: '紧急',
-        type: '类型1',
-        productName: '钻石切割刀',
-        number: '9999',
-        status: '未认领',
-        remark: '这里是备注这里是备注这里是备注这里是备注这里是备注这里是备注这里是备注这里是备注',
-        time: '2024-10-26 18:00:00'
-      }
+    console.log(options.id)
+    this.queryDetail(options.id).then(res => {
+      this.setData({
+        instance: res.data.data
+      })
     })
+    .then(() => {
+      this.data.loading = false
+    })
+    .catch(err => {})
   },
 
   /**
