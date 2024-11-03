@@ -1,0 +1,117 @@
+const app = getApp()
+Page({
+
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    gradeMap: {
+      middle: '普通',
+      high: '紧急'
+    },
+    gradeTypeMap: {
+      middle: 'success',
+      high: 'danger'
+    },
+    typeMap: {
+      produce: '制造',
+      maintenance: '维修'
+    },
+    statusMap: {
+      create: '已创建',
+      receive: '已认领',
+      producing: '生产中',
+      completed: '已完成'
+    },
+    statusTypeMap: {
+      create: 'primary',
+      receive: 'danger',
+      producing: 'warning',
+      completed: 'success'
+    },
+    instance: {},
+    loading: false
+  },
+
+  queryDetail(id) {
+    let loading = this.data.loading
+    return new Promise((resolve, reject) => {
+      app.request({
+        url: app.api.WORK_ORDER_DETAIL,
+        loading: loading,
+        data: {
+          id
+        }
+      }).then(res => {
+        return resolve(res)
+      }).catch(err => {
+        return reject(err)
+      })
+    })
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad(options) {
+    console.log(options.id)
+    this.queryDetail(options.id).then(res => {
+      this.setData({
+        instance: res.data.data
+      })
+    })
+    .then(() => {
+      this.data.loading = false
+    })
+    .catch(err => {})
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady() {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow() {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide() {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload() {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh() {
+
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom() {
+
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage() {
+
+  }
+})
