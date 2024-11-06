@@ -14,6 +14,7 @@ module.exports = {
     WORK_ORDER_DETAIL: "/wxapp/workOrder/queryDetail",
     RECEIVE_PROCEDURE: "/wxapp/workOrder/queryReceiveProcedure",
     RECEIVE_PROCESS: "/wxapp/workOrder/receive",
+    CANCEL_PROCESS: "/wxapp/workOrder/cancel",
     //站内信模块
     MESSAGE_ID:"/wxapp/message/queryMyMessageById?id=",         //读取站内信
     MESSAGE_PAGE:"/wxapp/message/queryMyMessageByPage",         //查询当前用户站内信列表

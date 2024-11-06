@@ -1,4 +1,5 @@
 const app = getApp()
+import Toast from '@vant/weapp/toast/toast';
 Page({
 
   /**
@@ -34,8 +35,23 @@ Page({
     max: 1,
     page: 2,
     size: 5,
-    doneList: false
+    doneList: false,
+    show: false,
+    processList: [],
+    choosedProcess: '',
+    verify(action) {
+      return new Promise((resolve) => {
+        if (action === 'confirm') {
+          this.onConfirm(resolve)
+        } else {
+          resolve(true)
+        }
+      })
+    },
+    user_info: null
   },
+  
+  stop() {},
 
   goToDetail (e) {
     wx.navigateTo({
@@ -67,6 +83,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+    this.setData({
+      verify: this.data.verify.bind(this),
+      user_info: app.globalData.user_info
+    })
     this.queryList(1)
       .then(res => {
         this.setData({
@@ -123,6 +143,77 @@ Page({
         })
         .catch(err => {})
     }
+  },
+
+  onCancel() {
+    this.setData({
+      show: false,
+      processList: [],
+      choosedProcess: ''
+    })
+  },
+
+  onConfirm(resolve) {
+    if (this.data.choosedProcess) {
+      return app.request({
+        url: app.api.CANCEL_PROCESS,
+        loading: false,
+        data: {
+          id: this.data.choosedProcess
+        }
+      }).then(res => {
+        if (res.data.code === '00000') {
+          console.log('000', res)
+          Toast('撤销成功')
+          resolve(true)
+        } else {
+          Toast(res.data.message)
+          resolve(false)
+        }
+      }).catch(err => {
+        console.log(err)
+      })
+    } else {
+      Toast({
+        message: '请选择要撤销的工序',
+        zIndex: 10000
+      })
+      resolve(false)
+    }
+  },
+
+  queryProcess(id) {
+    return new Promise((resolve, reject) => {
+      app.request({
+        url: app.api.RECEIVE_PROCEDURE,
+        loading: false,
+        data: {
+          id
+        }
+      }).then(res => {
+        return resolve(res.data.data)
+      }).catch(err => {
+        return reject(err)
+      })
+    })
+  },
+
+  openDialog(e) {
+    console.log('user', app.globalData.user_info)
+    this.queryProcess(e.currentTarget.dataset.id).then(res => {
+      const canArr = res.filter(n => n.userId === this.data.user_info.id)
+      this.setData({
+        processList: res,
+        show: true,
+        choosedProcess: canArr[0]?.id || ''
+      })
+    })
+  },
+
+  onChange(event) {
+    this.setData({
+      choosedProcess: event.detail,
+    })
   },
 
   /**

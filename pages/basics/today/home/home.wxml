@@ -44,7 +44,7 @@
   bind:confirm="onConfirm" -->
 <van-dialog
   use-slot
-  title="选择工序"
+  title="选择要认领的工序"
   show="{{ show }}"
   show-cancel-button
   before-close="{{ verify }}"

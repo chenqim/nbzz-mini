@@ -34,7 +34,30 @@
 		</view>
 		<view>
 			<van-button type="default" bind:tap="goToDetail" data-id="{{ item.id }}" size="small">查看详情</van-button>
-			<van-button type="info" class="margin-left-xs" size="small" wx:if="{{ item.status === 'create' }}">认领工单</van-button>
+			<!-- wx:if="{{ item.status === 'create' }}" -->
+			<van-button type="info" bind:click="openDialog" data-id="{{ item.id }}" class="margin-left-xs" size="small">撤销工单</van-button>
 		</view>
 	</view>
 </view>
+<van-toast id="van-toast" />
+<!-- show-confirm-button="{{ false }}" -->
+<!-- bind:cancel="onCancel"
+  bind:confirm="onConfirm" -->
+<van-dialog
+  use-slot
+  title="选择要撤销的工序"
+  show="{{ show }}"
+  show-cancel-button
+  before-close="{{ verify }}"
+  catchtouchmove="stop"
+>
+	<view class="process-dialog-content">
+		<van-radio-group value="{{ choosedProcess }}" bind:change="onChange">
+			<van-radio name="{{ item.id }}" wx:for="{{ processList }}" disabled="{{ item.userId !== user_info.id }}" wx:key="id" custom-class="custom-class">
+				<text>{{ item.workingProcedure.name }}</text>
+				<text wx:if="{{ item.userId }}">（{{ item.userName }} 已接单）</text>
+				<text wx:else>（未接单）</text>
+			</van-radio>
+		</van-radio-group>
+	</view>
+</van-dialog>

@@ -55,7 +55,7 @@ Page({
 
   goToDetail (e) {
     wx.navigateTo({
-      url: '/pages/basics/work/detail/detail?id=' + e.currentTarget.dataset.id
+      url: '/pages/basics/today/detail/detail?id=' + e.currentTarget.dataset.id
     })
   },
 
@@ -174,7 +174,7 @@ Page({
       })
     } else {
       Toast({
-        message: '请选择工序',
+        message: '请选择要认领的工序',
         zIndex: 10000
       })
       resolve(false)
