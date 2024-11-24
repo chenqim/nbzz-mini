@@ -1,0 +1,34 @@
+<!--pages/basics/stage/submit/submit.wxml-->
+<!-- <text>pages/basics/stage/submit/submit.wxml</text> -->
+<cu-custom bgColor="bg-blue" isBack="{{true}}"> 
+	<view slot="content">流转中转区</view>
+</cu-custom>
+
+<view>
+    <van-cell-group>
+        <van-cell title="流转区ID" value="{{ stageId }}" />
+        <van-cell title="类型" class="type">
+            <van-radio-group
+                value="{{ radio }}"
+                bind:change="onChange"
+                direction="horizontal"
+                class="cus-radio-group"
+            >
+                <van-radio name="1">放入</van-radio>
+                <van-radio name="2">取出</van-radio>
+            </van-radio-group>
+        </van-cell>
+        <van-cell title="工单" value="{{ workOrder }}" is-link bind:click="showPopup1" />
+        <van-cell title="工序" value="{{ process }}" is-link bind:click="showPopup2" />
+        <van-cell title="数量">
+            <van-stepper value="{{ count }}" integer input-width="100rpx" />
+        </van-cell>
+    </van-cell-group>
+</view>
+<van-popup show="{{ show1 }}" position="bottom" bind:close="onClose1" close-on-click-overlay="{{ false }}">
+    <van-picker columns="{{ columns1 }}" show-toolbar title="选择工单" bind:cancel="onCancel1" bind:confirm="onConfirm1" bind:change="onChange1" />
+</van-popup>
+<van-popup show="{{ show2 }}" position="bottom" bind:close="onClose2" close-on-click-overlay="{{ false }}">
+    <van-picker columns="{{ columns2 }}" show-toolbar title="选择工序" bind:cancel="onCancel2" bind:confirm="onConfirm2" bind:change="onChange2" />
+</van-popup>
+<van-toast id="van-toast" />

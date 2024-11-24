@@ -2,6 +2,9 @@
   "permission": {
     "scope.userLocation": {
       "desc": "您的位置信息将用于小程序的签到功能和位置采集"
+    },
+    "wx.scanCode": {
+      "desc": "您的摄像头将用于小程序二维码的扫描"
     }
   },
   "pages": [
@@ -27,6 +30,7 @@
     "pages/basics/work/detail/detail",
     "pages/basics/today/home/home",
     "pages/basics/today/detail/detail",
+    "pages/basics/stage/submit/submit",
     "pages/about/setting/setting",
     "pages/about/password/password",
     "pages/about/sign_record/sign_record"

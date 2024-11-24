@@ -49,7 +49,15 @@
 				</view> -->
 				<!-- </navigator> -->
 			</view>
-
+			<!-- <view>
+				<view>
+					<van-grid-item use-slot url="/pages/basics/work/home/home" link-type="navigateTo">
+						<van-icon name="/images/icon/my_work.svg" size="50px" />
+						<text class="margin-top-sm">流转中转区</text>
+					</van-grid-item>
+				</view>
+			</view> -->
 		</van-grid>
+		<!-- <view><button bindtap="scanQRCode">扫一扫</button></view> -->
 	</view>
 </view>

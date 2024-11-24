@@ -7,6 +7,20 @@ Page({
       url: '/pages/basics/message/home/home',
     })
   },
+  scanQRCode: function () {
+    wx.scanCode({
+      success: (res) => {
+        console.log('QR CODE', res)
+        // 1850123839927787522
+        wx.navigateTo({
+          url: '/pages/basics/stage/submit/submit?id=' + res.result,
+        })
+        // this.setData({
+        //   src: res.result,
+        // })
+      }
+    })
+  },
 
   data: {
     user_info: null,
