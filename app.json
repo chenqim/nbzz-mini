@@ -31,6 +31,7 @@
     "pages/basics/today/home/home",
     "pages/basics/today/detail/detail",
     "pages/basics/stage/submit/submit",
+    "pages/basics/stage/circle/circle",
     "pages/about/setting/setting",
     "pages/about/password/password",
     "pages/about/sign_record/sign_record"

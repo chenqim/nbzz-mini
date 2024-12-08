@@ -21,8 +21,19 @@
     </van-cell-group>
     <van-cell-group wx:for="{{ instance.procedureList }}" wx:key="id" title="{{ item.workingProcedure.name + '(' + item.workingProcedure.code + ')' }}">
         <van-cell title="当前认领人" value="{{ item.userName || '-' }}" />
-        <van-cell title="认领时间" value="{{ item.userName || '-' }}" />
+        <van-cell title="认领时间" value="{{ item.startTime || '-' }}" />
         <van-cell title="完成情况" value="{{ item.completeCount + '/' + item.count }}" />
+        <van-cell wx:if="{{ item.userId ===  userInfo.id }}" title="操作">
+            <van-button wx:if="{{ index !== 0 }}" type="danger" size="mini" bind:tap="scanQRCode" data-type="rework"
+                data-process="{{ item.id }}" data-process-name="{{ item.workingProcedure.name }}" data-process-count="{{ item.count }}"
+                data-work="{{ instance.id }}" data-work-name="{{ instance.name }}">返工</van-button>
+            <van-button wx:if="{{ index !== instance.procedureList.length - 1 }}" type="primary" size="mini" bind:tap="scanQRCode" data-type="forward"
+                data-process="{{ item.id }}" data-process-name="{{ item.workingProcedure.name }}" data-process-count="{{ item.count }}"
+                data-work="{{ instance.id }}" data-work-name="{{ instance.name }}" class="margin-left-xs">转序</van-button>
+            <van-button wx:if="{{ index === instance.procedureList.length - 1 }}" type="primary" size="mini" bind:tap="completeWorkOrder" data-type="forward"
+                data-process="{{ item.id }}" data-process-name="{{ item.workingProcedure.name }}" data-process-count="{{ item.count }}"
+                data-work="{{ instance.id }}" data-work-name="{{ instance.name }}" class="margin-left-xs">完结工单</van-button>
+        </van-cell>
         <!-- <van-cell>
             <view slot="title">
                 <van-progress percentage="50" style="margin-top: 50rpx;" />
@@ -31,3 +42,4 @@
         <!-- <van-progress percentage="0" /> -->
     </van-cell-group>
 </view>
+<van-toast id="van-toast" />

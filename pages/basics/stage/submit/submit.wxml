@@ -1,7 +1,7 @@
 <!--pages/basics/stage/submit/submit.wxml-->
 <!-- <text>pages/basics/stage/submit/submit.wxml</text> -->
 <cu-custom bgColor="bg-blue" isBack="{{true}}"> 
-	<view slot="content">流转中转区</view>
+	<view slot="content">提取在制品</view>
 </cu-custom>
 
 <view>

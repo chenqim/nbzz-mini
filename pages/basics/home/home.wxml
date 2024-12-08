@@ -35,7 +35,12 @@
 				<!-- dot  badge -->
 				<!-- <navigator url="{{item.href}}" > -->
 				<view class="{{item.statu=='s'?'menu-s':''}}">
-					<van-grid-item use-slot url="{{item.href}}" link-type="{{item.target}}">
+					<van-grid-item wx:if="{{ item.target === 'scanQRCode' }}" use-slot bindtap="scanQRCode">
+						<van-icon name="{{'/images/icon/' + item.icon}}" size="50px" />
+						<text class="margin-top-sm">{{item.title}}</text>
+						<view class="disabled" wx:if="{{item.statu=='s'}}" catchtap></view>
+					</van-grid-item>
+					<van-grid-item wx:else use-slot url="{{item.href}}" link-type="{{item.target}}">
 						<van-icon name="{{'/images/icon/' + item.icon}}" size="50px" />
 						<text class="margin-top-sm">{{item.title}}</text>
 						<view class="disabled" wx:if="{{item.statu=='s'}}" catchtap></view>

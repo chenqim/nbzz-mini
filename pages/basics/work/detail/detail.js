@@ -1,4 +1,5 @@
 const app = getApp()
+import Toast from '@vant/weapp/toast/toast';
 Page({
 
   /**
@@ -30,7 +31,9 @@ Page({
       completed: 'success'
     },
     instance: {},
-    loading: false
+    loading: false,
+    userInfo: null,
+    options: null
   },
 
   queryDetail(id) {
@@ -50,14 +53,60 @@ Page({
     })
   },
 
+  queryStageDetail(code) {
+    let loading = this.data.loading
+    return new Promise((resolve, reject) => {
+      app.request({
+        url: app.api.STAGE_DETAIL,
+        loading: loading,
+        data: {
+          code
+        }
+      }).then(res => {
+        return resolve(res)
+      }).catch(err => {
+        return reject(err)
+      })
+    })
+  },
+
+  scanQRCode: function (e) {
+    console.log('e>>>>', e)
+    wx.scanCode({
+      success: (res) => {
+        console.log('QR CODE', res)
+        this.queryStageDetail(res.result).then(result => {
+          console.log('result >>>>>', result)
+          if (result.data.code === '00000') {
+            wx.navigateTo({
+              url: `/pages/basics/stage/circle/circle?stageCode=${res.result}&stageId=${result.data.data.id}&stageName=${result.data.data.name}&workOrderId=${e.currentTarget.dataset.work}&workOrderName=${e.currentTarget.dataset.workName}&processId=${e.currentTarget.dataset.process}&processName=${e.currentTarget.dataset.processName}&processCount=${e.currentTarget.dataset.processCount}&type=${e.currentTarget.dataset.type}`,
+            })
+          } else {
+            Toast(result.data.message)
+          }
+        })
+        .then(() => {
+          this.data.loading = false
+        })
+        .catch(err => {})
+      }
+    })
+  },
+
+  completeWorkOrder() {
+    Toast('完结工单')
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    console.log(options.id)
+    console.log('on load >>>>>', options.id)
     this.queryDetail(options.id).then(res => {
       this.setData({
-        instance: res.data.data
+        instance: res.data.data,
+        userInfo: app.globalData.user_info || null,
+        options
       })
     })
     .then(() => {
@@ -77,7 +126,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-
+    console.log("on show >>>>>")
+    if (this.data.options) this.onLoad(this.data.options)
   },
 
   /**

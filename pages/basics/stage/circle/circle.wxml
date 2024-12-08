@@ -1,0 +1,29 @@
+<!--pages/basics/stage/submit/submit.wxml-->
+<!-- <text>pages/basics/stage/submit/submit.wxml</text> -->
+<cu-custom bgColor="bg-blue" isBack="{{true}}">
+    <view wx:if="{{ type === 'rework' }}" slot="content">返工</view>
+	<view wx:else slot="content">转序</view>
+</cu-custom>
+
+<view>
+    <van-cell-group>
+        <van-cell title="流转区编码" value="{{ stageCode }}" />
+        <van-cell title="流转区名称" value="{{ stageName }}" />
+        <van-cell title="工单ID" value="{{ workOrderId }}" />
+        <van-cell title="工单名称" value="{{ workOrderName }}" />
+        <!-- <van-cell title="当前工序ID" value="{{ processId }}" /> -->
+        <van-cell title="当前工序" value="{{ processName }}" />
+        <van-cell wx:if="{{ type === 'rework' }}" title="返工工序" value="{{ prevProcessName }}" is-link bind:click="showPopup2" />
+        <van-cell wx:else title="转序工序" value="{{ nextProcessName }}" />
+        <van-cell title="{{ type === 'rework' ? '返工数量' : '转序数量' }}">
+            <van-stepper value="{{ count }}" integer input-width="100rpx" />
+        </van-cell>
+    </van-cell-group>
+</view>
+<view class="padding-sm">
+    <van-button type="{{ type === 'rework' ? 'danger' : 'primary' }}" block size="small" bind:tap="writeArt" disabled="{{ btnLoading }}" loading="{{ btnLoading }}">提交{{ type === 'rework' ? '返工' : '转序' }}</van-button>
+</view>
+<van-popup show="{{ processShow }}" position="bottom" bind:close="onClose2" close-on-click-overlay="{{ false }}">
+    <van-picker columns="{{ prevProcessList }}" show-toolbar title="选择工序" bind:cancel="onCancel2" bind:confirm="onConfirm2" bind:change="onChange2" />
+</van-popup>
+<van-toast id="van-toast" />

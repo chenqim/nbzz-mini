@@ -51,28 +51,28 @@ Page({
         user_info: app.globalData.user_info || null
       })
     }
-    if (app.globalData.appConfig == null) {
-      app.request({
-        url: app.api.APP_CONFIG,
-        toShow: true,
-        loading: false
-      }).then(resolve => {
-        if (resolve.data.code == 1) {
-          app.globalData.appConfig = resolve.data.data;
-          this.setData({
-            enterpriseName: app.globalData.appConfig.enterpriseName
-          });
-        }
-      }).catch(err => {
-        return wx.reLaunch({
-          url: '/pages/login/home'
-        })
-      });
-    }else{
-      this.setData({
-        enterpriseName: app.globalData.appConfig.enterpriseName
-      });
-    }
+    // if (app.globalData.appConfig == null) {
+    //   app.request({
+    //     url: app.api.APP_CONFIG,
+    //     toShow: true,
+    //     loading: false
+    //   }).then(resolve => {
+    //     if (resolve.data.code == 1) {
+    //       app.globalData.appConfig = resolve.data.data;
+    //       this.setData({
+    //         enterpriseName: app.globalData.appConfig.enterpriseName
+    //       });
+    //     }
+    //   }).catch(err => {
+    //     return wx.reLaunch({
+    //       url: '/pages/login/home'
+    //     })
+    //   });
+    // }else{
+    //   this.setData({
+    //     enterpriseName: app.globalData.appConfig.enterpriseName
+    //   });
+    // }
 
     app.request({
       url: app.api.CURRENT_MENT_INFO
