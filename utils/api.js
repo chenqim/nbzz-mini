@@ -16,7 +16,9 @@ module.exports = {
     RECEIVE_PROCESS: "/wxapp/workOrder/receive",
     CANCEL_PROCESS: "/wxapp/workOrder/cancel",
     STAGE_DETAIL: "/wxapp/stagingArea/queryStagingAreaByCode",
+    STAGE_INVENTORY: "/wxapp/stagingArea/queryStagingAreaInventoryByCode",
     WRITE_ATR: "/wxapp/produce/writeArtifact",
+    READ_ART: "/wxapp/produce/readArtifact",
     //站内信模块
     MESSAGE_ID:"/wxapp/message/queryMyMessageById?id=",         //读取站内信
     MESSAGE_PAGE:"/wxapp/message/queryMyMessageByPage",         //查询当前用户站内信列表

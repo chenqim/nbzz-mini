@@ -7,17 +7,42 @@ Page({
       url: '/pages/basics/message/home/home',
     })
   },
+
+  queryStageDetail(code) {
+    let loading = this.data.loading
+    return new Promise((resolve, reject) => {
+      app.request({
+        url: app.api.STAGE_DETAIL,
+        loading: loading,
+        data: {
+          code
+        }
+      }).then(res => {
+        return resolve(res)
+      }).catch(err => {
+        return reject(err)
+      })
+    })
+  },
+
   scanQRCode: function () {
     wx.scanCode({
       success: (res) => {
         console.log('QR CODE', res)
-        // 1850123839927787522
-        wx.navigateTo({
-          url: '/pages/basics/stage/submit/submit?id=' + res.result,
+        this.queryStageDetail(res.result).then(result => {
+          console.log('result >>>>>', result)
+          if (result.data.code === '00000') {
+            wx.navigateTo({
+              url: `/pages/basics/stage/submit/submit?stageCode=${res.result}&stageId=${result.data.data.id}&stageName=${result.data.data.name}`,
+            })
+          } else {
+            Toast(result.data.message)
+          }
         })
-        // this.setData({
-        //   src: res.result,
-        // })
+        .then(() => {
+          this.data.loading = false
+        })
+        .catch(err => {})
       }
     })
   },
@@ -28,6 +53,7 @@ Page({
     messageCount: '',
     errCount: 0,
     enterpriseName: "",
+    loading: false
   },
 
 

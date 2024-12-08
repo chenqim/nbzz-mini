@@ -49,7 +49,7 @@ Page({
 
   onCancel2() {
     this.onClose2()
-    Toast('取消');
+    // Toast('取消');
   },
 
   writeArt() {
