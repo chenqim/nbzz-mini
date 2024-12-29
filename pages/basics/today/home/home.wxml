@@ -2,6 +2,12 @@
 <cu-custom bgColor="bg-blue" isBack="{{true}}"> 
 	<view slot="content">工单池</view>
 </cu-custom>
+<van-search
+	value="{{ searchValue }}"
+	placeholder="请输入工单名称进行搜索"
+	bind:search="onSearch"
+	bind:clear="onSearch"
+/>
 <view class="work-box" wx:for="{{ workOrderList }}" wx:key="id">
 	<!-- 工单名称、工单级别、工单类型、产品名称、生产数量、生产状态、备注 -->
 	<view class="flex justify-between">

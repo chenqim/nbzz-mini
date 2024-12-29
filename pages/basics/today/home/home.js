@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    searchValue: '',
     gradeMap: {
       middle: '普通',
       high: '紧急'
@@ -51,6 +52,26 @@ Page({
     },
   },
 
+  onSearch(e) {
+    this.data.searchValue = e.detail
+    this.data.page = 2
+    this.queryList(1)
+      .then(res => {
+        this.setData({
+          workOrderList: res.records,
+          max: res.pages
+        })
+        this.setData({
+          doneList: this.data.max >= this.data.page
+        })
+        wx.showToast({
+          title: '搜索成功',
+          icon: 'none',
+          duration: 2000
+        })
+      })
+  },
+
   stop() {},
 
   goToDetail (e) {
@@ -69,6 +90,9 @@ Page({
           pageParam: {
             page,
             size: this.data.size
+          },
+          queryParam: {
+            name: this.data.searchValue
           }
         }
       }).then(res => {

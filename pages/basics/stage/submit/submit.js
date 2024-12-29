@@ -57,7 +57,7 @@ Page({
     this.setData({
       workOrderId: value.id,
       workOrderName: value.text,
-      processList: processList.map(n => ({ text: n.workOrderProcedure.id, id: n.workOrderProcedure.id, count: n.workOrderProcedure.count })),
+      processList: processList.map(n => ({ text: n.workingProcedureName, id: n.workOrderProcedure.id, count: n.workOrderProcedure.count })),
       processId: '',
       processName: ''
     })
