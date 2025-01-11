@@ -38,7 +38,7 @@ Page({
     userInfo: null,
     options: null,
     show: false,
-    count: 0,
+    count: 1,
     workOrderProcedureId: null,
     commentShow: false,
     comment: ''

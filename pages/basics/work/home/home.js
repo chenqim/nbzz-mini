@@ -94,7 +94,7 @@ Page({
             size: this.data.size
           },
           queryParam: {
-            name: this.data.searchValue
+            keyword: this.data.searchValue
           }
         }
       }).then(res => {

@@ -4,7 +4,7 @@
 </cu-custom>
 <van-search
 	value="{{ searchValue }}"
-	placeholder="请输入工单名称进行搜索"
+	placeholder="请输入工单编号或名称进行搜索"
 	bind:search="onSearch"
 	bind:clear="onSearch"
 />
