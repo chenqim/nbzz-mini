@@ -9,14 +9,14 @@
     <van-cell-group>
         <van-cell title="流转区编码" value="{{ stageCode }}" />
         <van-cell title="流转区名称" value="{{ stageName }}" />
-        <van-cell title="工单ID" value="{{ workOrderId }}" />
+        <van-cell title="工单编号" value="{{ workOrderCode }}" />
         <van-cell title="工单名称" value="{{ workOrderName }}" />
         <!-- <van-cell title="当前工序ID" value="{{ processId }}" /> -->
         <van-cell title="当前工序" value="{{ processName }}" />
         <van-cell wx:if="{{ type === 'rework' }}" title="返工工序" value="{{ prevProcessName }}" is-link bind:click="showPopup2" />
         <van-cell wx:else title="转序工序" value="{{ nextProcessName }}" />
         <van-cell title="{{ type === 'rework' ? '返工数量' : '转序数量' }}">
-            <van-stepper value="{{ count }}" integer input-width="100rpx" />
+            <van-stepper value="{{ count }}" bind:change="stepperChange" integer input-width="100rpx" />
         </van-cell>
     </van-cell-group>
 </view>

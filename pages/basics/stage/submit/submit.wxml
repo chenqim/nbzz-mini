@@ -22,7 +22,7 @@
         <van-cell title="工单" value="{{ workOrderName }}" is-link bind:click="showPopup1" />
         <van-cell title="工序" value="{{ processName }}" is-link bind:click="showPopup2" />
         <van-cell title="数量">
-            <van-stepper value="{{ count }}" integer input-width="100rpx" />
+            <van-stepper value="{{ count }}" bind:change="stepperChange" integer input-width="100rpx" />
         </van-cell>
     </van-cell-group>
 </view>

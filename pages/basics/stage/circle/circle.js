@@ -10,6 +10,7 @@ Page({
     stageCode: '',
     stageName: '',
     workOrderId: '',
+    workOrderCode: '',
     workOrderName: '',
     processId: '',
     processName: '',
@@ -21,7 +22,8 @@ Page({
     prevProcessId: '',
     prevProcessName: '',
     processShow: false,
-    prevProcessList: []
+    prevProcessList: [],
+    count: 0
   },
 
   showPopup2() {
@@ -52,8 +54,14 @@ Page({
     // Toast('取消');
   },
 
+  stepperChange(event) {
+    this.setData({
+      count: event.detail
+    })
+  },
+
   writeArt() {
-    if (!this.data.prevProcessId) {
+    if (this.data.type === 'rework' && !this.data.prevProcessId) {
       Toast('请选择返工工序')
       return
     }
@@ -84,7 +92,7 @@ Page({
         loading: loading,
         data: {
           count: this.data.count,
-          nextWorkingProcedureId: this.data.type === 'rework' ? this.data.prevProcessId : undefined,
+          nextWorkOrderProcedureId: this.data.type === 'rework' ? this.data.prevProcessId : undefined,
           operateType: this.data.type,
           stagingAreaId: this.data.stageId,
           workOrderProcedureId: this.data.processId
@@ -124,6 +132,7 @@ Page({
       stageCode: options.stageCode,
       stageName: options.stageName,
       workOrderId: options.workOrderId,
+      workOrderCode: options.workOrderCode,
       workOrderName: options.workOrderName,
       processId: options.processId,
       processName: options.processName,

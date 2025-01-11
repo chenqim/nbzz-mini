@@ -5,7 +5,7 @@
 </cu-custom>
 <view>
     <van-cell-group title="基本信息">
-        <van-cell title="ID" value="{{ instance.id }}" />
+        <van-cell title="工单编号" value="{{ instance.code }}" />
         <van-cell title="工单名称" value="{{ instance.name }}" />
         <van-cell title="工单级别">
             <van-tag type="{{ gradeTypeMap[instance.grade] }}">{{ gradeMap[instance.grade] }}</van-tag>
@@ -21,7 +21,7 @@
     </van-cell-group>
     <van-cell-group wx:for="{{ instance.procedureList }}" wx:key="id" title="{{ item.workingProcedure.name + '(' + item.workingProcedure.code + ')' }}">
         <van-cell title="当前认领人" value="{{ item.userName || '-' }}" />
-        <van-cell title="认领时间" value="{{ item.userName || '-' }}" />
+        <van-cell title="认领时间" value="{{ item.startTime || '-' }}" />
         <van-cell title="完成情况" value="{{ item.completeCount + '/' + item.count }}" />
         <!-- <van-cell>
             <view slot="title">

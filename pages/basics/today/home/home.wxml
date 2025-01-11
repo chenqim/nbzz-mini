@@ -40,7 +40,7 @@
 		</view>
 		<view>
 			<van-button type="default" bind:tap="goToDetail" data-id="{{ item.id }}" size="small">查看详情</van-button>
-			<van-button type="info" bind:click="openDialog" data-id="{{ item.id }}" class="margin-left-xs" size="small" wx:if="{{ item.status !== 'completed' }}">认领工单</van-button>
+			<van-button type="info" bind:click="openDialog" data-id="{{ item.id }}" class="margin-left-xs" size="small" wx:if="{{ item.canReceive }}">认领工单</van-button>
 		</view>
 	</view>
 </view>

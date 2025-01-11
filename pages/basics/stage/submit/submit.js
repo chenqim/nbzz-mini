@@ -98,6 +98,12 @@ Page({
     // Toast('取消');
   },
 
+  stepperChange(event) {
+    this.setData({
+      count: event.detail
+    })
+  },
+
   queryStageInventory(code) {
     let loading = this.data.loading
     return new Promise((resolve, reject) => {
