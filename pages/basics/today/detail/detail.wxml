@@ -19,7 +19,7 @@
         <van-cell title="截止时间" value="{{ instance.needDate }}" />
         <van-cell title="备注" label="{{ instance.remark }}" />
     </van-cell-group>
-    <van-cell-group wx:for="{{ instance.procedureList }}" wx:key="id" title="{{ item.workingProcedure.name + '(' + item.workingProcedure.code + ')' }}">
+    <van-cell-group wx:for="{{ instance.procedureList }}" wx:key="id" title="{{ item.workingProcedure.name + ' [ ' + item.workingProcedure.code + ' ] ' }}">
         <van-cell title="当前认领人" value="{{ item.userName || '-' }}" />
         <van-cell title="认领时间" value="{{ item.startTime || '-' }}" />
         <van-cell title="完成情况" value="{{ item.completeCount + '/' + item.count }}" />

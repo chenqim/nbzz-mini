@@ -23,12 +23,14 @@ Page({
       create: '已创建',
       receive: '已认领',
       producing: '生产中',
+      executed: '待发货',
       completed: '已完成'
     },
     statusTypeMap: {
       create: 'primary',
       receive: 'danger',
       producing: 'warning',
+      executed: 'primary',
       completed: 'success'
     },
     workOrderList: [],
