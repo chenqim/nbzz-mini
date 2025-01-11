@@ -189,11 +189,16 @@ Page({
         }
       }).then(res => {
         if (res.data.code === '00000') {
-          console.log('000', res)
-          Toast('撤销成功')
+          Toast({
+            message: '撤销成功',
+            zIndex: 9999,
+          })
           resolve(true)
         } else {
-          Toast(res.data.message)
+          Toast({
+            message: res.data.message,
+            zIndex: 9999,
+          })
           resolve(false)
         }
       }).catch(err => {
