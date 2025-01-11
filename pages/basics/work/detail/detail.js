@@ -177,7 +177,7 @@ Page({
     })
   },
 
-  extract: function () {
+  extract: function (e) {
     wx.scanCode({
       success: (res) => {
         console.log('QR CODE', res)
@@ -185,7 +185,7 @@ Page({
           console.log('result >>>>>', result)
           if (result.data.code === '00000') {
             wx.navigateTo({
-              url: `/pages/basics/stage/submit/submit?stageCode=${res.result}&stageId=${result.data.data.id}&stageName=${result.data.data.name}`,
+              url: `/pages/basics/stage/submit/submit?stageCode=${res.result}&stageId=${result.data.data.id}&stageName=${result.data.data.name}&from=detail&workOrderId=${this.data.instance.id}&workOrderName=${this.data.instance.name}&processId=${e.currentTarget.dataset.process}&processName=${e.currentTarget.dataset.processName}&count=${e.currentTarget.dataset.count}`,
             })
           } else {
             Toast(result.data.message)

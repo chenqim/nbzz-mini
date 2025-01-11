@@ -27,7 +27,16 @@
         <van-cell title="待提取在制品" value="{{ item.currentNeedGetArtifactCount || 0 }}" />
         <van-cell wx:if="{{ item.userId ===  userInfo.id }}">
             <van-button wx:if="{{ item.currentNeedGetArtifactCount > 0 }}" type="info" size="small" bind:tap="checkStage" data-id="{{ item.id }}">查看中转区</van-button>
-            <van-button wx:if="{{ item.currentNeedGetArtifactCount > 0 }}" type="warning" size="small" bind:tap="extract" class="margin-left-xs">提取在制品</van-button>
+            <van-button
+                wx:if="{{ item.currentNeedGetArtifactCount > 0 }}"
+                type="warning"
+                size="small"
+                bind:tap="extract"
+                data-process="{{ item.id }}"
+                data-process-name="{{ item.workingProcedure.name }}"
+                data-count="{{ item.currentNeedGetArtifactCount }}"
+                class="margin-left-xs"
+            >提取在制品</van-button>
             <van-button wx:if="{{ index !== 0 }}" type="danger" size="small" bind:tap="scanQRCode" data-type="rework"
                 data-process="{{ item.id }}" data-process-name="{{ item.workingProcedure.name }}" data-process-count="{{ item.count }}"
                 data-work="{{ instance.id }}" data-work-code="{{ instance.code }}" data-work-name="{{ instance.name }}" class="margin-left-xs">返工</van-button>

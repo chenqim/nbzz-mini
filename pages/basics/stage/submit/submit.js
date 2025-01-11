@@ -21,7 +21,8 @@ Page({
     processList: [],
     cacheProcessList: [],
     btnLoading: false,
-    loading: false
+    loading: false,
+    from: ''
   },
 
   // onChange(event) {
@@ -38,6 +39,7 @@ Page({
   // },
 
   showPopup1() {
+    if (this.data.from === 'detail') return
     this.setData({ workOrderShow: true });
   },
 
@@ -70,6 +72,7 @@ Page({
   },
 
   showPopup2() {
+    if (this.data.from === 'detail') return
     this.setData({ processShow: true });
   },
 
@@ -175,7 +178,13 @@ Page({
     this.setData({
       stageId: options.stageId,
       stageCode: options.stageCode,
-      stageName: options.stageName
+      stageName: options.stageName,
+      from: options.from || '',
+      workOrderId: options.workOrderId || '',
+      workOrderName: options.workOrderName || '',
+      processId: options.processId || '',
+      processName: options.processName || '',
+      count: options.count || 1
     })
     this.queryStageInventory(options.stageCode).then(res => {
       const list = res.data.data

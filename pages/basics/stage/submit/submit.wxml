@@ -19,8 +19,8 @@
                 <van-radio name="2">取出</van-radio>
             </van-radio-group>
         </van-cell> -->
-        <van-cell title="工单" value="{{ workOrderName }}" is-link bind:click="showPopup1" />
-        <van-cell title="工序" value="{{ processName }}" is-link bind:click="showPopup2" />
+        <van-cell title="工单" value="{{ workOrderName }}" is-link="{{ from !== 'detail' }}" bind:click="showPopup1" />
+        <van-cell title="工序" value="{{ processName }}" is-link="{{ from !== 'detail' }}" bind:click="showPopup2" />
         <van-cell title="数量">
             <van-stepper value="{{ count }}" bind:change="stepperChange" integer input-width="100rpx" />
         </van-cell>
