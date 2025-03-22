@@ -1,0 +1,95 @@
+<!--pages/basics/work/detail/detail.wxml-->
+<!--pages/basics/work/home/home.wxml-->
+<cu-custom bgColor="bg-blue" isBack="{{true}}"> 
+	<view slot="content">工单进度详情</view>
+</cu-custom>
+<view>
+    <van-cell-group title="基本信息">
+        <van-cell title="工单编号" value="{{ instance.code }}" />
+        <van-cell title="工单名称" value="{{ instance.name }}" />
+        <van-cell title="工单级别">
+            <van-tag type="{{ gradeTypeMap[instance.grade] }}">{{ gradeMap[instance.grade] }}</van-tag>
+        </van-cell>
+        <van-cell title="工单类型" value="{{ typeMap[instance.type] }}" />
+        <van-cell title="产品名称" value="{{ instance.productInfo.name }}" />
+        <van-cell title="生产数量" value="{{ instance.count }}" />
+        <van-cell title="生产状态">
+            <van-tag plain type="{{ statusTypeMap[instance.status] }}">{{ statusMap[instance.status] }}</van-tag>
+        </van-cell>
+        <van-cell title="截止时间" value="{{ instance.needDate }}" />
+        <!-- <van-cell title="备注" bind:click="clickComment" is-link value="{{ instance.remark }}" /> -->
+    </van-cell-group>
+    <van-cell-group wx:for="{{ instance.procedureList }}" wx:key="id" title="{{ item.workingProcedure.name + ' [ ' + item.workingProcedure.code + ' ]' }}">
+        <van-cell title="当前认领人" value="{{ item.userName || '-' }}" />
+        <van-cell title="认领时间" value="{{ item.startTime || '-' }}" />
+        <van-cell title="完成情况" value="{{ item.completeCount + '/' + item.count }}" />
+        <van-cell title="已提取在制品" value="{{ item.currentArtifactCount || 0 }}" />
+        <van-cell title="待提取在制品" value="{{ item.currentNeedGetArtifactCount || 0 }}" />
+        <!-- <van-cell wx:if="{{ item.userId ===  userInfo.id }}">
+            <van-button wx:if="{{ item.currentNeedGetArtifactCount > 0 }}" type="info" size="small" bind:tap="checkStage" data-id="{{ item.id }}">查看中转区</van-button>
+            <van-button
+                wx:if="{{ item.currentNeedGetArtifactCount > 0 }}"
+                type="warning"
+                size="small"
+                bind:tap="extract"
+                data-process="{{ item.id }}"
+                data-process-name="{{ item.workingProcedure.name }}"
+                data-count="{{ item.currentNeedGetArtifactCount }}"
+                class="margin-left-xs"
+            >提取在制品</van-button>
+            <van-button wx:if="{{ index !== 0 }}" type="danger" size="small" bind:tap="scanQRCode" data-type="rework"
+                data-process="{{ item.id }}" data-process-name="{{ item.workingProcedure.name }}" data-process-count="{{ item.count }}"
+                data-work="{{ instance.id }}" data-work-code="{{ instance.code }}" data-work-name="{{ instance.name }}" class="margin-left-xs">返工</van-button>
+            <van-button wx:if="{{ index !== instance.procedureList.length - 1 }}" type="primary" size="small" bind:tap="scanQRCode" data-type="forward"
+                data-process="{{ item.id }}" data-process-name="{{ item.workingProcedure.name }}" data-process-count="{{ item.count }}"
+                data-work="{{ instance.id }}" data-work-code="{{ instance.code }}" data-work-name="{{ instance.name }}" class="margin-left-xs">转序</van-button>
+            <van-button wx:if="{{ index === instance.procedureList.length - 1 }}" type="primary" size="small" bind:tap="completeWorkOrder" data-type="forward"
+                data-process="{{ item.id }}" data-process-name="{{ item.workingProcedure.name }}" data-process-count="{{ item.count }}"
+                data-work="{{ instance.id }}" data-work-code="{{ instance.code }}" data-work-name="{{ instance.name }}" class="margin-left-xs">完结工单</van-button>
+        </van-cell> -->
+        <!-- <van-cell>
+            <view slot="title">
+                <van-progress percentage="50" style="margin-top: 50rpx;" />
+            </view>
+        </van-cell> -->
+        <!-- <van-progress percentage="0" /> -->
+    </van-cell-group>
+</view>
+<van-toast id="van-toast" />
+<van-dialog id="van-dialog" />
+
+<van-dialog
+  use-slot
+  title="报工数量"
+  show="{{ show }}"
+  show-cancel-button
+  bind:confirm="onConfirm"
+  bind:close="onClose"
+  catchtouchmove="stop"
+>
+  <view style="text-align: center; margin-top: 50rpx; margin-bottom: 50rpx;">
+    <van-stepper value="{{ count }}" bind:change="stepperChange" integer input-width="100rpx" />
+</view>
+</van-dialog>
+
+<van-dialog
+  use-slot
+  title="修改备注"
+  show="{{ commentShow }}"
+  show-cancel-button
+  bind:confirm="onCommentConfirm"
+  bind:close="onCommentClose"
+  catchtouchmove="stop"
+>
+  <view style="text-align: center; margin-top: 50rpx; margin-bottom: 50rpx;">
+    <van-field
+        value="{{ comment }}"
+        label="备注"
+        type="textarea"
+        placeholder="请输入备注"
+        bind:change="commentChange"
+        autosize
+        border="{{ false }}"
+    />
+</view>
+</van-dialog>

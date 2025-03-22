@@ -27,6 +27,12 @@ page {
     }
 }
 
+.no-data {
+  color: #C0C4CC;
+  text-align: center;
+  margin-top: 100rpx;
+}
+
 .box:nth-child(odd) {
     background-color: aquamarine;
 }

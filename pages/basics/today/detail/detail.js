@@ -32,7 +32,8 @@ Page({
       completed: 'success'
     },
     instance: {},
-    loading: false
+    loading: false,
+    options: null
   },
 
   queryDetail(id) {
@@ -59,7 +60,8 @@ Page({
     console.log(options.id)
     this.queryDetail(options.id).then(res => {
       this.setData({
-        instance: res.data.data
+        instance: res.data.data,
+        options
       })
     })
     .then(() => {
@@ -100,7 +102,16 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh() {
-
+    console.log("onPullDownRefresh >>>>>")
+    if (this.data.options) {
+      this.onLoad(this.data.options)
+      wx.showToast({
+        title: '刷新成功',
+        icon: 'none',
+        duration: 2000
+      })
+      wx.stopPullDownRefresh({})
+    }
   },
 
   /**

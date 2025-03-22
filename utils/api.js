@@ -22,6 +22,9 @@ module.exports = {
     WRITE_ATR: "/wxapp/produce/writeArtifact",
     READ_ART: "/wxapp/produce/readArtifact",
     COMPLETE_WORK_ORDER: "/wxapp/produce/completeOrder",
+    LATELY_WORK_ORDER: "/workOrder/queryLatelyByPage",
+    ORDER_ACHIEVE_TOTAL: "/wxapp/boss/queryOrderAchieveTotal",
+    PRODUCE_EXECUTE_TOTAL: "/wxapp/boss/queryProduceExecuteTotal",
     //站内信模块
     MESSAGE_ID:"/wxapp/message/queryMyMessageById?id=",         //读取站内信
     MESSAGE_PAGE:"/wxapp/message/queryMyMessageByPage",         //查询当前用户站内信列表

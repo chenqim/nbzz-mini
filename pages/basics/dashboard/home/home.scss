@@ -1,0 +1,35 @@
+/* pages/basics/dashboard/home/home.wxss */
+.title {
+  font-size: 32rpx;
+  font-weight: 700;
+  padding: 16rpx 32rpx;
+}
+.mt-32 {
+  margin-top: 32rpx;
+}
+.box-container {
+  padding: 0 16rpx;
+  display: flex;
+  flex-wrap: wrap;
+  .box-item {
+    width: calc(50% - 32rpx);
+    // flex: 1;
+    margin: 0 16rpx;
+    margin-bottom: 32rpx;
+    // height: 150rpx;
+    background-color: #0081ff;
+    color: #FFFFFF;
+    border-radius: 10rpx;
+    padding: 32rpx;
+    .label {
+      font-size: 32rpx;
+      font-weight: 700;
+    }
+    .value {
+      font-size: 32rpx;
+      font-weight: 700;
+      margin-top: 32rpx;
+      text-align: right;
+    }
+  }
+}

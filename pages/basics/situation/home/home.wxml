@@ -1,10 +1,10 @@
 <!--pages/basics/work/home/home.wxml-->
 <cu-custom bgColor="bg-blue" isBack="{{true}}"> 
-	<view slot="content">工单池</view>
+	<view slot="content">工单进度</view>
 </cu-custom>
 <van-search
 	value="{{ searchValue }}"
-	placeholder="请输入工单编号或名称进行搜索"
+	placeholder="请输入工单名称进行搜索"
 	bind:search="onSearch"
 	bind:clear="onSearch"
 />
@@ -27,8 +27,8 @@
     </view>
     <view class="flex justify-between margin-top-sm">
       <view class="text-cut">
-        <text>数量：</text>
-        <text class="sub-text">{{ item.count }}</text>
+        <text>工单情况：</text>
+        <text class="sub-text">{{ item.completeCount }}/{{ item.count }}</text>
       </view>
       <view>
         <text>截止时间：</text>
@@ -41,7 +41,8 @@
       </view>
       <view>
         <van-button type="default" bind:tap="goToDetail" data-id="{{ item.id }}" size="small">查看详情</van-button>
-        <van-button type="info" bind:click="openDialog" data-id="{{ item.id }}" class="margin-left-xs" size="small" wx:if="{{ item.canReceive }}">认领工单</van-button>
+        <!-- wx:if="{{ item.status === 'create' }}" -->
+        <!-- <van-button type="info" bind:click="openDialog" data-id="{{ item.id }}" class="margin-left-xs" size="small">撤销工单</van-button> -->
       </view>
     </view>
   </view>
@@ -53,7 +54,7 @@
   bind:confirm="onConfirm" -->
 <van-dialog
   use-slot
-  title="选择要认领的工序"
+  title="选择要撤销的工序"
   show="{{ show }}"
   show-cancel-button
   before-close="{{ verify }}"
@@ -61,7 +62,7 @@
 >
 	<view class="process-dialog-content">
 		<van-radio-group value="{{ choosedProcess }}" bind:change="onChange">
-			<van-radio name="{{ item.id }}" wx:for="{{ processList }}" disabled="{{ item.userId }}" wx:key="id" custom-class="custom-class">
+			<van-radio name="{{ item.id }}" wx:for="{{ processList }}" disabled="{{ item.userId !== user_info.id }}" wx:key="id" custom-class="custom-class">
 				<text>{{ item.workingProcedure.name }}</text>
 				<text wx:if="{{ item.userId }}">（{{ item.userName }} 已接单）</text>
 				<text wx:else>（未接单）</text>
