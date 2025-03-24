@@ -49,13 +49,14 @@ Page({
     if(this.data.comPass==this.data.newPass&&this.data.newPass.length>=2){
       app.request({
         toShow:true,
+        loading: false,
         url:app.api.CHANGE_PASSWORD,
         data:{
           oldPassword:this.data.oldPass,
           newPassword:this.data.newPass
         }
       }).then(res =>{
-        if(res.data.code == '1'){
+        if(res.data.code === '00000'){
           wx.showModal({
             // title: '提示',
             content: "密码修改成功",
@@ -64,13 +65,14 @@ Page({
             success(res) {
               if (res.confirm) {
                 // return wx.navigateBack({delta:1})
+                wx.clearStorageSync()
                 return wx.redirectTo({
                   url: '/pages/login/home',
                 })
               }
             }
           })
-        }else if(res.data.code == 0){
+        }else if(res.data.code === 'B0001'){
           wx.showModal({
             // title: '提示',
             content: "原密码错误,请重新填写",
