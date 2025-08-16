@@ -43,17 +43,28 @@ function request(opts = {}) {
       success: res => {
         // console.log(`请求【${method} ${url}】成功，响应数据：%o`, res)
         if(res.statusCode!=200){
-          if(loading){
-            wx.showToast({
-              title: "电波无法到达，请稍后再试~",
-              icon: 'none',
-              duration: 2000
-            })
+          // 增加 token 过期自动续接逻辑
+          if (res.data.code === 'A0230') {
+            setTimeout(() => {
+              wx.redirectTo({
+                url: '/pages/index/index',
+              })
+            }, 1000)
+            initialization(toShow,loading)
+            return resolve(res)
+          } else {
+            if(loading){
+              wx.showToast({
+                title: "电波无法到达，请稍后再试~",
+                icon: 'none',
+                duration: 2000
+              })
+            }
+            initialization(toShow,loading)
+            return resolve(res)
           }
-          initialization(toShow,loading)
-          return resolve(res)
         }
-        console.log(res);
+        console.log('request.js === ', res);
         if(res.header["Auth-Token"] && res.header["Auth-Token"]!=token){
           wx.setStorageSync('token', res.header["Auth-Token"])
         }

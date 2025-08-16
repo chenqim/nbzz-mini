@@ -27,10 +27,12 @@ Page({
 
   auoLogin (code) {
     const that = this
+    const token = wx.getStorageSync('token')
+    console.log('tkkk', token)
     wx.request({
       method: "POST",
       header:{
-        // "Auth-Token":token
+        "Auth-Token":token
       },
       url: config.apiPrefix + app.api.AUTO_LOGIN,
       data: {
@@ -41,7 +43,9 @@ Page({
           // 自动登录成功直接存token，获取用户信息，跳转到首页
           Toast('自动登录成功')
           console.log('自动登录成功', res)
-          wx.setStorageSync('token', res.header["Auth-Token"])
+          if (res.header["Auth-Token"]) {
+            wx.setStorageSync('token', res.header["Auth-Token"])
+          }
           app.request({
             url: app.api.CURRENT_USER_INFO,
             toShow: true,
@@ -83,6 +87,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log('===== 首屏 ===== ')
     const that = this
     wx.login({
       success(res) {

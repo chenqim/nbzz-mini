@@ -5,6 +5,7 @@ const app = getApp()
 Page({
 
   getToken() {
+    console.log('getttt')
     const that = this
     const token = wx.getStorageSync('token') || ''
     wx.login({
@@ -159,7 +160,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log('===== 登录页 ===== ')
     const that = this
     const token = wx.getStorageSync('token') || ''
     app.globalData.internal = true
@@ -178,7 +179,10 @@ Page({
               code: res.code
             },
             success(res) {
-              wx.setStorageSync('token', res.header["Auth-Token"])
+              // wx.setStorageSync('token', res.header["Auth-Token"])
+              if (res.header["Auth-Token"]) {
+                wx.setStorageSync('token', res.header["Auth-Token"])
+              }
             },
             fail(err){
               wx.showToast({
