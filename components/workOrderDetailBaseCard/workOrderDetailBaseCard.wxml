@@ -1,0 +1,18 @@
+<!--components/workOrderDetailBaseCard.wxml-->
+<van-cell-group title="基本信息">
+  <van-cell title="工单编号" value="{{ instance.code }}" />
+  <van-cell title="工单名称" value="{{ instance.name }}" />
+  <van-cell title="工单级别">
+      <van-tag type="{{ gradeTypeMap[instance.grade] }}">{{ gradeMap[instance.grade] }}</van-tag>
+  </van-cell>
+  <van-cell title="工单类型" value="{{ typeMap[instance.type] }}" />
+  <van-cell title="产品名称" value="{{ instance.productInfo.name }}" />
+  <van-cell title="规格型号" value="{{ instance.productInfo.spec }}" />
+  <van-cell title="生产数量" value="{{ instance.count }}" />
+  <van-cell title="生产状态">
+      <van-tag plain type="{{ statusTypeMap[instance.status] }}">{{ statusMap[instance.status] }}</van-tag>
+  </van-cell>
+  <van-cell title="截止时间" value="{{ instance.needDate }}" />
+  <van-cell wx:if="{{ from === 'work' || from === 'dispatch' }}" title="备注" bind:click="clickComment" is-link value="{{ instance.remark }}" />
+  <van-cell wx:elif="{{ from === 'today' || from === 'situation' }}" title="备注" label="{{ instance.remark }}" />
+</van-cell-group>
