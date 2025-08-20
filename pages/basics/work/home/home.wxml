@@ -39,6 +39,10 @@
         <text class="sub-text">{{ item.needDate }}</text>
       </view>
     </view>
+    <view class="text-cut margin-top-sm">
+      <text>备注：</text>
+      <text class="sub-text">{{ item.remark || '-' }}</text>
+    </view>
     <view class="flex justify-between margin-top-sm">
       <view>
         <van-tag plain type="{{ statusTypeMap[item.status] }}">{{ statusMap[item.status] }}</van-tag>
