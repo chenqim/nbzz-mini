@@ -12,6 +12,7 @@
         </van-cell>
         <van-cell title="工单类型" value="{{ typeMap[instance.type] }}" />
         <van-cell title="产品名称" value="{{ instance.productInfo.name }}" />
+        <van-cell title="规格型号" value="{{ instance.productInfo.spec }}" />
         <van-cell title="生产数量" value="{{ instance.count }}" />
         <van-cell title="生产状态">
             <van-tag plain type="{{ statusTypeMap[instance.status] }}">{{ statusMap[instance.status] }}</van-tag>
