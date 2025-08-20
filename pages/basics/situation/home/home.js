@@ -78,7 +78,7 @@ Page({
 
   goToDetail (e) {
     wx.navigateTo({
-      url: '/pages/basics/situation/detail/detail?id=' + e.currentTarget.dataset.id
+      url: '/pages/basics/situation/detail/detail?id=' + e.detail.id
     })
   },
 

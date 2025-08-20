@@ -1,0 +1,26 @@
+/* pages/workOrderListCard.wxss */
+@import "/colorui/main.wxss";
+.work-box {
+  padding: 32rpx;
+  background-color: #ffffff;
+  margin: 8rpx;
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+  view {
+      line-height: 48rpx;
+  }
+  .title {
+      font-weight: 600;
+  }
+  .sub-text {
+      color: #606266;
+  }
+  .number {
+      width: 300rpx;
+  }
+  .status {
+      width: 100rpx;
+      text-align: right;
+  }
+}

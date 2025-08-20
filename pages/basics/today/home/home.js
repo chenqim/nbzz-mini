@@ -224,7 +224,7 @@ Page({
   },
 
   openDialog(e) {
-    this.queryProcess(e.currentTarget.dataset.id).then(res => {
+    this.queryProcess(e.detail.id).then(res => {
       const notArr = res.filter(n => !n.userId)
       this.setData({
         processList: res,

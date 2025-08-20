@@ -78,7 +78,7 @@ Page({
 
   goToDetail (e) {
     wx.navigateTo({
-      url: '/pages/basics/work/detail/detail?id=' + e.currentTarget.dataset.id
+      url: '/pages/basics/work/detail/detail?id=' + e.detail.id
     })
   },
 
@@ -231,7 +231,7 @@ Page({
 
   openDialog(e) {
     console.log('user', app.globalData.user_info)
-    this.queryProcess(e.currentTarget.dataset.id).then(res => {
+    this.queryProcess(e.detail.id).then(res => {
       const canArr = res.filter(n => n.userId === this.data.user_info.id)
       this.setData({
         processList: res,
