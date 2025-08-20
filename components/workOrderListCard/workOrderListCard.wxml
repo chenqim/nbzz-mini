@@ -49,7 +49,7 @@
       <van-button type="default" bind:tap="goToDetail" data-id="{{ item.id }}" size="small">查看详情</van-button>
     </view>
     <view wx:elif="{{ from === 'dispatch' }}">
-      <van-button type="default" bind:tap="goToDetail" data-id="{{ item.id }}" size="small">撤销派单</van-button>
+      <van-button type="default" bind:tap="openDialog" data-id="{{ item.id }}" size="small">撤销派单</van-button>
       <van-button type="info" bind:tap="goToDetail" data-id="{{ item.id }}" class="margin-left-xs" size="small">派单</van-button>
     </view>
   </view>

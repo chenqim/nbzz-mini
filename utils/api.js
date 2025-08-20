@@ -9,6 +9,7 @@ module.exports = {
     CURRENT_MENT_INFO:"/wxapp/auth/queryCurrentMenuInfo",       //查询当前菜单信息
     CURRENT_USER_INFO : "/wxapp/auth/queryCurrentUserInfo",     //查询当前用户信息
     CHANGE_PASSWORD:"/wxapp/auth/updatePassword",               //修改密码
+    ALL_USER_LIST: "/user/queryByList",
     WORK_ORDER_PAGE: "/wxapp/workOrder/queryByPage",
     MY_WORK_ORDER_PAGE: "/wxapp/workOrder/queryMyByPage",
     WORK_ORDER_DETAIL: "/wxapp/workOrder/queryDetail",

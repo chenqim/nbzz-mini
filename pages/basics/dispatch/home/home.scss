@@ -1,1 +1,10 @@
 /* pages/basics/dispatch/home/home.wxss */
+.process-dialog-content {
+  min-height: 200rpx;
+  margin-top: 20rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  .custom-class {
+      margin-bottom: 20rpx;
+  }
+}

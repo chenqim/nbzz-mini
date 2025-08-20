@@ -61,7 +61,7 @@ Page({
     let loading = this.data.loading
     return new Promise((resolve, reject) => {
       app.request({
-        url: app.api.MY_WORK_ORDER_PAGE,
+        url: app.api.WORK_ORDER_PAGE,
         loading: loading,
         data: {
           pageParam: {
@@ -69,7 +69,8 @@ Page({
             size: this.data.size
           },
           queryParam: {
-            keyword: this.data.searchValue
+            keyword: this.data.searchValue,
+            type: 'maintenance'
           }
         }
       }).then(res => {
@@ -156,32 +157,37 @@ Page({
 
   onConfirm(resolve) {
     if (this.data.choosedProcess) {
-      return app.request({
-        url: app.api.CANCEL_PROCESS,
-        loading: false,
-        data: {
-          id: this.data.choosedProcess
-        }
-      }).then(res => {
-        if (res.data.code === '00000') {
-          Toast({
-            message: '撤销成功',
-            zIndex: 9999,
-          })
-          resolve(true)
-        } else {
-          Toast({
-            message: res.data.message,
-            zIndex: 9999,
-          })
-          resolve(false)
-        }
-      }).catch(err => {
-        console.log(err)
+      // return app.request({
+      //   url: app.api.CANCEL_PROCESS,
+      //   loading: false,
+      //   data: {
+      //     id: this.data.choosedProcess
+      //   }
+      // }).then(res => {
+      //   if (res.data.code === '00000') {
+      //     Toast({
+      //       message: '撤销成功',
+      //       zIndex: 9999,
+      //     })
+      //     resolve(true)
+      //   } else {
+      //     Toast({
+      //       message: res.data.message,
+      //       zIndex: 9999,
+      //     })
+      //     resolve(false)
+      //   }
+      // }).catch(err => {
+      //   console.log(err)
+      // })
+      resolve(true)
+      Toast({
+        message: '撤销成功',
+        zIndex: 9999,
       })
     } else {
       Toast({
-        message: '请选择要撤销的工序',
+        message: '请选择要撤销派单的工序',
         zIndex: 10000
       })
       resolve(false)

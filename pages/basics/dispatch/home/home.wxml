@@ -25,7 +25,7 @@
   bind:confirm="onConfirm" -->
 <van-dialog
   use-slot
-  title="选择要撤销的工序"
+  title="选择要撤销派单的工序"
   show="{{ show }}"
   show-cancel-button
   before-close="{{ verify }}"
@@ -33,10 +33,11 @@
 >
 	<view class="process-dialog-content">
 		<van-radio-group value="{{ choosedProcess }}" bind:change="onChange">
-			<van-radio name="{{ item.id }}" wx:for="{{ processList }}" disabled="{{ item.userId !== user_info.id }}" wx:key="id" custom-class="custom-class">
+      <!-- disabled="{{ item.userId !== user_info.id }}" -->
+			<van-radio name="{{ item.id }}" wx:for="{{ processList }}" wx:key="id" custom-class="custom-class">
 				<text>{{ item.workingProcedure.name }}</text>
-				<text wx:if="{{ item.userId }}">（{{ item.userName }} 已接单）</text>
-				<text wx:else>（未接单）</text>
+				<!-- <text wx:if="{{ item.userId }}">（{{ item.userName }} 已接单）</text>
+				<text wx:else>（未接单）</text> -->
 			</van-radio>
 		</van-radio-group>
 	</view>

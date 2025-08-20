@@ -12,11 +12,13 @@ Page({
     loading: false,
     userInfo: null,
     options: null,
-    show: false,
+    user: '',
     count: 1,
-    workOrderProcedureId: null,
     commentShow: false,
-    comment: ''
+    comment: '',
+    index: -1,
+    userShow: false,
+    userList: []
   },
 
   clickComment() {
@@ -64,6 +66,71 @@ Page({
     })
   },
 
+  showPopup(e) {
+    this.setData({ userShow: true, index: e.currentTarget.dataset.index });
+  },
+  onClose() {
+    this.setData({ userShow: false, index: -1 });
+  },
+  onChange(event) {
+    const { picker, value, index } = event.detail;
+    // Toast(`当前值：${value}, 当前索引：${index}`);
+  },
+  onConfirm(event) {
+    const { picker, value, index } = event.detail;
+    this.data.instance.procedureList[this.data.index].dispatchUserId = value.id
+    this.data.instance.procedureList[this.data.index].dispatchUserName = value.userName
+    this.setData({
+      instance: this.data.instance
+    })
+    this.onClose()
+  },
+  onCancel() {
+    this.onClose()
+    // Toast('取消');
+  },
+
+  stepperChange(event) {
+    this.setData({
+      count: event.detail
+    })
+  },
+
+  dispatchWorkOrder() {
+    // this.save().then(res => {
+    //   if (res.data.code === '00000') {
+    //     wx.navigateBack()
+    //   } else {
+    //     Toast(res.data.message)
+    //   }
+    // })
+    // .then(() => {
+    //   this.data.loading = false
+    //   this.setData({
+    //     btnLoading: false
+    //   })
+    // })
+    // .catch(err => {})
+  },
+  // save() {
+  //   let loading = this.data.loading
+  //   return new Promise((resolve, reject) => {
+  //     app.request({
+  //       url: app.api.READ_ART,
+  //       loading: loading,
+  //       data: {
+  //         count: this.data.count,
+  //         stagingAreaId: this.data.stageId,
+  //         workOrderProcedureId: this.data.processId
+  //       }
+  //     }).then(res => {
+  //       return resolve(res)
+  //     }).catch(err => {
+  //       return reject(err)
+  //     })
+  //   })
+  // },
+
   queryDetail(id) {
     let loading = this.data.loading
     return new Promise((resolve, reject) => {
@@ -80,151 +147,19 @@ Page({
       })
     })
   },
-
-  queryStageDetail(code) {
-    let loading = this.data.loading
+  
+  queryAllUser() {
     return new Promise((resolve, reject) => {
       app.request({
-        url: app.api.STAGE_DETAIL,
-        loading: loading,
-        data: {
-          code
-        }
+        url: app.api.ALL_USER_LIST,
+        loading: false,
+        data: {}
       }).then(res => {
         return resolve(res)
       }).catch(err => {
         return reject(err)
       })
     })
-  },
-
-  queryBelongStage(id) {
-    let loading = this.data.loading
-    return new Promise((resolve, reject) => {
-      app.request({
-        url: app.api.CHECK_STAGE,
-        loading: loading,
-        data: {
-          id
-        }
-      }).then(res => {
-        return resolve(res)
-      }).catch(err => {
-        return reject(err)
-      })
-    })
-  },
-
-  complete(count, workOrderProcedureId) {
-    let loading = this.data.loading
-    return new Promise((resolve, reject) => {
-      app.request({
-        url: app.api.COMPLETE_WORK_ORDER,
-        loading: loading,
-        data: {
-          count,
-          workOrderProcedureId
-        }
-      }).then(res => {
-        return resolve(res)
-      }).catch(err => {
-        return reject(err)
-      })
-    })
-  },
-
-  checkStage(e) {
-    this.queryBelongStage(e.currentTarget.dataset.id).then(result => {
-      if (result.data.code === '00000') {
-        const ins = result.data.data?.[0] || {}
-        Dialog.alert({
-          title: '所在中转区详情',
-          messageAlign: 'left',
-          message: `
-            中转区编号：${ins.stagingArea.code}\n
-            中转区名称：${ins.stagingArea.name}\n
-            待提取数量：${ins.count}
-          `,
-        }).then(() => {
-          // on close
-        })
-      } else {
-        Toast(result.data.message)
-      }
-    })
-  },
-
-  extract: function (e) {
-    wx.scanCode({
-      success: (res) => {
-        console.log('QR CODE', res)
-        this.queryStageDetail(res.result).then(result => {
-          console.log('result >>>>>', result)
-          if (result.data.code === '00000') {
-            wx.navigateTo({
-              url: `/pages/basics/stage/submit/submit?stageCode=${res.result}&stageId=${result.data.data.id}&stageName=${result.data.data.name}&from=detail&workOrderId=${this.data.instance.id}&workOrderName=${this.data.instance.name}&processId=${e.currentTarget.dataset.process}&processName=${e.currentTarget.dataset.processName}&count=${e.currentTarget.dataset.count}`,
-            })
-          } else {
-            Toast(result.data.message)
-          }
-        })
-        .then(() => {
-          this.data.loading = false
-        })
-        .catch(err => {})
-      }
-    })
-  },
-
-  scanQRCode: function (e) {
-    console.log('e>>>>', e)
-    wx.scanCode({
-      success: (res) => {
-        console.log('QR CODE', res)
-        this.queryStageDetail(res.result).then(result => {
-          console.log('result >>>>>', result)
-          if (result.data.code === '00000') {
-            wx.navigateTo({
-              url: `/pages/basics/stage/circle/circle?stageCode=${res.result}&stageId=${result.data.data.id}&stageName=${result.data.data.name}&workOrderId=${e.currentTarget.dataset.work}&workOrderCode=${e.currentTarget.dataset.workCode}&workOrderName=${e.currentTarget.dataset.workName}&processId=${e.currentTarget.dataset.process}&processName=${e.currentTarget.dataset.processName}&processCount=${e.currentTarget.dataset.processCount}&type=${e.currentTarget.dataset.type}`,
-            })
-          } else {
-            Toast(result.data.message)
-          }
-        })
-        .then(() => {
-          this.data.loading = false
-        })
-        .catch(err => {})
-      }
-    })
-  },
-
-  completeWorkOrder(e) {
-    // Toast('完结工单')
-    this.setData({ show: true, workOrderProcedureId: e.currentTarget.dataset.process })
-  },
-
-  stepperChange(event) {
-    this.setData({
-      count: event.detail
-    })
-  },
-
-  onConfirm() {
-    this.complete(this.data.count, this.data.workOrderProcedureId).then(result => {
-      console.log('result >>>>>', result)
-      if (result.data.code === '00000') {
-        Toast('操作成功')
-        // 刷新
-        if (this.data.options) this.onLoad(this.data.options)
-      } else {
-        Toast(result.data.message)
-      }
-    })
-  },
-
-  onClose() {
-    this.setData({ show: false, count: 1 })
   },
 
   /**
@@ -232,7 +167,18 @@ Page({
    */
   onLoad(options) {
     console.log('on load >>>>>', options.id)
+    this.queryAllUser().then(res => {
+      this.setData({
+        userList: res.data.data
+      })
+      console.log(this.data.userList)
+    })
     this.queryDetail(options.id).then(res => {
+      res.data.data.procedureList.forEach(n => {
+        n.dispatchUserId = ''
+        n.dispatchUserName = ''
+        n.dispatchCount = 1
+      })
       this.setData({
         instance: res.data.data,
         userInfo: app.globalData.user_info || null,

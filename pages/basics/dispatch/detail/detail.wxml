@@ -5,57 +5,17 @@
 <view>
   <work-order-detail-base-card from="dispatch" instance="{{ instance }}" bind:clickcomment="clickComment" />
   <van-cell-group wx:for="{{ instance.procedureList }}" wx:key="id" title="{{ item.workingProcedure.name + ' [ ' + item.workingProcedure.code + ' ]' }}">
-      <van-cell title="当前认领人" value="{{ item.userName || '-' }}" />
-      <van-cell title="认领时间" value="{{ item.startTime || '-' }}" />
-      <van-cell title="完成情况" value="{{ item.completeCount + '/' + item.count }}" />
-      <van-cell title="已提取在制品" value="{{ item.currentArtifactCount || 0 }}" />
-      <van-cell title="待提取在制品" value="{{ item.currentNeedGetArtifactCount || 0 }}" />
-      <van-cell wx:if="{{ item.userId ===  userInfo.id }}">
-          <van-button wx:if="{{ item.currentNeedGetArtifactCount > 0 }}" type="info" size="small" bind:tap="checkStage" data-id="{{ item.id }}">查看中转区</van-button>
-          <van-button
-              wx:if="{{ item.currentNeedGetArtifactCount > 0 }}"
-              type="warning"
-              size="small"
-              bind:tap="extract"
-              data-process="{{ item.id }}"
-              data-process-name="{{ item.workingProcedure.name }}"
-              data-count="{{ item.currentNeedGetArtifactCount }}"
-              class="margin-left-xs"
-          >提取在制品</van-button>
-          <van-button wx:if="{{ index !== 0 }}" type="danger" size="small" bind:tap="scanQRCode" data-type="rework"
-              data-process="{{ item.id }}" data-process-name="{{ item.workingProcedure.name }}" data-process-count="{{ item.count }}"
-              data-work="{{ instance.id }}" data-work-code="{{ instance.code }}" data-work-name="{{ instance.name }}" class="margin-left-xs">返工</van-button>
-          <van-button wx:if="{{ index !== instance.procedureList.length - 1 }}" type="primary" size="small" bind:tap="scanQRCode" data-type="forward"
-              data-process="{{ item.id }}" data-process-name="{{ item.workingProcedure.name }}" data-process-count="{{ item.count }}"
-              data-work="{{ instance.id }}" data-work-code="{{ instance.code }}" data-work-name="{{ instance.name }}" class="margin-left-xs">转序</van-button>
-          <van-button wx:if="{{ index === instance.procedureList.length - 1 }}" type="primary" size="small" bind:tap="completeWorkOrder" data-type="forward"
-              data-process="{{ item.id }}" data-process-name="{{ item.workingProcedure.name }}" data-process-count="{{ item.count }}"
-              data-work="{{ instance.id }}" data-work-code="{{ instance.code }}" data-work-name="{{ instance.name }}" class="margin-left-xs">完结工单</van-button>
-      </van-cell>
-      <!-- <van-cell>
-          <view slot="title">
-              <van-progress percentage="50" style="margin-top: 50rpx;" />
-          </view>
-      </van-cell> -->
-      <!-- <van-progress percentage="0" /> -->
+    <van-cell title="作业人员" value="{{ item.dispatchUserName }}" is-link data-index="{{index}}" bind:click="showPopup" />
+    <van-cell title="作业数量">
+      <van-stepper value="{{ item.dispatchCount }}" bind:change="stepperChange" integer input-width="100rpx" />
+    </van-cell>
   </van-cell-group>
+</view>
+<view class="padding-sm">
+    <van-button type="primary" block size="small" bind:tap="dispatchWorkOrder" disabled="{{ btnLoading }}" loading="{{ btnLoading }}">提交派单</van-button>
 </view>
 <van-toast id="van-toast" />
 <van-dialog id="van-dialog" />
-
-<van-dialog
-  use-slot
-  title="报工数量"
-  show="{{ show }}"
-  show-cancel-button
-  bind:confirm="onConfirm"
-  bind:close="onClose"
-  catchtouchmove="stop"
->
-  <view style="text-align: center; margin-top: 50rpx; margin-bottom: 50rpx;">
-    <van-stepper value="{{ count }}" bind:change="stepperChange" integer input-width="100rpx" />
-</view>
-</van-dialog>
 
 <van-dialog
   use-slot
@@ -76,5 +36,8 @@
         autosize
         border="{{ false }}"
     />
-</view>
+  </view>
 </van-dialog>
+<van-popup show="{{ userShow }}" position="bottom" bind:close="onClose" close-on-click-overlay="{{ false }}">
+    <van-picker columns="{{ userList }}" value-key="userName" show-toolbar title="选择人员" bind:cancel="onCancel" bind:confirm="onConfirm" bind:change="onChange" />
+</van-popup>
