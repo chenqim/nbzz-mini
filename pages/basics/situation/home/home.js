@@ -7,32 +7,6 @@ Page({
    */
   data: {
     searchValue: '',
-    gradeMap: {
-      middle: '普通',
-      high: '紧急'
-    },
-    gradeTypeMap: {
-      middle: 'success',
-      high: 'danger'
-    },
-    typeMap: {
-      produce: '制造',
-      maintenance: '维修'
-    },
-    statusMap: {
-      create: '已创建',
-      receive: '已认领',
-      producing: '生产中',
-      executed: '待发货',
-      completed: '已完成'
-    },
-    statusTypeMap: {
-      create: 'primary',
-      receive: 'danger',
-      producing: 'warning',
-      executed: 'primary',
-      completed: 'success'
-    },
     workOrderList: [],
     loading: false,
     max: 1,

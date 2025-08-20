@@ -1,6 +1,6 @@
+// pages/basics/dispatch/home/home.js
 const app = getApp()
 import Toast from '@vant/weapp/toast/toast';
-
 Page({
 
   /**
@@ -26,6 +26,7 @@ Page({
         }
       })
     },
+    user_info: null
   },
 
   onSearch(e) {
@@ -47,12 +48,12 @@ Page({
         })
       })
   },
-
+  
   stop() {},
 
   goToDetail (e) {
     wx.navigateTo({
-      url: '/pages/basics/today/detail/detail?id=' + e.detail.id
+      url: '/pages/basics/dispatch/detail/detail?id=' + e.detail.id
     })
   },
 
@@ -60,7 +61,7 @@ Page({
     let loading = this.data.loading
     return new Promise((resolve, reject) => {
       app.request({
-        url: app.api.WORK_ORDER_PAGE,
+        url: app.api.MY_WORK_ORDER_PAGE,
         loading: loading,
         data: {
           pageParam: {
@@ -84,7 +85,8 @@ Page({
    */
   onLoad(options) {
     this.setData({
-      verify: this.data.verify.bind(this)
+      verify: this.data.verify.bind(this),
+      user_info: app.globalData.user_info
     })
     this.queryList(1)
       .then(res => {
@@ -155,18 +157,23 @@ Page({
   onConfirm(resolve) {
     if (this.data.choosedProcess) {
       return app.request({
-        url: app.api.RECEIVE_PROCESS,
+        url: app.api.CANCEL_PROCESS,
         loading: false,
         data: {
           id: this.data.choosedProcess
         }
       }).then(res => {
         if (res.data.code === '00000') {
-          console.log('000', res)
-          Toast('认领成功')
+          Toast({
+            message: '撤销成功',
+            zIndex: 9999,
+          })
           resolve(true)
         } else {
-          Toast(res.data.message)
+          Toast({
+            message: res.data.message,
+            zIndex: 9999,
+          })
           resolve(false)
         }
       }).catch(err => {
@@ -174,7 +181,7 @@ Page({
       })
     } else {
       Toast({
-        message: '请选择要认领的工序',
+        message: '请选择要撤销的工序',
         zIndex: 10000
       })
       resolve(false)
@@ -198,12 +205,13 @@ Page({
   },
 
   openDialog(e) {
+    console.log('user', app.globalData.user_info)
     this.queryProcess(e.detail.id).then(res => {
-      const notArr = res.filter(n => !n.userId)
+      const canArr = res.filter(n => n.userId === this.data.user_info.id)
       this.setData({
         processList: res,
         show: true,
-        choosedProcess: notArr[0]?.id || ''
+        choosedProcess: canArr[0]?.id || ''
       })
     })
   },

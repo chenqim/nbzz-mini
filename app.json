@@ -33,6 +33,8 @@
     "pages/basics/work/detail/detail",
     "pages/basics/today/home/home",
     "pages/basics/today/detail/detail",
+    "pages/basics/dispatch/home/home",
+    "pages/basics/dispatch/detail/detail",
     "pages/basics/stage/submit/submit",
     "pages/basics/stage/circle/circle",
     "pages/about/setting/setting",

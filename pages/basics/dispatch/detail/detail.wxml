@@ -1,6 +1,6 @@
-<!--pages/basics/work/detail/detail.wxml-->
+<!--pages/basics/dispatch/detail/detail.wxml-->
 <cu-custom bgColor="bg-blue" isBack="{{true}}"> 
-	<view slot="content">工单详情</view>
+	<view slot="content">派单详情</view>
 </cu-custom>
 <view>
     <van-cell-group title="基本信息">
