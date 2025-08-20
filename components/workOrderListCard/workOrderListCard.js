@@ -31,6 +31,10 @@ Component({
       produce: '制造',
       maintenance: '维修'
     },
+    typeTypeMap: {
+      produce: 'primary',
+      maintenance: 'warning'
+    },
     statusMap: {
       create: '已创建',
       receive: '已认领',
