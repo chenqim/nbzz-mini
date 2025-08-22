@@ -13,13 +13,17 @@
     </view>
   </view>
   <view class="text-cut margin-top-sm">
+    <text>工单编号：</text>
+    <text class="sub-text">{{ item.code }}</text>
+  </view>
+  <view class="text-cut margin-top-sm">
     <text>产品名称：</text>
     <text class="sub-text">{{ item.productInfo.name }}</text>
   </view>
-  <view class="text-cut margin-top-sm">
+  <!-- <view class="text-cut margin-top-sm">
     <text>规格型号：</text>
     <text class="sub-text">{{ item.productInfo.spec }}</text>
-  </view>
+  </view> -->
   <view class="flex justify-between margin-top-sm">
     <view class="text-cut">
       <text>数量：</text>
