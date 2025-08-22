@@ -28,12 +28,12 @@ Component({
       high: 'danger'
     },
     typeMap: {
-      produce: '制造',
+      produce: '新刀',
       maintenance: '维修'
     },
-    typeTypeMap: {
-      produce: 'primary',
-      maintenance: 'warning'
+    typeColorMap: {
+      produce: '#ff7051',
+      maintenance: '#8799a3'
     },
     statusMap: {
       create: '已创建',
