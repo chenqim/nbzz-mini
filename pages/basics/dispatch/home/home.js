@@ -29,6 +29,7 @@ Page({
     },
     user_info: null,
     resetWorkOrderId: '',
+    toDetailId: ''
   },
 
   onSearch(e) {
@@ -54,6 +55,9 @@ Page({
   stop() {},
 
   goToDetail (e) {
+    this.setData({
+      toDetailId: e.detail.id
+    })
     wx.navigateTo({
       url: '/pages/basics/dispatch/detail/detail?id=' + e.detail.id
     })
@@ -73,6 +77,28 @@ Page({
           queryParam: {
             keyword: this.data.searchValue,
             type: 'maintenance'
+          }
+        }
+      }).then(res => {
+        return resolve(res.data.data)
+      }).catch(err => {
+        return reject(err)
+      })
+    })
+  },
+  queryDetail(id) {
+    let loading = this.data.loading
+    return new Promise((resolve, reject) => {
+      app.request({
+        url: app.api.WORK_ORDER_PAGE,
+        loading: loading,
+        data: {
+          pageParam: {
+            page: 1,
+            size: 10
+          },
+          queryParam: {
+            id
           }
         }
       }).then(res => {
@@ -141,11 +167,11 @@ Page({
   openDialog(e) {
     console.log('user', app.globalData.user_info)
     this.queryProcess(e.detail.id).then(res => {
-      // const canArr = res.filter(n => n.userId === this.data.user_info.id)
+      const canArr = res.filter(n => n.userId)
       this.setData({
         processList: res,
         show: true,
-        choosedProcess: res?.[0]?.id || ''
+        choosedProcess: canArr?.[0]?.id || ''
       })
     })
   },
@@ -194,6 +220,22 @@ Page({
           zIndex: 9999,
         })
         resolve(true)
+        // 单独刷新当前这条工单（状态会有变更，有些操作按钮会显示或者隐藏）
+        this.queryDetail(this.data.resetWorkOrderId).then(res => {
+          const wo = res?.records?.[0]
+          if (wo) {
+            const index = this.data.workOrderList.findIndex(n => n.id === this.data.resetWorkOrderId)
+            this.data.workOrderList[index] = wo
+            this.setData({
+              workOrderList: this.data.workOrderList,
+              toDetailId: ''
+            })
+          }
+        })
+        .then(() => {
+          this.data.loading = false
+        })
+        .catch(err => {})
       } else {
         Toast({
           message: res.data.message,
@@ -283,7 +325,24 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-
+    if (this.data.toDetailId) {
+      // 单独刷新当前这条工单（状态会有变更，有些操作按钮会显示或者隐藏）
+      this.queryDetail(this.data.toDetailId).then(res => {
+        const wo = res?.records?.[0]
+        if (wo) {
+          const index = this.data.workOrderList.findIndex(n => n.id === this.data.toDetailId)
+          this.data.workOrderList[index] = wo
+          this.setData({
+            workOrderList: this.data.workOrderList,
+            toDetailId: ''
+          })
+        }
+      })
+      .then(() => {
+        this.data.loading = false
+      })
+      .catch(err => {})
+    }
   },
 
   /**

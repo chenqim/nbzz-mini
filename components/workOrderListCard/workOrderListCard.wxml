@@ -44,21 +44,25 @@
     <view>
       <van-tag plain type="{{ statusTypeMap[item.status] }}">{{ statusMap[item.status] }}</van-tag>
     </view>
+    <!-- 我的工单 -->
     <view wx:if="{{ from === 'work' }}">
       <van-button type="default" bind:tap="goToDetail" data-id="{{ item.id }}" size="small">查看详情</van-button>
-      <van-button type="info" bind:click="openDialog" data-id="{{ item.id }}" class="margin-left-xs" size="small">撤销工单</van-button>
+      <van-button wx:if="{{ item.type === 'produce' }}" type="info" bind:click="openDialog" data-id="{{ item.id }}" class="margin-left-xs" size="small">撤销工单</van-button>
     </view>
+    <!-- 工单池 -->
     <view wx:elif="{{ from === 'today' }}">
       <van-button type="default" bind:tap="goToDetail" data-id="{{ item.id }}" size="small">查看详情</van-button>
       <van-button type="info" bind:click="openDialog" data-id="{{ item.id }}" class="margin-left-xs" size="small" wx:if="{{ item.canReceive }}">认领工单</van-button>
     </view>
+    <!-- 执行总览 -->
     <view wx:elif="{{ from === 'situation' }}">
       <van-button type="default" bind:tap="goToDetail" data-id="{{ item.id }}" size="small">查看详情</van-button>
     </view>
+    <!-- 维修派单 -->
     <view wx:elif="{{ from === 'dispatch' }}">
       <van-button type="danger" bind:tap="openResetDialog" data-id="{{ item.id }}" size="small">重置派单</van-button>
       <van-button type="warning" bind:tap="openDialog" data-id="{{ item.id }}" class="margin-left-xs" size="small">撤销派单</van-button>
-      <van-button type="info" bind:tap="goToDetail" data-id="{{ item.id }}" class="margin-left-xs" size="small">手动派单</van-button>
+      <van-button type="info" bind:tap="goToDetail" data-id="{{ item.id }}" class="margin-left-xs" size="small" wx:if="{{ item.canReceive }}">手动派单</van-button>
     </view>
   </view>
 </view>

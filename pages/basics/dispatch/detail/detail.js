@@ -129,10 +129,10 @@ Page({
           orderProcedureList: this.data.instance.procedureList.map(n => {
             return {
               workOrderProcedureId: n.id,
-              userId: n.dispatchUserId,
+              userId: n.dispatchUserId || undefined,
               count: n.dispatchCount
             }
-          }).filter(n => n.userId && n.count > 0) // 过滤掉未分配的
+          })
         }
       }).then(res => {
         return resolve(res)
@@ -186,9 +186,9 @@ Page({
     })
     this.queryDetail(options.id).then(res => {
       res.data.data.procedureList.forEach(n => {
-        n.dispatchUserId = ''
-        n.dispatchUserName = ''
-        n.dispatchCount = 0
+        n.dispatchUserId = n.userId || ''
+        n.dispatchUserName = n.userName || ''
+        n.dispatchCount = n.originalCount || 0
       })
       this.setData({
         instance: res.data.data,
