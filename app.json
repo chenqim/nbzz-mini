@@ -99,7 +99,8 @@
     "van-tabs": "@vant/weapp/tabs/index",
     "van-calendar": "@vant/weapp/calendar/index",
     "van-toast": "@vant/weapp/toast/index",
-    "van-progress": "@vant/weapp/progress/index"
+    "van-progress": "@vant/weapp/progress/index",
+    "van-empty": "@vant/weapp/empty/index"
   },
   "sitemapLocation": "sitemap.json",
   "networkTimeout": {

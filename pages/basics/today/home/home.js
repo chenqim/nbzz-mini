@@ -68,7 +68,8 @@ Page({
             size: this.data.size
           },
           queryParam: {
-            keyword: this.data.searchValue
+            keyword: this.data.searchValue,
+            type: 'produce'
           }
         }
       }).then(res => {

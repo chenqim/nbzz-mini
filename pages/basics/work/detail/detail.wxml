@@ -31,6 +31,9 @@
             <van-button wx:if="{{ index === instance.procedureList.length - 1 }}" type="primary" size="small" bind:tap="completeWorkOrder" data-type="forward"
                 data-process="{{ item.id }}" data-process-name="{{ item.workingProcedure.name }}" data-process-count="{{ item.count }}"
                 data-work="{{ instance.id }}" data-work-code="{{ instance.code }}" data-work-name="{{ instance.name }}" class="margin-left-xs">完结工单</van-button>
+            <van-button wx:if="{{ instance.type === 'maintenance' }}" color="#7232dd" size="small" bind:tap="completeWorkOrder" data-type="forward"
+                data-process="{{ item.id }}" data-process-name="{{ item.workingProcedure.name }}" data-process-count="{{ item.count }}"
+                data-work="{{ instance.id }}" data-work-code="{{ instance.code }}" data-work-name="{{ instance.name }}" class="margin-left-xs">提前完工</van-button>
         </van-cell>
     </van-cell-group>
 </view>

@@ -7,12 +7,12 @@
   <van-cell-group wx:for="{{ instance.procedureList }}" wx:key="id" title="{{ item.workingProcedure.name + ' [ ' + item.workingProcedure.code + ' ]' }}">
     <van-cell title="作业人员" value="{{ item.dispatchUserName }}" is-link data-index="{{index}}" bind:click="showPopup" />
     <van-cell title="作业数量">
-      <van-stepper value="{{ item.dispatchCount }}" bind:change="stepperChange" integer input-width="100rpx" />
+      <van-stepper value="{{ item.dispatchCount }}" bind:change="stepperChange" data-index="{{index}}" integer min="{{0}}" max="{{100000000}}" input-width="100rpx" />
     </van-cell>
   </van-cell-group>
 </view>
 <view class="padding-sm">
-    <van-button type="primary" block size="small" bind:tap="dispatchWorkOrder" disabled="{{ btnLoading }}" loading="{{ btnLoading }}">提交派单</van-button>
+    <van-button type="primary" block size="small" bind:click="dispatchWorkOrder" disabled="{{ btnLoading }}" loading="{{ btnLoading }}">提交派单</van-button>
 </view>
 <van-toast id="van-toast" />
 <van-dialog id="van-dialog" />

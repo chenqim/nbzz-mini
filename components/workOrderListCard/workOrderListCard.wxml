@@ -4,7 +4,9 @@
   <view class="flex justify-between">
     <view class="text-cut">
       <!-- <text>工单名称：</text> -->
-      <van-tag color="{{ typeColorMap[item.type] }}">{{ typeMap[item.type] }}</van-tag>
+      <van-tag color="{{ typeColorMap[item.type] }}" text-color="{{ typeTextColorMap[item.type] }}">
+        <view style="font-weight: bolder">{{ typeMap[item.type] }}</view>
+      </van-tag>
       <text class="title">{{ item.name }}</text>
     </view>
     <view class="status">
@@ -54,8 +56,9 @@
       <van-button type="default" bind:tap="goToDetail" data-id="{{ item.id }}" size="small">查看详情</van-button>
     </view>
     <view wx:elif="{{ from === 'dispatch' }}">
-      <van-button type="default" bind:tap="openDialog" data-id="{{ item.id }}" size="small">撤销派单</van-button>
-      <van-button type="info" bind:tap="goToDetail" data-id="{{ item.id }}" class="margin-left-xs" size="small">派单</van-button>
+      <van-button type="danger" bind:tap="openResetDialog" data-id="{{ item.id }}" size="small">重置派单</van-button>
+      <van-button type="warning" bind:tap="openDialog" data-id="{{ item.id }}" class="margin-left-xs" size="small">撤销派单</van-button>
+      <van-button type="info" bind:tap="goToDetail" data-id="{{ item.id }}" class="margin-left-xs" size="small">手动派单</van-button>
     </view>
   </view>
 </view>

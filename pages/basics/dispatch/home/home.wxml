@@ -13,12 +13,14 @@
     <work-order-list-card
       from="dispatch"
       item="{{item}}"
+      bind:openresetdialog="openResetDialog"
       bind:gotodetail="goToDetail"
       bind:opendialog="openDialog"
     />
   </view>
 </view>
-<view wx:else class="no-data">暂无数据</view>
+<!-- <view wx:else class="no-data">暂无数据</view> -->
+<van-empty wx:else image="search" description="暂无数据" />
 <van-toast id="van-toast" />
 <!-- show-confirm-button="{{ false }}" -->
 <!-- bind:cancel="onCancel"
@@ -42,3 +44,4 @@
 		</van-radio-group>
 	</view>
 </van-dialog>
+<van-dialog id="van-dialog" />

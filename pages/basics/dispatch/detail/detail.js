@@ -91,45 +91,56 @@ Page({
   },
 
   stepperChange(event) {
+    const index = event.currentTarget.dataset.index
+    this.data.instance.procedureList[index].dispatchCount = event.detail
     this.setData({
-      count: event.detail
+      instance: this.data.instance
     })
   },
 
   dispatchWorkOrder() {
-    // this.save().then(res => {
-    //   if (res.data.code === '00000') {
-    //     wx.navigateBack()
-    //   } else {
-    //     Toast(res.data.message)
-    //   }
-    // })
-    // .then(() => {
-    //   this.data.loading = false
-    //   this.setData({
-    //     btnLoading: false
-    //   })
-    // })
-    // .catch(err => {})
+    this.setData({
+      btnLoading: true
+    })
+    this.save().then(res => {
+      if (res.data.code === '00000') {
+        wx.navigateBack()
+        Toast('操作成功')
+      } else {
+        Toast(res.data.message)
+      }
+    })
+    .then(() => {
+      this.data.loading = false
+      this.setData({
+        btnLoading: false
+      })
+    })
+    .catch(err => {})
   },
-  // save() {
-  //   let loading = this.data.loading
-  //   return new Promise((resolve, reject) => {
-  //     app.request({
-  //       url: app.api.READ_ART,
-  //       loading: loading,
-  //       data: {
-  //         count: this.data.count,
-  //         stagingAreaId: this.data.stageId,
-  //         workOrderProcedureId: this.data.processId
-  //       }
-  //     }).then(res => {
-  //       return resolve(res)
-  //     }).catch(err => {
-  //       return reject(err)
-  //     })
-  //   })
-  // },
+  save() {
+    let loading = this.data.loading
+    return new Promise((resolve, reject) => {
+      app.request({
+        url: app.api.ALLOCATE_WORK_ORDER,
+        loading: loading,
+        data: {
+          workOrderId: this.data.instance.id,
+          orderProcedureList: this.data.instance.procedureList.map(n => {
+            return {
+              workOrderProcedureId: n.id,
+              userId: n.dispatchUserId,
+              count: n.dispatchCount
+            }
+          }).filter(n => n.userId && n.count > 0) // 过滤掉未分配的
+        }
+      }).then(res => {
+        return resolve(res)
+      }).catch(err => {
+        return reject(err)
+      })
+    })
+  },
 
   queryDetail(id) {
     let loading = this.data.loading
@@ -177,7 +188,7 @@ Page({
       res.data.data.procedureList.forEach(n => {
         n.dispatchUserId = ''
         n.dispatchUserName = ''
-        n.dispatchCount = 1
+        n.dispatchCount = 0
       })
       this.setData({
         instance: res.data.data,

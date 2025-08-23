@@ -1,6 +1,7 @@
 // pages/basics/dispatch/home/home.js
 const app = getApp()
 import Toast from '@vant/weapp/toast/toast';
+import Dialog from '@vant/weapp/dialog/dialog';
 Page({
 
   /**
@@ -26,7 +27,8 @@ Page({
         }
       })
     },
-    user_info: null
+    user_info: null,
+    resetWorkOrderId: '',
   },
 
   onSearch(e) {
@@ -78,6 +80,129 @@ Page({
       }).catch(err => {
         return reject(err)
       })
+    })
+  },
+
+  onCancel() {
+    this.setData({
+      show: false,
+      processList: [],
+      choosedProcess: ''
+    })
+  },
+  onConfirm(resolve) {
+    if (this.data.choosedProcess) {
+      return app.request({
+        url: app.api.CANCEL_ALLOCATE_WORK_ORDER,
+        loading: false,
+        data: {
+          id: this.data.choosedProcess
+        }
+      }).then(res => {
+        if (res.data.code === '00000') {
+          resolve(true)
+          Toast({
+            message: '撤销派单成功',
+            zIndex: 99999,
+          })
+        } else {
+          resolve(false)
+          Toast({
+            message: res.data.message,
+            zIndex: 9999,
+          })
+        }
+      }).catch(err => {
+        console.log(err)
+      })
+    } else {
+      Toast({
+        message: '请选择要撤销派单的工序',
+        zIndex: 10000
+      })
+      resolve(false)
+    }
+  },
+  queryProcess(id) {
+    return new Promise((resolve, reject) => {
+      app.request({
+        url: app.api.RECEIVE_PROCEDURE,
+        loading: false,
+        data: {
+          id
+        }
+      }).then(res => {
+        return resolve(res.data.data)
+      }).catch(err => {
+        return reject(err)
+      })
+    })
+  },
+  openDialog(e) {
+    console.log('user', app.globalData.user_info)
+    this.queryProcess(e.detail.id).then(res => {
+      // const canArr = res.filter(n => n.userId === this.data.user_info.id)
+      this.setData({
+        processList: res,
+        show: true,
+        choosedProcess: res?.[0]?.id || ''
+      })
+    })
+  },
+
+  onChange(event) {
+    this.setData({
+      choosedProcess: event.detail,
+    })
+  },
+
+  // 重置派单
+  beforeClose(action) {
+    return new Promise((resolve) => {
+      if (action === 'confirm') {
+        this.onResetConfirm(resolve)
+      } else {
+        resolve(true)
+      }
+    })
+  },
+  openResetDialog(e) {
+    this.setData({
+      resetWorkOrderId: e.detail.id
+    })
+    Dialog.confirm({
+      title: '重置派单',
+      message: '该操作会清空所有派单人员和数量，请谨慎操作！',
+      beforeClose: this.beforeClose,
+    }).then((res) => {
+      console.log('then', res)
+    }).catch((err) => {
+      console.log('catch', err)
+    })
+  },
+  onResetConfirm(resolve) {
+    return app.request({
+      url: app.api.RESET_ALLOCATE_WORK_ORDER,
+      loading: false,
+      data: {
+        id: this.data.resetWorkOrderId
+      }
+    }).then(res => {
+      if (res.data.code === '00000') {
+        Toast({
+          message: '重置派单成功',
+          zIndex: 9999,
+        })
+        resolve(true)
+      } else {
+        Toast({
+          message: res.data.message,
+          zIndex: 9999,
+        })
+        resolve(false)
+      }
+    }).catch(err => {
+      console.log(err)
     })
   },
 
@@ -145,87 +270,6 @@ Page({
         })
         .catch(err => {})
     }
-  },
-
-  onCancel() {
-    this.setData({
-      show: false,
-      processList: [],
-      choosedProcess: ''
-    })
-  },
-
-  onConfirm(resolve) {
-    if (this.data.choosedProcess) {
-      // return app.request({
-      //   url: app.api.CANCEL_PROCESS,
-      //   loading: false,
-      //   data: {
-      //     id: this.data.choosedProcess
-      //   }
-      // }).then(res => {
-      //   if (res.data.code === '00000') {
-      //     Toast({
-      //       message: '撤销成功',
-      //       zIndex: 9999,
-      //     })
-      //     resolve(true)
-      //   } else {
-      //     Toast({
-      //       message: res.data.message,
-      //       zIndex: 9999,
-      //     })
-      //     resolve(false)
-      //   }
-      // }).catch(err => {
-      //   console.log(err)
-      // })
-      resolve(true)
-      Toast({
-        message: '撤销成功',
-        zIndex: 9999,
-      })
-    } else {
-      Toast({
-        message: '请选择要撤销派单的工序',
-        zIndex: 10000
-      })
-      resolve(false)
-    }
-  },
-
-  queryProcess(id) {
-    return new Promise((resolve, reject) => {
-      app.request({
-        url: app.api.RECEIVE_PROCEDURE,
-        loading: false,
-        data: {
-          id
-        }
-      }).then(res => {
-        return resolve(res.data.data)
-      }).catch(err => {
-        return reject(err)
-      })
-    })
-  },
-
-  openDialog(e) {
-    console.log('user', app.globalData.user_info)
-    this.queryProcess(e.detail.id).then(res => {
-      const canArr = res.filter(n => n.userId === this.data.user_info.id)
-      this.setData({
-        processList: res,
-        show: true,
-        choosedProcess: canArr[0]?.id || ''
-      })
-    })
-  },
-
-  onChange(event) {
-    this.setData({
-      choosedProcess: event.detail,
-    })
   },
 
   /**

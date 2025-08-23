@@ -32,8 +32,12 @@ Component({
       maintenance: '维修'
     },
     typeColorMap: {
-      produce: '#ff7051',
-      maintenance: '#8799a3'
+      produce: '#0a0a0a',
+      maintenance: '#ff7051'
+    },
+    typeTextColorMap: {
+      produce: '#bfa075',
+      maintenance: '#ffffff'
     },
     statusMap: {
       create: '已创建',
@@ -55,6 +59,9 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    openResetDialog(e) {
+      this.triggerEvent('openresetdialog', { id: e.currentTarget.dataset.id })
+    },
     goToDetail (e) {
       this.triggerEvent('gotodetail', { id: e.currentTarget.dataset.id })
     },

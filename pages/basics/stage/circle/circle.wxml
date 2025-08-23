@@ -21,7 +21,7 @@
     </van-cell-group>
 </view>
 <view class="padding-sm">
-    <van-button type="{{ type === 'rework' ? 'danger' : 'primary' }}" block size="small" bind:tap="writeArt" disabled="{{ btnLoading }}" loading="{{ btnLoading }}">提交{{ type === 'rework' ? '返工' : '转序' }}</van-button>
+    <van-button type="{{ type === 'rework' ? 'danger' : 'primary' }}" block size="small" bind:click="writeArt" disabled="{{ btnLoading }}" loading="{{ btnLoading }}">提交{{ type === 'rework' ? '返工' : '转序' }}</van-button>
 </view>
 <van-popup show="{{ processShow }}" position="bottom" bind:close="onClose2" close-on-click-overlay="{{ false }}">
     <van-picker columns="{{ prevProcessList }}" show-toolbar title="选择工序" bind:cancel="onCancel2" bind:confirm="onConfirm2" bind:change="onChange2" />

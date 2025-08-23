@@ -18,7 +18,8 @@
     />
   </view>
 </view>
-<view wx:else class="no-data">暂无数据</view>
+<!-- <view wx:else class="no-data">暂无数据</view> -->
+<van-empty wx:else image="search" description="暂无数据" />
 <van-toast id="van-toast" />
 <!-- show-confirm-button="{{ false }}" -->
 <!-- bind:cancel="onCancel"
