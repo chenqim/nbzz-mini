@@ -1,0 +1,53 @@
+<!--pages/basics/work/detail/detail.wxml-->
+<!--pages/basics/work/home/home.wxml-->
+<cu-custom bgColor="bg-blue" isBack="{{true}}"> 
+	<view slot="content">工单进度</view>
+</cu-custom>
+<view>
+  <!-- <work-order-detail-base-card from="situation" instance="{{ instance }}" /> -->
+  <van-cell-group wx:for="{{ instance.procedureList }}" wx:key="id" title="{{ item.workingProcedure.name + ' [ ' + item.workingProcedure.code + ' ]' }}">
+      <van-cell title="当前认领人" value="{{ item.userName || '-' }}" />
+      <van-cell title="认领时间" value="{{ item.startTime || '-' }}" />
+      <van-cell title="完成情况" value="{{ item.completeCount + '/' + item.count }}" />
+      <!-- <van-cell title="已提取在制品" value="{{ item.currentArtifactCount || 0 }}" />
+      <van-cell title="待提取在制品" value="{{ item.currentNeedGetArtifactCount || 0 }}" /> -->
+  </van-cell-group>
+</view>
+<van-toast id="van-toast" />
+<van-dialog id="van-dialog" />
+
+<van-dialog
+  use-slot
+  title="报工数量"
+  show="{{ show }}"
+  show-cancel-button
+  bind:confirm="onConfirm"
+  bind:close="onClose"
+  catchtouchmove="stop"
+>
+  <view style="text-align: center; margin-top: 50rpx; margin-bottom: 50rpx;">
+    <van-stepper value="{{ count }}" bind:change="stepperChange" integer input-width="100rpx" />
+</view>
+</van-dialog>
+
+<van-dialog
+  use-slot
+  title="修改备注"
+  show="{{ commentShow }}"
+  show-cancel-button
+  bind:confirm="onCommentConfirm"
+  bind:close="onCommentClose"
+  catchtouchmove="stop"
+>
+  <view style="text-align: center; margin-top: 50rpx; margin-bottom: 50rpx;">
+    <van-field
+        value="{{ comment }}"
+        label="备注"
+        type="textarea"
+        placeholder="请输入备注"
+        bind:change="commentChange"
+        autosize
+        border="{{ false }}"
+    />
+</view>
+</van-dialog>

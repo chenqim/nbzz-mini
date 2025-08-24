@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "work-order-detail-base-card": "/components/workOrderDetailBaseCard/workOrderDetailBaseCard"
+  },
+  "enablePullDownRefresh": true
+}

@@ -25,6 +25,12 @@ Page({
     }
   },
 
+  goToDetail (e) {
+    wx.navigateTo({
+      url: '/pages/basics/dashboard/detail/detail?type=' + e.currentTarget.dataset.type
+    })
+  },
+
   onDisplay() {
     this.setData({ show: true });
   },

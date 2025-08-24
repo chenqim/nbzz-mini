@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "work-order-list-card": "/components/workOrderListCard/workOrderListCard"
+  },
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#000000",
+  "backgroundTextStyle": "light",
+  "onReachBottomDistance": 50
+}

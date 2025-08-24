@@ -27,6 +27,8 @@
     "pages/basics/site/details/details",
     "pages/basics/police/home/home",
     "pages/basics/dashboard/home/home",
+    "pages/basics/dashboard/detail/detail",
+    "pages/basics/dashboard/progress/progress",
     "pages/basics/situation/home/home",
     "pages/basics/situation/detail/detail",
     "pages/basics/work/home/home",
@@ -100,7 +102,8 @@
     "van-calendar": "@vant/weapp/calendar/index",
     "van-toast": "@vant/weapp/toast/index",
     "van-progress": "@vant/weapp/progress/index",
-    "van-empty": "@vant/weapp/empty/index"
+    "van-empty": "@vant/weapp/empty/index",
+    "van-sticky": "@vant/weapp/sticky/index"
   },
   "sitemapLocation": "sitemap.json",
   "networkTimeout": {

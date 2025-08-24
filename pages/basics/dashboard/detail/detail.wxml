@@ -1,0 +1,14 @@
+<!--pages/basics/dashboard/detail/detail.wxml-->
+<cu-custom bgColor="bg-blue" isBack="{{true}}"> 
+	<view slot="content">{{ type === 'circle' ? '在制工单数' : '完工工单数' }}</view>
+</cu-custom>
+<view wx:if="{{ workOrderList && workOrderList.length }}">
+  <view wx:for="{{ workOrderList }}" wx:key="id">
+    <work-order-list-card
+      from="dashboard"
+      item="{{item}}"
+      bind:gotodetail="goToDetail"
+    />
+  </view>
+</view>
+<van-empty wx:else image="search" description="暂无数据" />

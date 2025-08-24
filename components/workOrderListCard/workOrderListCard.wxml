@@ -1,6 +1,6 @@
 <!--pages/workOrderListCard.wxml-->
 <!-- 工单名称、工单级别、工单类型、产品名称、生产数量、生产状态、备注 -->
-<view class="work-box">
+<view wx:if="{{ from !== 'dashboard' }}" class="work-box">
   <view class="flex justify-between">
     <view class="text-cut">
       <!-- <text>工单名称：</text> -->
@@ -67,5 +67,26 @@
       <van-button type="info" bind:tap="goToDetail" data-id="{{ item.id }}" class="margin-left-xs" size="small" wx:if="{{ item.canReceive }}">手动派单</van-button>
       <van-button type="default" bind:tap="goToDetail" data-id="{{ item.id }}" class="margin-left-xs" size="small" wx:else>查看详情</van-button>
     </view>
+  </view>
+</view>
+<view wx:else class="work-box">
+  <view class="text-cut">
+    <text class="title-dashboard">{{ item.name }}</text>
+  </view>
+  <view class="text-cut margin-top-sm">
+    <text>产品名称：</text>
+    <text class="sub-text">{{ item.productInfo.name }}</text>
+  </view>
+  <view class="flex justify-between margin-top-sm">
+    <view class="text-cut">
+      <text>数量：</text>
+      <text class="sub-text">{{ item.count }}</text>
+    </view>
+    <van-button
+      type="default"
+      bind:tap="goToDetail"
+      data-id="{{ item.id }}"
+      size="small"
+    >查看进度</van-button>
   </view>
 </view>
