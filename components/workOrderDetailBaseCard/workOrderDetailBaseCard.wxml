@@ -3,14 +3,20 @@
   <van-cell title="工单编号" value="{{ instance.code }}" />
   <van-cell title="工单名称" value="{{ instance.name }}" />
   <van-cell title="工单级别">
-      <van-tag type="{{ gradeTypeMap[instance.grade] }}">{{ gradeMap[instance.grade] }}</van-tag>
+    <van-tag type="{{ gradeTypeMap[instance.grade] }}">
+      <view style="font-weight: bolder">{{ gradeMap[instance.grade] }}</view>
+    </van-tag>
   </van-cell>
-  <van-cell title="工单类型" value="{{ typeMap[instance.type] }}" />
-  <van-cell title="产品名称" value="{{ instance.productInfo.name }}" />
-  <van-cell title="规格型号" value="{{ instance.productInfo.spec }}" />
-  <van-cell title="生产数量" value="{{ instance.count }}" />
+  <van-cell title="工单类型">
+    <van-tag color="{{ typeColorMap[instance.type] }}" text-color="{{ typeTextColorMap[instance.type] }}">
+      <view style="font-weight: bolder">{{ typeMap[instance.type] }}</view>
+    </van-tag>
+  </van-cell>
+  <van-cell title="产品名称" value="{{ instance.productInfo.name }}" value-class="custom-value" />
+  <van-cell title="规格型号" value="{{ instance.productInfo.spec }}" value-class="custom-value" />
+  <van-cell title="完成数量 / 生产数量" value="{{ instance.completeCount + ' / ' + instance.count }}" />
   <van-cell title="生产状态">
-      <van-tag plain type="{{ statusTypeMap[instance.status] }}">{{ statusMap[instance.status] }}</van-tag>
+    <van-tag plain type="{{ statusTypeMap[instance.status] }}">{{ statusMap[instance.status] }}</van-tag>
   </van-cell>
   <van-cell title="截止时间" value="{{ instance.needDate }}" />
   <van-cell wx:if="{{ from === 'work' || from === 'dispatch' }}" title="备注" bind:click="clickComment" is-link value="{{ instance.remark }}" />

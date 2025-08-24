@@ -228,7 +228,7 @@ Page({
             this.data.workOrderList[index] = wo
             this.setData({
               workOrderList: this.data.workOrderList,
-              toDetailId: ''
+              resetWorkOrderId: ''
             })
           }
         })

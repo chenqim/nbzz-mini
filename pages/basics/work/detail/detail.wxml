@@ -11,29 +11,45 @@
         <van-cell title="已提取在制品" value="{{ item.currentArtifactCount || 0 }}" />
         <van-cell title="待提取在制品" value="{{ item.currentNeedGetArtifactCount || 0 }}" />
         <van-cell wx:if="{{ item.userId ===  userInfo.id }}">
-            <van-button wx:if="{{ item.currentNeedGetArtifactCount > 0 }}" type="info" size="small" bind:tap="checkStage" data-id="{{ item.id }}">查看中转区</van-button>
-            <van-button
-                wx:if="{{ item.currentNeedGetArtifactCount > 0 }}"
-                type="warning"
+            <view>
+              <van-button wx:if="{{ item.currentNeedGetArtifactCount > 0 }}" type="info" size="small" bind:tap="checkStage" data-id="{{ item.id }}">查看中转区</van-button>
+              <van-button
+                  wx:if="{{ item.currentNeedGetArtifactCount > 0 }}"
+                  type="warning"
+                  size="small"
+                  bind:tap="extract"
+                  data-process="{{ item.id }}"
+                  data-process-name="{{ item.workingProcedure.name }}"
+                  data-count="{{ item.currentNeedGetArtifactCount }}"
+                  class="margin-left-xs"
+              >提取在制品</van-button>
+            </view>
+            <view class="margin-top-xs">
+              <van-button wx:if="{{ index !== 0 }}" type="danger" size="small" bind:tap="scanQRCode" data-type="rework"
+                  data-process="{{ item.id }}" data-process-name="{{ item.workingProcedure.name }}" data-process-count="{{ item.count }}"
+                  data-work="{{ instance.id }}" data-work-code="{{ instance.code }}" data-work-name="{{ instance.name }}" class="margin-left-xs">返工</van-button>
+              <van-button wx:if="{{ index !== instance.procedureList.length - 1 }}" type="primary" size="small" bind:tap="scanQRCode" data-type="forward"
+                  data-process="{{ item.id }}" data-process-name="{{ item.workingProcedure.name }}" data-process-count="{{ item.count }}"
+                  data-work="{{ instance.id }}" data-work-code="{{ instance.code }}" data-work-name="{{ instance.name }}" class="margin-left-xs">转序</van-button>
+              <van-button wx:if="{{ index === instance.procedureList.length - 1 }}" type="primary" size="small" bind:tap="completeWorkOrder" data-type="forward"
+                  data-process="{{ item.id }}" data-process-name="{{ item.workingProcedure.name }}" data-process-count="{{ item.count }}"
+                  data-work="{{ instance.id }}" data-work-code="{{ instance.code }}" data-work-name="{{ instance.name }}" class="margin-left-xs">完结工单</van-button>
+              <!-- 维修且不是最后一道工序时才展示提前完工 -->
+              <van-button
+                wx:if="{{ index !== instance.procedureList.length - 1 && instance.type === 'maintenance' }}"
+                color="#7232dd"
                 size="small"
-                bind:tap="extract"
+                bind:tap="completeWorkOrder"
+                data-type="forward"
                 data-process="{{ item.id }}"
                 data-process-name="{{ item.workingProcedure.name }}"
-                data-count="{{ item.currentNeedGetArtifactCount }}"
+                data-process-count="{{ item.count }}"
+                data-work="{{ instance.id }}"
+                data-work-code="{{ instance.code }}"
+                data-work-name="{{ instance.name }}"
                 class="margin-left-xs"
-            >提取在制品</van-button>
-            <van-button wx:if="{{ index !== 0 }}" type="danger" size="small" bind:tap="scanQRCode" data-type="rework"
-                data-process="{{ item.id }}" data-process-name="{{ item.workingProcedure.name }}" data-process-count="{{ item.count }}"
-                data-work="{{ instance.id }}" data-work-code="{{ instance.code }}" data-work-name="{{ instance.name }}" class="margin-left-xs">返工</van-button>
-            <van-button wx:if="{{ index !== instance.procedureList.length - 1 }}" type="primary" size="small" bind:tap="scanQRCode" data-type="forward"
-                data-process="{{ item.id }}" data-process-name="{{ item.workingProcedure.name }}" data-process-count="{{ item.count }}"
-                data-work="{{ instance.id }}" data-work-code="{{ instance.code }}" data-work-name="{{ instance.name }}" class="margin-left-xs">转序</van-button>
-            <van-button wx:if="{{ index === instance.procedureList.length - 1 }}" type="primary" size="small" bind:tap="completeWorkOrder" data-type="forward"
-                data-process="{{ item.id }}" data-process-name="{{ item.workingProcedure.name }}" data-process-count="{{ item.count }}"
-                data-work="{{ instance.id }}" data-work-code="{{ instance.code }}" data-work-name="{{ instance.name }}" class="margin-left-xs">完结工单</van-button>
-            <van-button wx:if="{{ instance.type === 'maintenance' }}" color="#7232dd" size="small" bind:tap="completeWorkOrder" data-type="forward"
-                data-process="{{ item.id }}" data-process-name="{{ item.workingProcedure.name }}" data-process-count="{{ item.count }}"
-                data-work="{{ instance.id }}" data-work-code="{{ instance.code }}" data-work-name="{{ instance.name }}" class="margin-left-xs">提前完工</van-button>
+              >提前完工</van-button>
+            </view>
         </van-cell>
     </van-cell-group>
 </view>

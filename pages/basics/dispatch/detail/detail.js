@@ -1,7 +1,6 @@
 // pages/basics/dispatch/detail/detail.js
 const app = getApp()
 import Toast from '@vant/weapp/toast/toast';
-import Dialog from '@vant/weapp/dialog/dialog';
 Page({
 
   /**
