@@ -9,7 +9,7 @@ Page({
     loading: false,
     max: 1,
     page: 2,
-    size: 10,
+    size: 20,
     doneList: false,
   },
 

@@ -4,7 +4,7 @@
 	<view slot="content">工单进度</view>
 </cu-custom>
 <view>
-  <!-- <work-order-detail-base-card from="situation" instance="{{ instance }}" /> -->
+  <work-order-detail-base-card from="situation" instance="{{ instance }}" />
   <van-cell-group wx:for="{{ instance.procedureList }}" wx:key="id" title="{{ item.workingProcedure.name + ' [ ' + item.workingProcedure.code + ' ]' }}">
       <van-cell title="当前认领人" value="{{ item.userName || '-' }}" />
       <van-cell title="认领时间" value="{{ item.startTime || '-' }}" />

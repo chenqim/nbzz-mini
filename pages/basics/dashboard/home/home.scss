@@ -1,4 +1,11 @@
 /* pages/basics/dashboard/home/home.wxss */
+.custom-value {
+  color: #0081ff !important;
+  font-size: 26px !important;
+}
+.custom-label {
+  font-size: 30px !important; /* 修改为所需字号 */
+}
 .title {
   font-size: 32rpx;
   font-weight: 700;

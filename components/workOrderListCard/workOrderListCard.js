@@ -12,6 +12,10 @@ Component({
     from: {
       type: String,
       value: 'work' // work：我的工单 today：工单池 situation：工单进度 dispatch：派单 dashboard：总览
+    },
+    index: {
+      type: Number,
+      value: 0
     }
   },
 

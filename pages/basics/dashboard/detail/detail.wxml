@@ -8,6 +8,7 @@
       from="dashboard"
       item="{{item}}"
       bind:gotodetail="goToDetail"
+      index="{{index}}"
     />
   </view>
 </view>

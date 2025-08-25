@@ -3,58 +3,58 @@
 	<view slot="content">执行总览</view>
 </cu-custom>
 <van-sticky offset-top="{{ 60 }}">
-<van-cell title="查询日期" value="{{ date }}" bind:click="onDisplay" />
+<van-cell title="查询日期" value="{{ date }}" bind:click="onDisplay" value-class="custom-value" label-class="custom-label" />
 </van-sticky>
 <van-calendar show="{{ show }}" bind:close="onClose" bind:confirm="onConfirm" color="#0081ff" min-date="{{ minDate }}" max-date="{{ maxDate }}" />
-<!-- <view class="title mt-32">需求达成率总览</view>
+<view class="title">今日工单执行总览</view>
 <view class="box-container">
-  <view class="box-item">
-    <view class="label">总需求</view>
-    <view class="value">{{ top.totalOrderCount }}</view>
-  </view>
-  <view class="box-item">
-    <view class="label">已发货</view>
-    <view class="value">{{ top.completedOrderCount }}</view>
-  </view>
-  <view class="box-item">
-    <view class="label">待发货</view>
-    <view class="value">{{ top.executedOrderCount }}</view>
-  </view>
-  <view class="box-item">
-    <view class="label">未完成</view>
-    <view class="value">{{ top.processOrderCount }}</view>
-  </view>
-  <view class="box-item">
-    <view class="label">需求达成率</view>
-    <view class="value">{{ top.completedOrderRatio }}%</view>
-  </view>
-</view> -->
-<view class="title">工单执行总览</view>
-<view class="box-container">
-  <view class="box-item">
-    <view class="label">生产人数</view>
-    <view class="value">{{ bottom.totalWorkerCount }}</view>
-  </view>
-  <view class="box-item">
-    <view class="label">在制产品数</view>
-    <view class="value">{{ bottom.totalArtifactCount }}</view>
-  </view>
   <view class="box-item" bind:tap="goToDetail" data-type="circle">
     <view class="label">
-      <view>在制工单数</view>
+      <view>今日在制工单数</view>
       <view>></view>
     </view>
     <view class="value">{{ bottom.totalOrderCount }}</view>
   </view>
-  <view class="box-item">
-    <view class="label">完工成品数</view>
-    <view class="value">{{ bottom.successArtifactCount }}</view>
-  </view>
   <view class="box-item" bind:tap="goToDetail" data-type="finsh">
     <view class="label">
-      <view>完工工单数</view>
+      <view>今日完工工单数</view>
       <view>></view>
     </view>
     <view class="value">{{ bottom.successOrderCount }}</view>
+  </view>
+  <view class="box-item">
+    <view class="label">今日生产人数</view>
+    <view class="value">{{ bottom.totalWorkerCount }}</view>
+  </view>
+  <view class="box-item">
+    <view class="label">今日在制产品数</view>
+    <view class="value">{{ bottom.totalArtifactCount }}</view>
+  </view>
+  <view class="box-item">
+    <view class="label">今日完工成品数</view>
+    <view class="value">{{ bottom.successArtifactCount }}</view>
+  </view>
+</view>
+<view class="title mt-32">需求达成率总览</view>
+<view class="box-container">
+  <view class="box-item">
+    <view class="label">今日总工单数</view>
+    <view class="value">{{ top.totalOrderCount }}</view>
+  </view>
+  <view class="box-item">
+    <view class="label">今日已发货</view>
+    <view class="value">{{ top.completedOrderCount }}</view>
+  </view>
+  <view class="box-item">
+    <view class="label">今日待发货</view>
+    <view class="value">{{ top.executedOrderCount }}</view>
+  </view>
+  <view class="box-item">
+    <view class="label">今日未完成</view>
+    <view class="value">{{ top.processOrderCount }}</view>
+  </view>
+  <view class="box-item">
+    <view class="label">今日需求达成率</view>
+    <view class="value">{{ top.completedOrderRatio }}%</view>
   </view>
 </view>

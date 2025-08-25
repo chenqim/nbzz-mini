@@ -70,23 +70,7 @@
   </view>
 </view>
 <view wx:else class="work-box">
-  <view class="text-cut">
-    <text class="title-dashboard">{{ item.name }}</text>
-  </view>
-  <view class="text-cut margin-top-sm">
-    <text>产品名称：</text>
-    <text class="sub-text">{{ item.productInfo.name }}</text>
-  </view>
-  <view class="flex justify-between margin-top-sm">
-    <view class="text-cut">
-      <text>数量：</text>
-      <text class="sub-text">{{ item.count }}</text>
-    </view>
-    <van-button
-      type="default"
-      bind:tap="goToDetail"
-      data-id="{{ item.id }}"
-      size="small"
-    >查看进度</van-button>
+  <view class="text-cut" bind:tap="goToDetail" data-id="{{ item.id }}">
+    <text class="title-dashboard"><text style="color: #0081ff">{{ index + 1 }}.</text> {{ item.name }} | {{ item.productInfo.name }}</text>
   </view>
 </view>
