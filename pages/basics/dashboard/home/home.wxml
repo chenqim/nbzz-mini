@@ -37,20 +37,32 @@
 </view>
 <view class="title mt-32">需求达成率总览</view>
 <view class="box-container">
-  <view class="box-item">
-    <view class="label">今日总工单数</view>
+  <view class="box-item" bind:tap="goToDetail" data-type="total">
+    <view class="label">
+      <view>今日总工单数</view>
+      <view>></view>
+    </view>
     <view class="value">{{ top.totalOrderCount }}</view>
   </view>
-  <view class="box-item">
-    <view class="label">今日已发货</view>
+  <view class="box-item" bind:tap="goToDetail" data-type="delivered">
+    <view class="label">
+      <view>今日已发货</view>
+      <view>></view>
+    </view>
     <view class="value">{{ top.completedOrderCount }}</view>
   </view>
-  <view class="box-item">
-    <view class="label">今日待发货</view>
+  <view class="box-item" bind:tap="goToDetail" data-type="pendingDelivered">
+    <view class="label">
+      <view>今日待发货</view>
+      <view>></view>
+    </view>
     <view class="value">{{ top.executedOrderCount }}</view>
   </view>
-  <view class="box-item">
-    <view class="label">今日未完成</view>
+  <view class="box-item" bind:tap="goToDetail" data-type="notFinsh">
+    <view class="label">
+      <view>今日未完成</view>
+      <view>></view>
+    </view>
     <view class="value">{{ top.processOrderCount }}</view>
   </view>
   <view class="box-item">

@@ -11,6 +11,14 @@ Page({
     page: 2,
     size: 20,
     doneList: false,
+    titleMap: {
+      circle: '今日在制工单数',
+      finsh: '今日完工工单数',
+      total: '今日总工单数',
+      delivered: '今日已发货',
+      pendingDelivered: '今日待发货',
+      notFinsh: '今日未完成'
+    }
   },
 
   queryList(page) {

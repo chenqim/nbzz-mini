@@ -4,6 +4,7 @@
   <view class="flex justify-between">
     <view class="text-cut">
       <!-- <text>工单名称：</text> -->
+      <text style="color: #0081ff">{{ index + 1 }}. </text>
       <van-tag color="{{ typeColorMap[item.type] }}" text-color="{{ typeTextColorMap[item.type] }}">
         <view style="font-weight: bolder">{{ typeMap[item.type] }}</view>
       </van-tag>

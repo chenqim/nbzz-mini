@@ -28,123 +28,6 @@ Page({
     },
   },
 
-  onSearch(e) {
-    this.data.searchValue = e.detail
-    this.data.page = 2
-    this.queryList(1)
-      .then(res => {
-        this.setData({
-          workOrderList: res.records,
-          max: res.pages
-        })
-        this.setData({
-          doneList: this.data.max >= this.data.page
-        })
-        wx.showToast({
-          title: '搜索成功',
-          icon: 'none',
-          duration: 2000
-        })
-      })
-  },
-
-  stop() {},
-
-  goToDetail (e) {
-    wx.navigateTo({
-      url: '/pages/basics/today/detail/detail?id=' + e.detail.id
-    })
-  },
-
-  queryList(page) {
-    let loading = this.data.loading
-    return new Promise((resolve, reject) => {
-      app.request({
-        url: app.api.WORK_ORDER_PAGE,
-        loading: loading,
-        data: {
-          pageParam: {
-            page,
-            size: this.data.size
-          },
-          queryParam: {
-            keyword: this.data.searchValue,
-            type: 'produce'
-          }
-        }
-      }).then(res => {
-        return resolve(res.data.data)
-      }).catch(err => {
-        return reject(err)
-      })
-    })
-  },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad(options) {
-    this.setData({
-      verify: this.data.verify.bind(this)
-    })
-    this.queryList(1)
-      .then(res => {
-        this.setData({
-          workOrderList: res.records,
-          max: res.pages
-        })
-        this.setData({
-          doneList: this.data.max >= this.data.page
-        })
-      })
-      .then(() => {
-        this.data.loading = false
-      })
-      .catch(err => {})
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-    this.data.page = 2
-    this.queryList(1)
-      .then(res => {
-        this.setData({
-          workOrderList: res.records,
-          max: res.pages
-        })
-        this.setData({
-          doneList: this.data.max >= this.data.page
-        })
-        wx.showToast({
-          title: '刷新成功',
-          icon: 'none',
-          duration: 2000
-        })
-        wx.stopPullDownRefresh({})
-      })
-  },
-
-   /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-    if (this.data.doneList) {
-      this.queryList(this.data.page)
-        .then(res => {
-          this.setData({
-            workOrderList: this.data.workOrderList.concat(res.records)
-          })
-          this.data.page++
-          this.setData({
-            doneList: this.data.max >= this.data.page
-          })
-        })
-        .catch(err => {})
-    }
-  },
-
   onCancel() {
     this.setData({
       show: false,
@@ -213,6 +96,124 @@ Page({
     this.setData({
       choosedProcess: event.detail,
     })
+  },
+
+  onSearch(e) {
+    this.data.searchValue = e.detail
+    this.data.page = 2
+    this.queryList(1)
+      .then(res => {
+        this.setData({
+          workOrderList: res.records,
+          max: res.pages
+        })
+        this.setData({
+          doneList: this.data.max >= this.data.page
+        })
+        wx.showToast({
+          title: '搜索成功',
+          icon: 'none',
+          duration: 2000
+        })
+      })
+  },
+
+  stop() {},
+
+  goToDetail (e) {
+    wx.navigateTo({
+      url: '/pages/basics/today/detail/detail?id=' + e.detail.id
+    })
+  },
+
+  queryList(page) {
+    let loading = this.data.loading
+    return new Promise((resolve, reject) => {
+      app.request({
+        url: app.api.WORK_ORDER_PAGE,
+        loading: loading,
+        data: {
+          pageParam: {
+            page,
+            size: this.data.size
+          },
+          queryParam: {
+            keyword: this.data.searchValue,
+            type: this.data.type
+          }
+        }
+      }).then(res => {
+        return resolve(res.data.data)
+      }).catch(err => {
+        return reject(err)
+      })
+    })
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad(options) {
+    this.setData({
+      verify: this.data.verify.bind(this),
+      type: options.type
+    })
+    this.queryList(1)
+      .then(res => {
+        this.setData({
+          workOrderList: res.records,
+          max: res.pages
+        })
+        this.setData({
+          doneList: this.data.max >= this.data.page
+        })
+      })
+      .then(() => {
+        this.data.loading = false
+      })
+      .catch(err => {})
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh() {
+    this.data.page = 2
+    this.queryList(1)
+      .then(res => {
+        this.setData({
+          workOrderList: res.records,
+          max: res.pages
+        })
+        this.setData({
+          doneList: this.data.max >= this.data.page
+        })
+        wx.showToast({
+          title: '刷新成功',
+          icon: 'none',
+          duration: 2000
+        })
+        wx.stopPullDownRefresh({})
+      })
+  },
+
+   /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+    if (this.data.doneList) {
+      this.queryList(this.data.page)
+        .then(res => {
+          this.setData({
+            workOrderList: this.data.workOrderList.concat(res.records)
+          })
+          this.data.page++
+          this.setData({
+            doneList: this.data.max >= this.data.page
+          })
+        })
+        .catch(err => {})
+    }
   },
 
   /**

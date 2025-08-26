@@ -13,6 +13,7 @@
     <work-order-list-card
       from="situation"
       item="{{item}}"
+      index="{{index}}"
       bind:gotodetail="goToDetail"
       bind:opendialog="openDialog"
     />
