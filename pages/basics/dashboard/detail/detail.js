@@ -5,6 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    type: '',
+    date: '',
     workOrderList: [],
     loading: false,
     max: 1,
@@ -18,6 +20,14 @@ Page({
       delivered: '今日已发货',
       pendingDelivered: '今日待发货',
       notFinsh: '今日未完成'
+    },
+    paramMap: {
+      circle: 'artifactOrderCount',
+      finsh: 'successOrderCount',
+      total: 'totalOrderCount',
+      delivered: 'completedOrderCount',
+      pendingDelivered: 'executedOrderCount',
+      notFinsh: 'processOrderCount'
     }
   },
 
@@ -25,16 +35,12 @@ Page({
     let loading = this.data.loading
     return new Promise((resolve, reject) => {
       app.request({
-        url: app.api.LATELY_WORK_ORDER,
+        url: app.api.DASHBOARD_WORK_ORDER,
         loading: loading,
         data: {
-          pageParam: {
-            page,
-            size: this.data.size
-          },
-          queryParam: {
-            // name: this.data.searchValue
-          }
+          // artifactOrderCount在制工单数、successOrderCount完工工单数、totalOrderCount总工单、completedOrderCount已发货、executedOrderCount待发货、processOrderCount未完成
+          byType: this.data.paramMap[this.data.type],
+          targetDate: this.data.date
         }
       }).then(res => {
         return resolve(res.data.data)
@@ -67,12 +73,13 @@ Page({
    */
   onLoad(options) {
     this.setData({
-      type: options.type
+      type: options.type,
+      date: options.date
     })
     this.queryList(1)
       .then(res => {
         this.setData({
-          workOrderList: res.records,
+          workOrderList: res,
           max: res.pages
         })
         this.setData({
@@ -121,7 +128,7 @@ Page({
     this.queryList(1)
       .then(res => {
         this.setData({
-          workOrderList: res.records,
+          workOrderList: res,
           max: res.pages
         })
         this.setData({
@@ -144,7 +151,7 @@ Page({
       this.queryList(this.data.page)
         .then(res => {
           this.setData({
-            workOrderList: this.data.workOrderList.concat(res.records)
+            workOrderList: this.data.workOrderList.concat(res)
           })
           this.data.page++
           this.setData({

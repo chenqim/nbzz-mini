@@ -27,7 +27,7 @@ Page({
 
   goToDetail (e) {
     wx.navigateTo({
-      url: '/pages/basics/dashboard/detail/detail?type=' + e.currentTarget.dataset.type
+      url: '/pages/basics/dashboard/detail/detail?type=' + e.currentTarget.dataset.type + '&date=' + this.data.date
     })
   },
 

@@ -10,6 +10,7 @@ module.exports = {
     CURRENT_USER_INFO : "/wxapp/auth/queryCurrentUserInfo",     //查询当前用户信息
     CHANGE_PASSWORD:"/wxapp/auth/updatePassword",               //修改密码
     ALL_USER_LIST: "/user/queryByList",
+    DASHBOARD_WORK_ORDER: "/wxapp/boss/queryTotalOrderList",
     WORK_ORDER_PAGE: "/wxapp/workOrder/queryByPage",
     MY_WORK_ORDER_PAGE: "/wxapp/workOrder/queryMyByPage",
     WORK_ORDER_DETAIL: "/wxapp/workOrder/queryDetail",
