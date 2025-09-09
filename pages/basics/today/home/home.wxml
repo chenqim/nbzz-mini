@@ -1,6 +1,6 @@
 <!--pages/basics/work/home/home.wxml-->
 <cu-custom bgColor="bg-blue" isBack="{{true}}"> 
-	<view slot="content">{{ type === 'produces' ? '新刀工单池' : '维修工单池' }}</view>
+	<view slot="content">{{ type === 'produce' ? '新刀工单池' : '维修工单池' }}</view>
 </cu-custom>
 <van-search
 	value="{{ searchValue }}"
