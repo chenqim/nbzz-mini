@@ -2,7 +2,7 @@
 <cu-custom bgColor="bg-blue" isBack="{{true}}"> 
 	<view slot="content">派单详情</view>
 </cu-custom>
-<view>
+<view class="page-container">
   <work-order-detail-base-card from="dispatch" instance="{{ instance }}" bind:clickcomment="clickComment" />
   <van-cell-group wx:for="{{ instance.procedureList }}" wx:key="id" title="{{ item.workingProcedure.name + ' [ ' + item.workingProcedure.code + ' ]' }}">
     <van-cell wx:if="{{instance.canReceive}}" title="作业人员" value="{{ item.dispatchUserName }}" is-link data-index="{{index}}" bind:click="showPopup" />
@@ -11,9 +11,9 @@
       <van-stepper value="{{ item.dispatchCount }}" bind:change="stepperChange" data-index="{{index}}" disabled="{{ !instance.canReceive }}" integer min="{{0}}" max="{{100000000}}" input-width="100rpx" />
     </van-cell>
   </van-cell-group>
-</view>
-<view wx:if="{{ instance.canReceive }}" class="padding-sm">
+  <view wx:if="{{ instance.canReceive }}" class="padding-sm">
     <van-button type="primary" block size="small" bind:click="dispatchWorkOrder" disabled="{{ btnLoading }}" loading="{{ btnLoading }}">提交派单</van-button>
+  </view>
 </view>
 <van-toast id="van-toast" />
 <van-dialog id="van-dialog" />

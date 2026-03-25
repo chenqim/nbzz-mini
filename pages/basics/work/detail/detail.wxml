@@ -2,7 +2,7 @@
 <cu-custom bgColor="bg-blue" isBack="{{true}}"> 
 	<view slot="content">工单详情</view>
 </cu-custom>
-<view>
+<view class="page-container">
     <work-order-detail-base-card from="work" instance="{{ instance }}" bind:clickcomment="clickComment" />
     <van-cell-group wx:for="{{ instance.procedureList }}" wx:key="id" title="{{ item.workingProcedure.name + ' [ ' + item.workingProcedure.code + ' ]' }}">
         <van-cell title="当前认领人" value="{{ item.userName || '-' }}" />

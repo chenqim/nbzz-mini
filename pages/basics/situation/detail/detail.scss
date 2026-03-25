@@ -1,1 +1,5 @@
 /* pages/basics/work/detail/detail.wxss */
+
+.page-container {
+  padding-bottom: calc(env(safe-area-inset-bottom) + 20rpx);
+}
