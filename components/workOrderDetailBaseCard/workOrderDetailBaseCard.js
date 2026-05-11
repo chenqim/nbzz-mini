@@ -29,15 +29,18 @@ Component({
     },
     typeMap: {
       produce: '新刀',
-      maintenance: '维修'
+      maintenance: '维修',
+      rework: '返工'
     },
     typeColorMap: {
       produce: '#0a0a0a',
-      maintenance: '#ff7051'
+      maintenance: '#ff7051',
+      rework: '#ffd437'
     },
     typeTextColorMap: {
       produce: '#bfa075',
-      maintenance: '#ffffff'
+      maintenance: '#ffffff',
+      rework: '#ffffff'
     },
     statusMap: {
       create: '已创建',

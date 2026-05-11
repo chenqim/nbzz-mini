@@ -8,7 +8,7 @@
       <van-tag color="{{ typeColorMap[item.type] }}" text-color="{{ typeTextColorMap[item.type] }}">
         <view style="font-weight: bolder">{{ typeMap[item.type] }}</view>
       </van-tag>
-      <text class="title">{{ item.name }}</text>
+      <text class="title">{{ item.name }} / {{ itemCodeSuffix }}</text>
     </view>
     <view class="status">
       <!-- <text>工单级别：</text> -->
@@ -23,7 +23,8 @@
   </view>
   <view class="text-cut margin-top-sm">
     <text>产品名称：</text>
-    <text class="sub-text">{{ item.productInfo.name }}</text>
+    <text class="sub-text">{{ productNameMain }}</text>
+    <text wx:if="{{ productNameHighlight }}" class="sub-text sub-text-highlight">{{ productNameHighlight }}</text>
   </view>
   <!-- <view class="text-cut margin-top-sm">
     <text>规格型号：</text>

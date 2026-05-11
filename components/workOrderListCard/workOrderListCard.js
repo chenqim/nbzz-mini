@@ -1,4 +1,27 @@
 // pages/workOrderListCard.js
+const splitProductName = (name) => {
+  const fullName = String(name || '')
+  const match = fullName.match(/^(.*?)(\[[^\]]+\])$/)
+
+  if (match) {
+    return {
+      productNameMain: match[1],
+      productNameHighlight: match[2]
+    }
+  }
+
+  return {
+    productNameMain: fullName,
+    productNameHighlight: ''
+  }
+}
+
+const formatCodeSuffix = (code) => {
+  const suffix = String(code || '').slice(-7)
+  if (suffix.length !== 7) return suffix
+  return `${suffix.slice(0, 2)}-${suffix.slice(2, 4)}-${suffix.slice(4)}`
+}
+
 Component({
 
   /**
@@ -8,6 +31,16 @@ Component({
     item: {
       type: Object,
       value: {},
+      observer(newVal) {
+        const code = String((newVal && newVal.code) || '')
+        const productName = newVal && newVal.productInfo ? newVal.productInfo.name : ''
+        const { productNameMain, productNameHighlight } = splitProductName(productName)
+        this.setData({
+          itemCodeSuffix: formatCodeSuffix(code),
+          productNameMain,
+          productNameHighlight
+        })
+      }
     },
     from: {
       type: String,
@@ -23,6 +56,9 @@ Component({
    * 组件的初始数据
    */
   data: {
+    itemCodeSuffix: '',
+    productNameMain: '',
+    productNameHighlight: '',
     gradeMap: {
       middle: '普通',
       high: '紧急'
@@ -33,15 +69,18 @@ Component({
     },
     typeMap: {
       produce: '新刀',
-      maintenance: '维修'
+      maintenance: '维修',
+      rework: '返工'
     },
     typeColorMap: {
       produce: '#0a0a0a',
-      maintenance: '#ff7051'
+      maintenance: '#ff7051',
+      rework: '#ffd437'
     },
     typeTextColorMap: {
       produce: '#bfa075',
-      maintenance: '#ffffff'
+      maintenance: '#ffffff',
+      rework: '#ffffff'
     },
     statusMap: {
       create: '已创建',

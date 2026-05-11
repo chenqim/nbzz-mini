@@ -2,25 +2,29 @@
 <cu-custom bgColor="bg-blue" isBack="{{true}}"> 
 	<view slot="content">我的工单</view>
 </cu-custom>
-<van-search
-	value="{{ searchValue }}"
-	placeholder="请输入工单编号或名称进行搜索"
-	bind:search="onSearch"
-	bind:clear="onSearch"
-/>
-<view wx:if="{{ workOrderList && workOrderList.length }}">
-  <view wx:for="{{ workOrderList }}" wx:key="id">
-    <work-order-list-card
-      from="work"
-      item="{{item}}"
-      index="{{index}}"
-      bind:gotodetail="goToDetail"
-      bind:opendialog="openDialog"
-    />
-  </view>
+<view class="search-fixed" style="top: {{ CustomBar }}px;">
+  <van-search
+    value="{{ searchValue }}"
+    placeholder="请输入工单编号或名称进行搜索"
+    bind:search="onSearch"
+    bind:clear="onSearch"
+  />
 </view>
-<!-- <view wx:else class="no-data">暂无数据</view> -->
-<van-empty wx:else image="search" description="暂无数据" />
+<view class="content-with-search">
+  <view wx:if="{{ workOrderList && workOrderList.length }}">
+    <view wx:for="{{ workOrderList }}" wx:key="id">
+      <work-order-list-card
+        from="work"
+        item="{{item}}"
+        index="{{index}}"
+        bind:gotodetail="goToDetail"
+        bind:opendialog="openDialog"
+      />
+    </view>
+  </view>
+  <!-- <view wx:else class="no-data">暂无数据</view> -->
+  <van-empty wx:else image="search" description="暂无数据" />
+</view>
 <van-toast id="van-toast" />
 <!-- show-confirm-button="{{ false }}" -->
 <!-- bind:cancel="onCancel"

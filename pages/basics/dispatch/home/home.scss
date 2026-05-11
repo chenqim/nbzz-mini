@@ -17,3 +17,15 @@
   text-align: center;
   margin-top: 100rpx;
 }
+
+.search-fixed {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  background-color: #efefef;
+}
+
+.content-with-search {
+  padding-top: 104rpx;
+}
