@@ -18,6 +18,15 @@
   <van-cell title="生产状态">
     <van-tag plain type="{{ statusTypeMap[instance.status] }}">{{ statusMap[instance.status] }}</van-tag>
   </van-cell>
+  <block wx:if="{{ from === 'situation' && instance.status === 'completed' }}">
+    <van-cell title="发货类型" value="{{ trackingTypeMap[instance.trackingType] || instance.trackingType || trackingTypeMap['3'] }}" />
+    <van-cell wx:if="{{ instance.trackingType === '1' }}" title="自提人员" value="{{ instance.trackingNumber }}" />
+    <van-cell wx:if="{{ instance.trackingType === '2' }}" title="送货人员" value="{{ instance.trackingNumber }}" />
+    <van-cell wx:else title="快递单号" is-link value="{{ instance.trackingNumber }}" bind:click="clickTrackingNumber" data-tracking-number="{{ instance.trackingNumber }}" />
+    <van-cell wx:if="{{ instance.trackingType === '1' }}" title="自提日期" value="{{ instance.deliveryDate }}" />
+    <van-cell wx:if="{{ instance.trackingType === '2' }}" title="送货日期" value="{{ instance.deliveryDate }}" />
+    <van-cell wx:else title="发货日期" value="{{ instance.deliveryDate }}" />
+  </block>
   <van-cell title="截止时间" value="{{ instance.needDate }}" />
   <van-cell wx:if="{{ from === 'work' || from === 'dispatch' }}" title="备注" bind:click="clickComment" is-link value="{{ instance.remark }}" />
   <van-cell wx:elif="{{ from === 'today' || from === 'situation' }}" title="备注" label="{{ instance.remark }}" />
