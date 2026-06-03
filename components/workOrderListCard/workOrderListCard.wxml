@@ -1,6 +1,6 @@
 <!--pages/workOrderListCard.wxml-->
 <!-- 工单名称、工单级别、工单类型、产品名称、生产数量、生产状态、备注 -->
-<view wx:if="{{ from !== 'dashboard' }}" class="work-box">
+<view wx:if="{{ from !== 'dashboard' && from !== 'express' }}" class="work-box">
   <view class="flex justify-between">
     <view class="text-cut">
       <!-- <text>工单名称：</text> -->

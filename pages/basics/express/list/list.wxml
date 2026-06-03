@@ -1,0 +1,18 @@
+<cu-custom bgColor="bg-blue" isBack="{{true}}"> 
+	<view slot="content">物流信息</view>
+</cu-custom>
+<van-sticky offset-top="{{ 60 }}">
+  <van-cell title="查询日期" value="{{ date }}" bind:click="onDisplay" value-class="custom-value" label-class="custom-label" />
+</van-sticky>
+<van-calendar show="{{ show }}" bind:close="onClose" bind:confirm="onConfirm" color="#0081ff" min-date="{{ minDate }}" max-date="{{ maxDate }}" />
+<view wx:if="{{ workOrderList && workOrderList.length }}">
+  <view wx:for="{{ workOrderList }}" wx:key="id">
+    <work-order-list-card
+      from="express"
+      item="{{item}}"
+      bind:gotodetail="goToDetail"
+      index="{{index}}"
+    />
+  </view>
+</view>
+<van-empty wx:else image="search" description="暂无数据" />

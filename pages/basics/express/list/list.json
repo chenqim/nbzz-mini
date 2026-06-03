@@ -1,0 +1,12 @@
+{
+  "usingComponents": {
+    "work-order-list-card": "/components/workOrderListCard/workOrderListCard",
+    "van-sticky": "@vant/weapp/sticky",
+    "van-cell": "@vant/weapp/cell",
+    "van-calendar": "@vant/weapp/calendar"
+  },
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#000000",
+  "backgroundTextStyle": "light",
+  "onReachBottomDistance": 50
+}

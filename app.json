@@ -41,14 +41,16 @@
     "pages/basics/stage/circle/circle",
     "pages/about/setting/setting",
     "pages/about/password/password",
-    "pages/about/sign_record/sign_record"
+    "pages/about/sign_record/sign_record",
+    "pages/basics/express/list/list",
+    "pages/basics/express/detail/detail"
   ],
   "window": {
     "navigationStyle": "custom",
     "backgroundColor": "#0081ff",
-    "backgroundColorBottom":"#F1F1F1",
-    "backgroundColorTop":"#F1F1F1",
-    "onReachBottomDistance":70
+    "backgroundColorBottom": "#F1F1F1",
+    "backgroundColorTop": "#F1F1F1",
+    "onReachBottomDistance": 70
   },
   "tabBar": {
     "selectedColor": "#0081ff",
