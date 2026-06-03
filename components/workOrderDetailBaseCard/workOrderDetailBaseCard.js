@@ -11,7 +11,7 @@ Component({
     },
     from: {
       type: String,
-      value: 'work' // work：我的工单 today：工单池 situation：工单进度 dispatch：派单
+      value: 'work' // work：我的工单 today：工单池 situation：工单进度 dispatch：派单 dashboard：总览 express：物流信息
     }
   },
 
@@ -56,11 +56,6 @@ Component({
       executed: 'primary',
       completed: 'success'
     },
-    trackingTypeMap: {
-      1: '上门自提',
-      2: '送货上门',
-      3: '快递发货'
-    }
   },
 
   /**
@@ -69,18 +64,6 @@ Component({
   methods: {
     clickComment() {
       this.triggerEvent('clickcomment')
-    },
-    clickTrackingNumber(e) {
-      wx.setClipboardData({
-        data: 'https://ucmp.sf-express.com/wxaccess/weixin/activity/wxapp_b2sf_order?p1=' + e.currentTarget.dataset.trackingNumber,
-        success() {
-          wx.showModal({
-            title: '链接已复制',
-            content: '请在手机浏览器中粘贴访问',
-            showCancel: false,
-          })
-        },
-      })
     },
   }
 })

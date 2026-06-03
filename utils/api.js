@@ -28,6 +28,7 @@ module.exports = {
     READ_ART: "/wxapp/produce/readArtifact",
     COMPLETE_WORK_ORDER: "/wxapp/produce/completeOrder",
     LATELY_WORK_ORDER: "/workOrder/queryLatelyByPage",
+    DELIVERY_DETAIL: "/workOrder/queryDeliveryDetail",
     ORDER_ACHIEVE_TOTAL: "/wxapp/boss/queryOrderAchieveTotal",
     PRODUCE_EXECUTE_TOTAL: "/wxapp/boss/queryProduceExecuteTotal",
     //站内信模块

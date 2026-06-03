@@ -1,3 +1,113 @@
 <cu-custom bgColor="bg-blue" isBack="{{true}}"> 
 	<view slot="content">物流详情</view>
 </cu-custom>
+<view class="page-container">
+  <work-order-detail-base-card from="dashboard" instance="{{ instance }}" />
+  <!-- 物流信息 -->
+  <!-- 全部发货 -->
+  <van-cell-group
+    wx:if="{{ deliveryList && deliveryList.length === 0 && instance.trackingType }}"
+    title="全部发货 - 发货记录"
+  >
+    <van-cell title="发货类型" value="{{ trackingTypeMap[instance.trackingType] || instance.trackingType }}" />
+    <!-- deliveryType=1: 上门自提 -->
+    <block wx:if="{{ instance.trackingType == 1 }}">
+      <van-cell title="自提日期" value="{{ instance.deliveryDate || '-' }}" />
+      <van-cell title="自提人员" value="{{ instance.trackingNumber || '-' }}" />
+    </block>
+    <!-- deliveryType=2: 送货上门 -->
+    <block wx:elif="{{ instance.trackingType == 2 }}">
+      <van-cell title="送货日期" value="{{ instance.deliveryDate || '-' }}" />
+      <van-cell title="送货人员" value="{{ instance.trackingNumber || '-' }}" />
+    </block>
+    <!-- deliveryType=3: 快递发货 -->
+    <block wx:elif="{{ instance.trackingType == 3 }}">
+      <van-cell title="发货日期" value="{{ instance.deliveryDate || '-' }}" />
+      <van-cell title="快递单号" value="{{ instance.trackingNumber || '-' }}" />
+      <van-cell wx:if="{{ instance.trackingNumber }}">
+        <view>
+          <van-button
+            type="primary"
+            size="mini"
+            data-no="{{ instance.trackingNumber }}"
+            bind:tap="copyTrackingNo"
+          >复制单号</van-button>
+        </view>
+      </van-cell>
+    </block>
+  </van-cell-group>
+  <!-- 部分发货 -->
+  <van-cell-group
+    wx:if="{{ deliveryList && deliveryList.length > 0 }}"
+    wx:for="{{ deliveryList }}"
+    wx:key="id"
+    wx:for-item="delivery"
+    wx:for-index="dIndex"
+    title="{{ '部分发货 - 发货记录' + (dIndex + 1) }}"
+  >
+    <van-cell title="发货类型" value="{{ trackingTypeMap[delivery.deliveryType] || delivery.deliveryType || '-' }}" />
+    <!-- deliveryType=1: 上门自提 -->
+    <block wx:if="{{ delivery.deliveryType == 1 }}">
+      <van-cell title="自提日期" value="{{ delivery.deliveryDate || '-' }}" />
+      <van-cell title="自提人员" value="{{ delivery.shipmentNo || '-' }}" />
+    </block>
+    <!-- deliveryType=2: 送货上门 -->
+    <block wx:elif="{{ delivery.deliveryType == 2 }}">
+      <van-cell title="送货日期" value="{{ delivery.deliveryDate || '-' }}" />
+      <van-cell title="送货人员" value="{{ delivery.shipmentNo || '-' }}" />
+    </block>
+    <!-- deliveryType=3: 快递发货 -->
+    <block wx:elif="{{ delivery.deliveryType == 3 }}">
+      <van-cell title="发货日期" value="{{ delivery.deliveryDate || '-' }}" />
+      <van-cell title="快递单号" value="{{ delivery.shipmentNo || '-' }}" />
+      <van-cell wx:if="{{ delivery.shipmentNo }}">
+        <view>
+          <van-button
+            type="primary"
+            size="mini"
+            data-no="{{ delivery.shipmentNo }}"
+            bind:tap="copyTrackingNo"
+          >复制单号</van-button>
+        </view>
+      </van-cell>
+    </block>
+  </van-cell-group>
+</view>
+<van-toast id="van-toast" />
+<van-dialog id="van-dialog" />
+
+<van-dialog
+  use-slot
+  title="报工数量"
+  show="{{ show }}"
+  show-cancel-button
+  bind:confirm="onConfirm"
+  bind:close="onClose"
+  catchtouchmove="stop"
+>
+  <view style="text-align: center; margin-top: 50rpx; margin-bottom: 50rpx;">
+    <van-stepper value="{{ count }}" bind:change="stepperChange" integer input-width="100rpx" />
+</view>
+</van-dialog>
+
+<van-dialog
+  use-slot
+  title="修改备注"
+  show="{{ commentShow }}"
+  show-cancel-button
+  bind:confirm="onCommentConfirm"
+  bind:close="onCommentClose"
+  catchtouchmove="stop"
+>
+  <view style="text-align: center; margin-top: 50rpx; margin-bottom: 50rpx;">
+    <van-field
+        value="{{ comment }}"
+        label="备注"
+        type="textarea"
+        placeholder="请输入备注"
+        bind:change="commentChange"
+        autosize
+        border="{{ false }}"
+    />
+</view>
+</van-dialog>
