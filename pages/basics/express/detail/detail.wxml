@@ -27,8 +27,15 @@
       <van-cell wx:if="{{ instance.trackingNumber }}">
         <view>
           <van-button
+            type="warning"
+            size="mini"
+            data-no="{{ instance.trackingNumber }}"
+            bind:tap="goShip"
+          >去发货</van-button>
+          <van-button
             type="primary"
             size="mini"
+            style="margin-left: 16rpx;"
             data-no="{{ instance.trackingNumber }}"
             bind:tap="copyTrackingNo"
           >复制单号</van-button>
@@ -70,8 +77,15 @@
       <van-cell wx:if="{{ delivery.shipmentNo }}">
         <view>
           <van-button
+            type="warning"
+            size="mini"
+            data-no="{{ delivery.shipmentNo }}"
+            bind:tap="goShip"
+          >去发货</van-button>
+          <van-button
             type="primary"
             size="mini"
+            style="margin-left: 16rpx;"
             data-no="{{ delivery.shipmentNo }}"
             bind:tap="copyTrackingNo"
           >复制单号</van-button>
@@ -87,41 +101,3 @@
     </block>
   </van-cell-group>
 </view>
-<van-toast id="van-toast" />
-<van-dialog id="van-dialog" />
-
-<van-dialog
-  use-slot
-  title="报工数量"
-  show="{{ show }}"
-  show-cancel-button
-  bind:confirm="onConfirm"
-  bind:close="onClose"
-  catchtouchmove="stop"
->
-  <view style="text-align: center; margin-top: 50rpx; margin-bottom: 50rpx;">
-    <van-stepper value="{{ count }}" bind:change="stepperChange" integer input-width="100rpx" />
-</view>
-</van-dialog>
-
-<van-dialog
-  use-slot
-  title="修改备注"
-  show="{{ commentShow }}"
-  show-cancel-button
-  bind:confirm="onCommentConfirm"
-  bind:close="onCommentClose"
-  catchtouchmove="stop"
->
-  <view style="text-align: center; margin-top: 50rpx; margin-bottom: 50rpx;">
-    <van-field
-        value="{{ comment }}"
-        label="备注"
-        type="textarea"
-        placeholder="请输入备注"
-        bind:change="commentChange"
-        autosize
-        border="{{ false }}"
-    />
-</view>
-</van-dialog>

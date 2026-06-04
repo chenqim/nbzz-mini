@@ -1,6 +1,4 @@
 const app = getApp()
-import Toast from '@vant/weapp/toast/toast';
-import Dialog from '@vant/weapp/dialog/dialog';
 Page({
 
   /**
@@ -17,11 +15,6 @@ Page({
     loading: false,
     userInfo: null,
     options: null,
-    show: false,
-    count: 1,
-    workOrderProcedureId: null,
-    commentShow: false,
-    comment: ''
   },
 
   copyTrackingNo(e) {
@@ -31,8 +24,24 @@ Page({
       success() {
         wx.showToast({
           title: '复制成功',
-          icon: 'success',
-          duration: 1500
+          icon: 'none',
+          duration: 3000
+        })
+      }
+    })
+  },
+
+  // 去发货 - 复制链接到剪贴板
+  goShip(e) {
+    const no = e.currentTarget.dataset.no
+    const url = `https://ucmp.sf-express.com/wxaccess/weixin/activity/wxapp_b2sf_order?p1=${no}`
+    wx.setClipboardData({
+      data: url,
+      success() {
+        wx.showToast({
+          title: '链接已复制，请在浏览器中粘贴打开',
+          icon: 'none',
+          duration: 3000
         })
       }
     })
@@ -41,65 +50,23 @@ Page({
   // 跳转顺丰速运+小程序查看物流详情
   viewLogistics(e) {
     const no = e.currentTarget.dataset.no
-    wx.navigateToMiniProgram({
-      appId: 'wxd4185d00bf7e08ac', // 顺丰速运+ AppID
-      path: 'pages/tabBar/index/index',
-      extraData: {
-        billNo: no
-      },
-      fail(err) {
-        console.error('跳转顺丰速运+失败', err)
-        wx.showToast({
-          title: '跳转失败，请确认是否安装顺丰速运+小程序',
-          icon: 'none',
-          duration: 2000
+    // 先复制单号到剪贴板，方便用户进入顺丰小程序后粘贴查询
+    wx.setClipboardData({
+      data: no,
+      success() {
+        wx.navigateToMiniProgram({
+          appId: 'wxd4185d00bf7e08ac', // 顺丰速运+ AppID
+          path: 'pages/tabBar/index/index',
+          fail(err) {
+            console.error('跳转顺丰速运+失败', err)
+            // wx.showToast({
+            //   title: '跳转失败，请确认是否安装顺丰速运+小程序',
+            //   icon: 'none',
+            //   duration: 2000
+            // })
+          }
         })
       }
-    })
-  },
-
-  clickComment() {
-    this.setData({ commentShow: true, comment: this.data.instance.remark })
-  },
-
-  commentChange(e) {
-    this.setData({
-      comment: e.detail
-    })
-  },
-
-  onCommentConfirm() {
-    this.update(this.data.instance.id, this.data.comment).then(result => {
-      console.log('result >>>>>', result)
-      if (result.data.code === '00000') {
-        Toast('修改成功')
-        // 刷新
-        if (this.data.options) this.onLoad(this.data.options)
-      } else {
-        Toast(result.data.message)
-      }
-    })
-  },
-
-  onCommentClose() {
-    this.setData({ commentShow: false, comment: '' })
-  },
-
-  update(id, remark) {
-    let loading = this.data.loading
-    return new Promise((resolve, reject) => {
-      app.request({
-        url: app.api.UPDATE_REMARK,
-        loading: loading,
-        data: {
-          id,
-          remark
-        }
-      }).then(res => {
-        return resolve(res)
-      }).catch(err => {
-        return reject(err)
-      })
     })
   },
 
@@ -133,152 +100,6 @@ Page({
         return reject(err)
       })
     })
-  },
-
-  queryStageDetail(code) {
-    let loading = this.data.loading
-    return new Promise((resolve, reject) => {
-      app.request({
-        url: app.api.STAGE_DETAIL,
-        loading: loading,
-        data: {
-          code
-        }
-      }).then(res => {
-        return resolve(res)
-      }).catch(err => {
-        return reject(err)
-      })
-    })
-  },
-
-  queryBelongStage(id) {
-    let loading = this.data.loading
-    return new Promise((resolve, reject) => {
-      app.request({
-        url: app.api.CHECK_STAGE,
-        loading: loading,
-        data: {
-          id
-        }
-      }).then(res => {
-        return resolve(res)
-      }).catch(err => {
-        return reject(err)
-      })
-    })
-  },
-
-  complete(count, workOrderProcedureId) {
-    let loading = this.data.loading
-    return new Promise((resolve, reject) => {
-      app.request({
-        url: app.api.COMPLETE_WORK_ORDER,
-        loading: loading,
-        data: {
-          count,
-          workOrderProcedureId
-        }
-      }).then(res => {
-        return resolve(res)
-      }).catch(err => {
-        return reject(err)
-      })
-    })
-  },
-
-  checkStage(e) {
-    this.queryBelongStage(e.currentTarget.dataset.id).then(result => {
-      if (result.data.code === '00000') {
-        const ins = result.data.data?.[0] || {}
-        Dialog.alert({
-          title: '所在中转区详情',
-          messageAlign: 'left',
-          message: `
-            中转区编号：${ins.stagingArea.code}\n
-            中转区名称：${ins.stagingArea.name}\n
-            待提取数量：${ins.count}
-          `,
-        }).then(() => {
-          // on close
-        })
-      } else {
-        Toast(result.data.message)
-      }
-    })
-  },
-
-  extract: function (e) {
-    wx.scanCode({
-      success: (res) => {
-        console.log('QR CODE', res)
-        this.queryStageDetail(res.result).then(result => {
-          console.log('result >>>>>', result)
-          if (result.data.code === '00000') {
-            wx.navigateTo({
-              url: `/pages/basics/stage/submit/submit?stageCode=${res.result}&stageId=${result.data.data.id}&stageName=${result.data.data.name}&from=detail&workOrderId=${this.data.instance.id}&workOrderName=${this.data.instance.name}&processId=${e.currentTarget.dataset.process}&processName=${e.currentTarget.dataset.processName}&count=${e.currentTarget.dataset.count}`,
-            })
-          } else {
-            Toast(result.data.message)
-          }
-        })
-        .then(() => {
-          this.data.loading = false
-        })
-        .catch(err => {})
-      }
-    })
-  },
-
-  scanQRCode: function (e) {
-    console.log('e>>>>', e)
-    wx.scanCode({
-      success: (res) => {
-        console.log('QR CODE', res)
-        this.queryStageDetail(res.result).then(result => {
-          console.log('result >>>>>', result)
-          if (result.data.code === '00000') {
-            wx.navigateTo({
-              url: `/pages/basics/stage/circle/circle?stageCode=${res.result}&stageId=${result.data.data.id}&stageName=${result.data.data.name}&workOrderId=${e.currentTarget.dataset.work}&workOrderCode=${e.currentTarget.dataset.workCode}&workOrderName=${e.currentTarget.dataset.workName}&processId=${e.currentTarget.dataset.process}&processName=${e.currentTarget.dataset.processName}&processCount=${e.currentTarget.dataset.processCount}&type=${e.currentTarget.dataset.type}`,
-            })
-          } else {
-            Toast(result.data.message)
-          }
-        })
-        .then(() => {
-          this.data.loading = false
-        })
-        .catch(err => {})
-      }
-    })
-  },
-
-  completeWorkOrder(e) {
-    // Toast('完结工单')
-    this.setData({ show: true, workOrderProcedureId: e.currentTarget.dataset.process })
-  },
-
-  stepperChange(event) {
-    this.setData({
-      count: event.detail
-    })
-  },
-
-  onConfirm() {
-    this.complete(this.data.count, this.data.workOrderProcedureId).then(result => {
-      console.log('result >>>>>', result)
-      if (result.data.code === '00000') {
-        Toast('操作成功')
-        // 刷新
-        if (this.data.options) this.onLoad(this.data.options)
-      } else {
-        Toast(result.data.message)
-      }
-    })
-  },
-
-  onClose() {
-    this.setData({ show: false, count: 1 })
   },
 
   /**

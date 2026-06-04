@@ -57,7 +57,7 @@ Page({
         url: app.api.DASHBOARD_WORK_ORDER,
         loading: loading,
         data: {
-          byType: 'completedOrderCount',
+          byType: 'byDeliveryDate',
           targetDate: this.data.date
         }
       }).then(res => {
@@ -72,18 +72,6 @@ Page({
     wx.navigateTo({
       url: '/pages/basics/express/detail/detail?id=' + e.detail.id
     })
-  },
-
-  openDialog(e) {
-    // console.log('user', app.globalData.user_info)
-    // this.queryProcess(e.currentTarget.dataset.id).then(res => {
-    //   const canArr = res.filter(n => n.userId === this.data.user_info.id)
-    //   this.setData({
-    //     processList: res,
-    //     show: true,
-    //     choosedProcess: canArr[0]?.id || ''
-    //   })
-    // })
   },
 
   /**
