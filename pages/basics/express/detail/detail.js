@@ -38,6 +38,26 @@ Page({
     })
   },
 
+  // 跳转顺丰速运+小程序查看物流详情
+  viewLogistics(e) {
+    const no = e.currentTarget.dataset.no
+    wx.navigateToMiniProgram({
+      appId: 'wxd4185d00bf7e08ac', // 顺丰速运+ AppID
+      path: 'pages/tabBar/index/index',
+      extraData: {
+        billNo: no
+      },
+      fail(err) {
+        console.error('跳转顺丰速运+失败', err)
+        wx.showToast({
+          title: '跳转失败，请确认是否安装顺丰速运+小程序',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    })
+  },
+
   clickComment() {
     this.setData({ commentShow: true, comment: this.data.instance.remark })
   },

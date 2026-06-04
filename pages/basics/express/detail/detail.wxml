@@ -32,6 +32,13 @@
             data-no="{{ instance.trackingNumber }}"
             bind:tap="copyTrackingNo"
           >复制单号</van-button>
+          <van-button
+            type="info"
+            size="mini"
+            style="margin-left: 16rpx;"
+            data-no="{{ instance.trackingNumber }}"
+            bind:tap="viewLogistics"
+          >物流详情</van-button>
         </view>
       </van-cell>
     </block>
@@ -68,6 +75,13 @@
             data-no="{{ delivery.shipmentNo }}"
             bind:tap="copyTrackingNo"
           >复制单号</van-button>
+          <van-button
+            type="info"
+            size="mini"
+            style="margin-left: 16rpx;"
+            data-no="{{ delivery.shipmentNo }}"
+            bind:tap="viewLogistics"
+          >物流详情</van-button>
         </view>
       </van-cell>
     </block>

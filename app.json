@@ -107,6 +107,9 @@
     "van-empty": "@vant/weapp/empty/index",
     "van-sticky": "@vant/weapp/sticky/index"
   },
+  "navigateToMiniProgramAppIdList": [
+    "wxd4185d00bf7e08ac"
+  ],
   "sitemapLocation": "sitemap.json",
   "networkTimeout": {
     "request": 60000,

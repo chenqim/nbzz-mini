@@ -104,17 +104,7 @@ Page({
       url: app.api.CURRENT_MENT_INFO
     }).then(res => {
       this.setData({
-        menuList: [ ...res.data.data, {
-          child: null,
-          featureCode: null,
-          href: "/pages/basics/express/list/list",
-          icon: "express.svg",
-          id: "1865620248838135812",
-          statu: "y",
-          target: "navigateTo",
-          title: "物流信息",
-          type: "menu",
-        }]
+        menuList: res.data.data
       })
     }).catch(err => {})
   },
