@@ -3,3 +3,66 @@
 .page-container {
   padding-bottom: calc(env(safe-area-inset-bottom) + 20rpx);
 }
+
+/* 二维码弹窗 */
+.qrcode-popup {
+  width: 600rpx;
+  padding: 48rpx 32rpx 32rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+}
+
+.qrcode-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #323233;
+  margin-bottom: 12rpx;
+}
+
+.qrcode-tip {
+  font-size: 24rpx;
+  color: #969799;
+  margin-bottom: 24rpx;
+  text-align: center;
+}
+
+/* 离屏 canvas：仅用于二维码绘制，用户不可见 */
+.qrcode-offscreen {
+  position: fixed;
+  left: -9999rpx;
+  top: -9999rpx;
+  width: 480rpx;
+  height: 480rpx;
+}
+
+/* 二维码展示区域：image 与 loading 二选一 */
+.qrcode-canvas-wrap {
+  width: 480rpx;
+  height: 480rpx;
+}
+
+.qrcode-img {
+  width: 480rpx;
+  height: 480rpx;
+  background-color: #fff;
+}
+
+.qrcode-loading {
+  width: 480rpx;
+  height: 480rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #969799;
+  font-size: 26rpx;
+  background-color: #f7f8fa;
+  border-radius: 8rpx;
+}
+
+.qrcode-actions {
+  margin-top: 32rpx;
+  display: flex;
+  justify-content: center;
+}

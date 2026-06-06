@@ -1,4 +1,5 @@
 const app = getApp()
+const drawQrcode = require('../../../../utils/weapp-qrcode')
 Page({
 
   /**
@@ -15,6 +16,10 @@ Page({
     loading: false,
     userInfo: null,
     options: null,
+    // 二维码弹窗
+    qrcodeShow: false,
+    qrcodeUrl: '',
+    qrcodeImg: '',
   },
 
   copyTrackingNo(e) {
@@ -43,6 +48,76 @@ Page({
           icon: 'none',
           duration: 3000
         })
+      }
+    })
+  },
+
+  // 生成二维码 - 弹窗展示二维码，长按可识别跳转顺丰小程序
+  generateQrcode(e) {
+    const no = e.currentTarget.dataset.no
+    const url = `https://ucmp.sf-express.com/wxaccess/weixin/activity/wxapp_b2sf_order?p1=${no}`
+    // canvas 使用的是 css 像素，需要把 wxml 中的 480rpx 换算成当前设备的 px
+    const sysInfo = wx.getSystemInfoSync()
+    const size = Math.floor(480 * sysInfo.windowWidth / 750)
+    this.setData({
+      qrcodeShow: true,
+      qrcodeUrl: url,
+      qrcodeImg: ''
+    }, () => {
+      // canvas 需要等弹窗动画与节点挂载
+      setTimeout(() => {
+        drawQrcode({
+          canvasId: 'shipQrcode',
+          ctx: this,
+          text: url,
+          width: size,
+          height: size,
+          // M 纠错：模块更稀疏，在小屏上扫码识别成功率更高
+          correctLevel: drawQrcode.QRErrorCorrectLevel.M,
+          background: '#ffffff',
+          foreground: '#000000'
+        }).then(() => {
+          // 旧版 canvas 是异步绘制，draw 后再延迟一下再导出，避免取到空白图
+          setTimeout(() => {
+            wx.canvasToTempFilePath({
+              canvasId: 'shipQrcode',
+              x: 0,
+              y: 0,
+              width: size,
+              height: size,
+              destWidth: size * 2,
+              destHeight: size * 2,
+              fileType: 'png',
+              success: (res) => {
+                this.setData({ qrcodeImg: res.tempFilePath })
+              },
+              fail: (err) => {
+                console.error('canvasToTempFilePath fail', err)
+                wx.showToast({ title: '二维码导出失败', icon: 'none' })
+              }
+            }, this)
+          }, 200)
+        }).catch(err => {
+          console.error('drawQrcode fail', err)
+          wx.showToast({ title: '二维码生成失败', icon: 'none' })
+        })
+      }, 300)
+    })
+  },
+
+  // 关闭二维码弹窗
+  onCloseQrcode() {
+    this.setData({ qrcodeShow: false, qrcodeImg: '', qrcodeUrl: '' })
+  },
+
+  // 复制二维码链接
+  copyQrcodeUrl() {
+    const url = this.data.qrcodeUrl
+    if (!url) return
+    wx.setClipboardData({
+      data: url,
+      success() {
+        wx.showToast({ title: '链接已复制', icon: 'none', duration: 2000 })
       }
     })
   },

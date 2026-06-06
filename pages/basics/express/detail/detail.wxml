@@ -33,6 +33,13 @@
             bind:tap="goShip"
           >去发货</van-button>
           <van-button
+            type="danger"
+            size="mini"
+            style="margin-left: 16rpx;"
+            data-no="{{ instance.trackingNumber }}"
+            bind:tap="generateQrcode"
+          >二维码</van-button>
+          <van-button
             type="primary"
             size="mini"
             style="margin-left: 16rpx;"
@@ -83,6 +90,13 @@
             bind:tap="goShip"
           >去发货</van-button>
           <van-button
+            type="danger"
+            size="mini"
+            style="margin-left: 16rpx;"
+            data-no="{{ delivery.shipmentNo }}"
+            bind:tap="generateQrcode"
+          >二维码</van-button>
+          <van-button
             type="primary"
             size="mini"
             style="margin-left: 16rpx;"
@@ -101,3 +115,34 @@
     </block>
   </van-cell-group>
 </view>
+
+<!-- 离屏 canvas：仅用于二维码绘制，生成后销毁。必须放在弹窗外、屏幕外，避免原生组件覆盖 loading -->
+<canvas
+  wx:if="{{ qrcodeShow && !qrcodeImg }}"
+  canvas-id="shipQrcode"
+  class="qrcode-offscreen"
+></canvas>
+
+<!-- 去发货 - 二维码弹窗 -->
+<van-popup
+  show="{{ qrcodeShow }}"
+  round
+  closeable
+  close-icon-position="top-right"
+  bind:close="onCloseQrcode"
+>
+  <view class="qrcode-popup">
+    <view class="qrcode-title">顺丰发货二维码</view>
+    <view class="qrcode-tip">保存到相册后用微信扫描或识别进行发货</view>
+    <view class="qrcode-canvas-wrap">
+      <image
+        wx:if="{{ qrcodeImg }}"
+        class="qrcode-img"
+        src="{{ qrcodeImg }}"
+        mode="aspectFit"
+        show-menu-by-longpress="{{ true }}"
+      />
+      <view wx:else class="qrcode-loading">二维码生成中...</view>
+    </view>
+  </view>
+</van-popup>
