@@ -23,7 +23,9 @@ Page({
     prevProcessName: '',
     processShow: false,
     prevProcessList: [],
-    count: 0
+    count: 0,
+    isLastProcess: false,
+    needAllocateOrder: false
   },
 
   showPopup2() {
@@ -60,6 +62,12 @@ Page({
     })
   },
 
+  onNeedAllocateorderChange(event) {
+    this.setData({
+      needAllocateOrder: event.detail
+    })
+  },
+
   writeArt() {
     if (this.data.type === 'rework' && !this.data.prevProcessId) {
       Toast('请选择返工工序')
@@ -86,17 +94,21 @@ Page({
 
   save() {
     let loading = this.data.loading
+    const data = {
+      count: this.data.count,
+      nextWorkOrderProcedureId: this.data.type === 'rework' ? this.data.prevProcessId : undefined,
+      operateType: this.data.type,
+      stagingAreaId: this.data.stageId,
+      workOrderProcedureId: this.data.processId
+    }
+    if (this.data.type === 'rework' && this.data.isLastProcess) {
+      data.needAllocateOrder = this.data.needAllocateOrder
+    }
     return new Promise((resolve, reject) => {
       app.request({
         url: app.api.WRITE_ATR,
         loading: loading,
-        data: {
-          count: this.data.count,
-          nextWorkOrderProcedureId: this.data.type === 'rework' ? this.data.prevProcessId : undefined,
-          operateType: this.data.type,
-          stagingAreaId: this.data.stageId,
-          workOrderProcedureId: this.data.processId
-        }
+        data
       }).then(res => {
         return resolve(res)
       }).catch(err => {
@@ -137,7 +149,8 @@ Page({
       processId: options.processId,
       processName: options.processName,
       type: options.type,
-      count: options.processCount || 1
+      count: options.processCount || 1,
+      isLastProcess: options.isLastProcess === 'true'
     })
     this.queryWorkOrderDetail(options.workOrderId).then(res => {
       const workOrderDetail = res.data.data

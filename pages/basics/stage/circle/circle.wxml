@@ -18,6 +18,9 @@
         <van-cell title="{{ type === 'rework' ? '返工数量' : '转序数量' }}">
             <van-stepper value="{{ count }}" bind:change="stepperChange" integer input-width="100rpx" />
         </van-cell>
+        <van-cell wx:if="{{ type === 'rework' && isLastProcess }}" title="是否同步派单" center>
+            <van-checkbox slot="right-icon" value="{{ needAllocateOrder }}" bind:change="onNeedAllocateorderChange" />
+        </van-cell>
     </van-cell-group>
 </view>
 <view class="padding-sm">

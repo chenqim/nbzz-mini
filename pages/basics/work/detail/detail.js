@@ -184,7 +184,7 @@ Page({
           console.log('result >>>>>', result)
           if (result.data.code === '00000') {
             wx.navigateTo({
-              url: `/pages/basics/stage/circle/circle?stageCode=${res.result}&stageId=${result.data.data.id}&stageName=${result.data.data.name}&workOrderId=${e.currentTarget.dataset.work}&workOrderCode=${e.currentTarget.dataset.workCode}&workOrderName=${e.currentTarget.dataset.workName}&processId=${e.currentTarget.dataset.process}&processName=${e.currentTarget.dataset.processName}&processCount=${e.currentTarget.dataset.processCount}&type=${e.currentTarget.dataset.type}`,
+              url: `/pages/basics/stage/circle/circle?stageCode=${res.result}&stageId=${result.data.data.id}&stageName=${result.data.data.name}&workOrderId=${e.currentTarget.dataset.work}&workOrderCode=${e.currentTarget.dataset.workCode}&workOrderName=${e.currentTarget.dataset.workName}&processId=${e.currentTarget.dataset.process}&processName=${e.currentTarget.dataset.processName}&processCount=${e.currentTarget.dataset.processCount}&type=${e.currentTarget.dataset.type}&isLastProcess=${!!e.currentTarget.dataset.isLastProcess}`,
             })
           } else {
             Toast(result.data.message)
